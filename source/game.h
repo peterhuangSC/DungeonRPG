@@ -5,9 +5,11 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "player.h"
+
 
 class Object;
+class Character;
+class Player;
 /////////////////////////////////////////////////////////////////
 
 //Cell Class
@@ -62,11 +64,11 @@ class Floor {
 
 //Information, for storing floor information
 struct Info{
-    *Player player;
+    int dimy;
+    Player *player;
     int level;
-    int dimx, dimy;
     public:
-    Info(int dimx, int dimy, *Player);
+    Info(int dimy, Player *player);
     void levelUp();
 
     friend std::ostream &operator<<(std::ostream &out, const Info info);
@@ -82,16 +84,16 @@ class Map{
     std::vector<Floor> Maps;
 
     //The Player
-    //Player player;
+    Player *player;
 
     //Information
     Info info;
-
+    
     public:
-    char Cellstr(int y, int x) const;
-
     //Create all floors of map
-    Map(int dimx, int dimy,std::string filename);
+    Map(int dimx, int dimy, std::string filename, std::string race);
+
+    char Cellstr(int y, int x) const;
 
     friend std::ostream &operator<<(std::ostream &out, const Map floor);
 };

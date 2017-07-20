@@ -60,24 +60,29 @@ void Floor::addCell(int y,int x,char c){
 /////////////////////////////////////////////////////////////////
 
 //Info Class// stores Maps information
-Info::Info(int x, int y,Player *player): dimx{x} dimy{y}, player{player}, level{1} {};
+Info::Info(int dimy, Player *player): dimy{dimy}, player{player}, level{1} {};
 
 void Info::levelUp(){++level;};
 
 ostream &operator<<(ostream &out, const Info info){
-    out << "Race: " << info.player->getHeroType() << " Gold: " << 0;
-    
+    string race = "Shade";
+    string line(56 - race.length(),' ');
+    out << "Race: " << race << " Gold: " << 0;
+    out << line << "Floor: " << info.level << endl;
+    out << "HP:  " << 0 << endl;
+    out << "Atk: " << 0 << endl;
+    out << "Def: " << 0 << endl;
+    out << "Action: " << endl;
     return out;
 };
 /////////////////////////////////////////////////////////////////
 
 //Map class// Stores an instance of the game
-char Map::Cellstr(int y, int x) const{
-    return Maps[level].Cellstr(y,x);
-};
 
     //Create all floors of map
-Map::Map(int dimx, int dimy,string filename): dimx{dimx}, dimy{dimy}, level{1} {
+Map::Map(int dimx, int dimy,string filename, string race): 
+dimx{dimx}, dimy{dimy}, level{1}, player{nullptr}, 
+info{dimy, player} {
     Maps.assign(5,Floor(dimx,dimy));
     ifstream file (filename);
     string line;
@@ -93,6 +98,11 @@ Map::Map(int dimx, int dimy,string filename): dimx{dimx}, dimy{dimy}, level{1} {
     }
 };
 
+//Gets the character in a cell on the current floor
+char Map::Cellstr(int y, int x) const{
+    return Maps[level].Cellstr(y,x);
+};
+
 //Outputs current floor of Map
 ostream &operator<<(ostream &out, const Map floor){
     int dimx = floor.dimx;
@@ -103,6 +113,6 @@ ostream &operator<<(ostream &out, const Map floor){
         }
         out << endl;
     }
-    //out << floor.info;
+    out << floor.info;
     return out;
 };

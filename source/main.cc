@@ -17,13 +17,10 @@ int main(int argc, char* argv[]){
     }
 /////////////////////////////////////////////////////////////////
 
-    //Create a game
+    //Begin a game
     bool playing = true;
     while(playing){
-        //Create a map of dimensions dimx*dimy
-        //Use the default file if none specified
-        
-        Map map(dimx, dimy, "default.txt");
+    cout << "At any time you may quit by typing: q" << endl;
 /////////////////////////////////////////////////////////////////
 
         //Command Initiliaztions
@@ -35,6 +32,7 @@ int main(int argc, char* argv[]){
 
         //Player must choose race
         cout << "Choose a Race, one of:  s, d, v, g, t" << endl;
+        
         if(!getline(cin,line)) return 0;
         istringstream line_in{line};
         line_in >> race;
@@ -44,32 +42,16 @@ int main(int argc, char* argv[]){
             cout << "Quitting Game..." << endl;
             return 0;
         }
-        else if(race == "s"){
-            cout << "You are a Shade!" << endl;
-            //intitialize player to Shade 
-        }
-        else if(race == "d"){
-            cout << "You are a Drow!" << endl;
-            //intitialize player to Drow
-        }
-        else if(race == "v"){
-            cout << "You are a Vampire!" << endl;
-            //intitialize player to Vampire
-        }
-        else if(race == "g"){
-            cout << "You are a Goblin!" << endl;
-            //intitialize player to Goblin
-        }
-        else if(race == "t"){
-            cout << "You are a Troll!" << endl;
-            //intitialize player to Troll
-        }
-        else{
-            cout << "Invalid Race, defaulting to Shade" << endl;
-            //Default to Shade
-            //intitialize player to Shade
-        }
+        //Create a map of dimensions dimx*dimy
+        //Use the default file if none specified
+        //Sets the race of the character
+        Map map(dimx, dimy, "default.txt", race);
+        cout << map;
 /////////////////////////////////////////////////////////////////
+        //Print valid comands
+        //cout << "Valid Commands are:" << endl;
+        //cout << "\t" << "Just did a tab" << endl;
+
 
         //Start the game, read commands, one line at a time
         while(getline(cin,line)) {
