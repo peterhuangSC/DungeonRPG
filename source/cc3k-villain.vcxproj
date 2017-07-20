@@ -123,6 +123,7 @@
     <ClInclude Include="item.h" />
     <ClInclude Include="ladder.h" />
     <ClInclude Include="merchant.h" />
+    <ClInclude Include="object.h" />
     <ClInclude Include="orc.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="shade.h" />
@@ -143,6 +144,7 @@
     <ClCompile Include="item.cc" />
     <ClCompile Include="ladder.cc" />
     <ClCompile Include="merchant.cc" />
+    <ClCompile Include="object.cc" />
     <ClCompile Include="orc.cc" />
     <ClCompile Include="player.cc" />
     <ClCompile Include="shade.cc" />

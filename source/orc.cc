@@ -5,7 +5,10 @@
 
 //default stats: Health 180, Attack 30, Defense 25, Gold: 1 pile
 Orc::Orc(int health = 180, int attack = 30, int defense = 25) :
-	Enemy(health, attack, defense, orcMobID, orcGold) {
+	Enemy(health, attack, defense, orcMobID, orcGold, 'O') {
+
+	//this->type = 'O'; //replaces the @ initialized from the character constructor
+
 	this->isMovable = true;
 	this->isHostile = true;
 

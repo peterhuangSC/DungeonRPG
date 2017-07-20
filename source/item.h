@@ -2,14 +2,14 @@
 #define __ITEM_H__
 
 #include <iostream>
+#include "object.h"
 
 class Character;
 
-class Item {
+class Item : public Object {
 protected:
 	char mapSymbol;
 public:
-	Item();
 	Item(char itemType);
 	~Item();
 

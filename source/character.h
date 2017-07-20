@@ -2,8 +2,9 @@
 #define __CHARACTER_H__
 
 #include <string>
+#include "object.h"
 
-class Character {
+class Character : public Object {
 
 protected:
 	int curHealth;
@@ -13,7 +14,7 @@ protected:
 	int defense;
 
 public:
-	Character(int health, int attack, int defense);
+	Character(int health, int attack, int defense, char myType);
 	~Character();
 
 	//virtual bool attack(Character* c) = 0;

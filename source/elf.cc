@@ -5,7 +5,10 @@
 
 //default stats: Health 140, Attack 30, Defense 10, Gold: 1 pile
 Elf::Elf(int health = 140, int attack = 30, int defense = 10) :
-	Enemy(health, attack, defense, elfMobID, elfGold) {
+	Enemy(health, attack, defense, elfMobID, elfGold, 'E') {
+
+	//this->type = 'E'; //replaces the @ initialized from the character constructor
+
 	this->isMovable = true;
 	this->isHostile = true;
 

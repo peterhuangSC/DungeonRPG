@@ -5,8 +5,8 @@
 
 using namespace std;
 
-Item::Item() {}
-Item::Item(char itemType) : mapSymbol{ itemType } {}
+Item::Item(char itemType) : 
+	Object(itemType), mapSymbol{ itemType } {}
 
 Item::~Item() {}
 

@@ -5,7 +5,10 @@
 
 //default stats: Health 100, Attack 15, Defense 20, Gold: 1 pile
 Halfling::Halfling(int health = 100, int attack = 15, int defense = 20) :
-	Enemy(health, attack, defense, halflingMobID, halflingGold) {
+	Enemy(health, attack, defense, halflingMobID, halflingGold, 'L') {
+
+	//this->type = 'L'; //replaces the @ initialized from the character constructor
+
 	this->isMovable = true;
 	this->isHostile = false;
 

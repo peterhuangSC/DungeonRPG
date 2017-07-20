@@ -20,12 +20,12 @@ protected:
 	
 public:
 	Enemy(int health, int attack, int defense, 
-		std::string myEnemyType, int goldDrop);
+		std::string myEnemyType, int goldDrop, char mapSymbol);
 	~Enemy();
 
 	int getLevel();
 	void setLevel(int newLevel);
-	std::string getEnemyType();
+	std::string getEnemyType() override;
 
 	void levelUp();
 

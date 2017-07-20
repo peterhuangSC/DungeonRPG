@@ -7,7 +7,8 @@ using namespace std;
 //attributes: curHealth, maxHealth, attack, defense
 
 //methods below-------------------------------------
-Character::Character(int myHealth, int myAttack, int myDefense) :
+Character::Character(int myHealth, int myAttack, int myDefense, char myType) :
+	Object(myType),
 	curHealth{ myHealth }, maxHealth{ myHealth }, attack{ myAttack }, defense{ defense } {
 
 }

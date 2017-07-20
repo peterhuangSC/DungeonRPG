@@ -93,6 +93,9 @@
     <ClInclude Include="gold.h">
       <Filter>Header Files\Item</Filter>
     </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="drow.cc">
@@ -148,6 +151,9 @@
     </ClCompile>
     <ClCompile Include="gold.cc">
       <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cc">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

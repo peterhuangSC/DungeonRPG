@@ -11,7 +11,7 @@ using namespace std;
 
 //default player is shade
 Player::Player(int health = 125, int attack = 25, int defense = 25, 
-	string myHeroType = "Shade") : Character(health, attack, defense), 
+	string myHeroType = "Shade") : Character(health, attack, defense, '@'), 
 	curLevel{ 1 }, gold{ 0 }, heroType{ myHeroType } {
 	//nothing assigned yet for its decorator of potions
 	//might need to overload this later
@@ -31,6 +31,10 @@ void Player::setLevel(int newLevel) {
 
 string Player::getHeroType() {
 	return this->heroType;
+}
+
+int Player::getGold() {
+	return this->gold;
 }
 
 //this method levels up the player by one level
@@ -63,6 +67,12 @@ bool Player::attackEnemy(Character* enemy) {
 	if (isEnemyAlive) {
 		return false;
 	}
+	else if (enemy->getEnemyType().compare("Human")) {
+	}
+	else if (enemy->getEnemyType().compare("Dragon")) {
+	}
+	else if (enemy->getEnemyType().compare("Merchant")) {
+	} 
 	else {
 		//enemy has been slain
 		int randGoldAmount = rand() % 2;

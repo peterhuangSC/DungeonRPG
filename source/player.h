@@ -22,7 +22,8 @@ public:
 
 	int getLevel();
 	void setLevel(int newLevel);
-	std::string getHeroType();
+	std::string getHeroType() override;
+	int getGold();
 
 	void levelUp();
 	void addGold(int myGold);
