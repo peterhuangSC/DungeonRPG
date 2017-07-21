@@ -6,7 +6,7 @@
 #include "player.h"
 
 class Goblin : public Player {
-	const int goldStealRate = 5;
+	int goldStealRate;
 public:
 	//default stats: health 110, attack 15, defense 20
 	Goblin(int health = 110, int attack = 15, int defense = 20);

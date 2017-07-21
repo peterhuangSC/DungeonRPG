@@ -5,7 +5,7 @@
 #include "player.h"
 
 class Troll : public Player {
-	int healthGainRate = 5;
+	int healthGainRate;
 
 public:
 	//default stats: health 120, attack 25, defense 15

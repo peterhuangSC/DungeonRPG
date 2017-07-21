@@ -8,7 +8,8 @@ using namespace std;
 
 //default stats: health 110, attack 15, defense 20
 Goblin::Goblin(int health, int attack, int defense) :
-	Player(health, attack, defense, "Goblin") {}
+	Player(health, attack, defense, "Goblin"),
+	goldStealRate{ 5 } {}
 
 Goblin::~Goblin() {}
 

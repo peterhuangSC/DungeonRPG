@@ -6,7 +6,8 @@
 
 //default stats: health 150, attack 25, defense 15
 Drow::Drow(int health, int attack, int defense) :
-	Player(health, attack, defense, "drow") {}
+	Player(health, attack, defense, "drow"),
+	potionEffectRate{ 1.5 } {}
 
 Drow::~Drow() {}
 

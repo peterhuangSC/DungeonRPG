@@ -6,7 +6,7 @@
 #include "player.h"
 
 class Vampire : public Player {
-	const int healthGainRate = 5;
+	int healthGainRate;
 	
 public:
 	//default stats: health 50, attack 25, defense 25, note also sets max health to 50 to start
