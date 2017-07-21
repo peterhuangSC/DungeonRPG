@@ -12,11 +12,12 @@ static int ur6 = 10; static int uc6 = 38; static int lr6 = 14; static int lc6 = 
 
 int whatRoom(int y, int x, char c){
     if(c == '.'){
-        if((ur1 <= y && uc1 <= x) && (y <= lr1 && x <= lc1))      return 1;
-        else if((ur1 <= y && uc1 <= x) && (y <= lr1 && x <= lc1)) return 2;
-        else if((ur1 <= y && uc1 <= x) && (y <= lr1 && x <= lc1)) return 3;
-        else if((ur1 <= y && uc1 <= x) && (y <= lr1 && x <= lc1)) return 4;
-        else if((ur1 <= y && uc1 <= x) && (y <= lr1 && x <= lc1)) return 5;
+             if((ur1 <= y && uc1 <= x) && (y <= lr1 && x <= lc1)) return 1;
+        else if((ur2 <= y && uc2 <= x) && (y <= lr2 && x <= lc2)) return 2;
+        else if((ur3 <= y && uc3 <= x) && (y <= lr3 && x <= lc3)) return 2;
+        else if((ur4 <= y && uc4 <= x) && (y <= lr4 && x <= lc4)) return 3;
+        else if((ur5 <= y && uc5 <= x) && (y <= lr5 && x <= lc5)) return 4;
+        else if((ur6 <= y && uc6 <= x) && (y <= lr6 && x <= lc6)) return 5;
         else return 0;
     }
     else return 0;
@@ -61,7 +62,6 @@ void Cell::notify(shared_ptr<Object> who){
 
 //Room Class// mostly for RNG purposes
 
-
 int Room::getFree() const{return free;};
 int Room::addFree(Cell *c){
     freeCells.push_back(c);
@@ -88,7 +88,7 @@ char Floor::Cellstr(int y,int x) const{
 void Floor::addCell(int y,int x,char c){
     ground[y][x].Type = c;
     ground[y][x].room = whatRoom(y,x,c);
-    rooms[ground[y][x].room.addFree(&ground[y][x])];
+    rooms[ground[y][x].room].addFree(&ground[y][x]);
 };
 
 
@@ -115,7 +115,7 @@ int Floor::gety(){
 
 void Floor::init(shared_ptr<Object> player){
     int r = rand() % 5;
-    Cell *me = rooms[r+1].removeFree();
+    Cell *me = rooms[++r].removeFree();
     me->setonCell(player);
     int noLadder = me->getRoom();
 };
@@ -123,18 +123,18 @@ void Floor::init(shared_ptr<Object> player){
 /////////////////////////////////////////////////////////////////
 
 //Info Class// stores Maps information
-Info::Info(int dimy, shared_ptr<Object> player): dimy{dimy}, player{player}, level{0} {};
+Info::Info(int dimy): dimy{dimy}, level{0} {};
 
 void Info::levelUp(){++level;};
 
 ostream &operator<<(ostream &out, const Info info){
-    string race = "Shade";
+    string race = info.player->getHeroType();
     string line(56 - race.length(),' ');
-    out << "Race: " << race << " Gold: " << 0;
+    out << "Race: " << race << " Gold: " <<  0; //info.player->getGold();
     out << line << "Floor: " << info.level + 1 << endl;
-    out << "HP:  " << 0 << endl;
-    out << "Atk: " << 0 << endl;
-    out << "Def: " << 0 << endl;
+    out << "HP:  " << info.player->getHealth() << endl;
+    out << "Atk: " << info.player->getAttack() << endl;
+    out << "Def: " << info.player->getDefense() << endl;
     out << "Action: " << endl;
     return out;
 };
@@ -143,14 +143,15 @@ ostream &operator<<(ostream &out, const Info info){
 //Map class// Stores an instance of the game
 
     //Create all floors of map
-Map::Map(int dimx, int dimy,string filename, string race): dimx{dimx}, dimy{dimy}, level{0} {
+Map::Map(int dimx, int dimy,string filename, string race): dimx{dimx}, dimy{dimy}, level{0}, info(dimy) {
     PlayerGenerator PG;
     player = PG.spawnPlayer(race[0]);
-    info = Info(dimy, player);
+    cout << player->getHeroType() << endl;
+    info.player = player;
     Maps.assign(5,Floor(dimx,dimy));
     ifstream file (filename);
     string line;
-    for(int i = 0; i < 5; ++i){
+    for(int i = 0; i < 5; ++i){ 
         for(int y = 0; y < dimy; ++y){
             getline(file, line);
             for(int x = 0; x < dimx; ++x){
@@ -160,6 +161,7 @@ Map::Map(int dimx, int dimy,string filename, string race): dimx{dimx}, dimy{dimy
             cout << endl;
         }
     }
+    this->init_Level();
 };
 
     //get the position of the player when the level starts
@@ -170,8 +172,8 @@ Map::Map(int dimx, int dimy,string filename, string race): dimx{dimx}, dimy{dimy
         y = Maps[level].gety();
     };
     //Initialize the current Level
-    void Map::newLevel(){
-        Maps[++level].init(player);
+    void Map::init_Level(){
+        Maps[level].init(player);
         this->getx();
         this->gety();
     };

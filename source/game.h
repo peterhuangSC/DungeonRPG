@@ -72,8 +72,7 @@ struct Info{
     int dimy;
     std::shared_ptr<Object> player;
     int level;
-    public:
-    Info(int dimy, std::shared_ptr<Object> player);
+    Info(int dimy);
     int getx();
     int gety();
     void levelUp();
@@ -92,14 +91,14 @@ class Map{
     //The Player
     std::shared_ptr<Object> player;
     int x,y;
-    int getx();
-    int gety();
+    void getx();
+    void gety();
 
     //Information
     Info info;
 
     //Initialize the current level;
-    void newLevel();
+    void init_Level();
 
     public:
     //Create all floors of map
@@ -108,7 +107,6 @@ class Map{
     char Cellstr(int y, int x) const;
 
     friend std::ostream &operator<<(std::ostream &out, const Map floor);
-
 
 };
 
