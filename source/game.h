@@ -5,8 +5,9 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <memory>
 #include "player.h"
-
+#include "PlayerGenerator.h"
 
 class Object;
 /////////////////////////////////////////////////////////////////
