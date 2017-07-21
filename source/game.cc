@@ -69,9 +69,9 @@ int Room::addFree(Cell *c){
 };
     //Pick a random open cell in the room, remove it from opencells and return it
 Cell *Room::removeFree(){
-    int r = rand() % free;
+    int r = rand() % free--;
     Cell *cell = freeCells[r];// Could use shared pointers
-    freeCells.erase(r);
+    freeCells.erase(freeCells.begin()+r);
     return cell;
 };
 /////////////////////////////////////////////////////////////////
@@ -87,8 +87,8 @@ char Floor::Cellstr(int y,int x) const{
 };
 void Floor::addCell(int y,int x,char c){
     ground[y][x].Type = c;
-    ground[y][x].Room = whatRoom(y,x,c);
-    rooms[ground[y][x].Room.addFree(&ground[y][x])];
+    ground[y][x].room = whatRoom(y,x,c);
+    rooms[ground[y][x].room.addFree(&ground[y][x])];
 };
 
 
@@ -97,7 +97,7 @@ int Floor::getx(){
     int dimx = ground[0].size();
     for(int y = 0; y < dimy; ++y){
         for(int x = 0; x < dimx; ++x){
-            if ground[y][x].getType() == '@' return x;
+            if(ground[y][x].getType() == '@') return x;
         }
     }
 };
@@ -108,7 +108,7 @@ int Floor::gety(){
     int dimx = ground[0].size();
     for(int y = 0; y < dimy; ++y){
         for(int x = 0; x < dimx; ++x){
-            if ground[y][x].getType() == '@' return y;
+            if(ground[y][x].getType() == '@') return y;
         }
     }
 };
@@ -143,8 +143,10 @@ ostream &operator<<(ostream &out, const Info info){
 //Map class// Stores an instance of the game
 
     //Create all floors of map
-Map::Map(int dimx, int dimy,string filename, string race): 
-dimx{dimx}, dimy{dimy}, level{0}, player{spawnPlayer(race[0])}, info{dimy, player} {
+Map::Map(int dimx, int dimy,string filename, string race): dimx{dimx}, dimy{dimy}, level{0} {
+    PlayerGenerator PG;
+    player = PG.spawnPlayer(race[0]);
+    info = Info(dimy, player);
     Maps.assign(5,Floor(dimx,dimy));
     ifstream file (filename);
     string line;
@@ -169,9 +171,9 @@ dimx{dimx}, dimy{dimy}, level{0}, player{spawnPlayer(race[0])}, info{dimy, playe
     };
     //Initialize the current Level
     void Map::newLevel(){
-        Maps[++level].init();
-        getx();
-        gety();
+        Maps[++level].init(player);
+        this->getx();
+        this->gety();
     };
 
 //Gets the character in a cell on the current floor
