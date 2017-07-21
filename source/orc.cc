@@ -1,4 +1,5 @@
 #include <string>
+#include <cmath>
 #include "orc.h"
 
 //additional attributes: const string orcMobID = "Orc", const int orcGold = 1

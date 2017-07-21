@@ -30,8 +30,8 @@ public:
 	int getDefense() override;
 	void setDefense(int newDefense);
 
-	virtual std::string getHeroType() = 0;
-	virtual std::string getEnemyType() = 0;
+	virtual std::string getHeroType();
+	virtual std::string getEnemyType();
 };
 
 #endif

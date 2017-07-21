@@ -23,10 +23,11 @@ public:
 	int getLevel();
 	void setLevel(int newLevel);
 	std::string getHeroType() override;
+
 	int getGold();
 
 	void levelUp();
-	void addGold(int myGold);
+	void addGold(int myGold) override;
 
 	virtual bool attackEnemy(Character* enemy);
 	void move(std::string direction); //implement coordinates?

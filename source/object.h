@@ -26,9 +26,12 @@ public:
 	virtual int getAttackEffect();
 	virtual int getDefenseEffect();
 
-	virtual void notify(Object* who);
+	virtual void addGold(int myGold);
+
+	virtual void notify(std::shared_ptr<Object> who);
 	virtual int consumePotion();
 	virtual void consumePotion(std::shared_ptr<Object> myObj);
+	virtual bool consumeGold(std::shared_ptr<Object> myObj);
 };
 
 #endif

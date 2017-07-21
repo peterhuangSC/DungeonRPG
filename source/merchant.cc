@@ -1,4 +1,5 @@
 #include <string>
+#include <cmath>
 #include "merchant.h"
 
 //additional attributes: const string merchantMobID = "Merchant", const int merchantGold = 1

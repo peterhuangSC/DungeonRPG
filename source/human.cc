@@ -1,4 +1,5 @@
 #include <string>
+#include <cmath>
 #include "human.h"
 
 //additional attributes: const string humanMobID = "Human", const int humanGold = 2

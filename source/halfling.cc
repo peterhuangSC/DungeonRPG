@@ -1,4 +1,5 @@
 #include <string>
+#include <cmath>
 #include "halfling.h"
 
 //additional attributes: const string halflingMobID = "Halfling", const int halflingGold = 1

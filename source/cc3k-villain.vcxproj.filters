@@ -37,6 +37,12 @@
     <Filter Include="Header Files\Item">
       <UniqueIdentifier>{e8b8355f-b757-40fa-b945-1410094e36de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Generator">
+      <UniqueIdentifier>{8ac79609-0b27-4e1f-8a6f-4289cf4f1fc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generator">
+      <UniqueIdentifier>{db3f6dd4-3e81-48d1-9c18-a3e60c652b69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="human.h">
@@ -102,6 +108,12 @@
     <ClInclude Include="specificPotions.h">
       <Filter>Header Files\Item</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerGenerator.h">
+      <Filter>Header Files\Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyGenerator.h">
+      <Filter>Header Files\Generator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="drow.cc">
@@ -166,6 +178,12 @@
     </ClCompile>
     <ClCompile Include="specificPotions.cc">
       <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerGenerator.cc">
+      <Filter>Source Files\Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyGenerator.cc">
+      <Filter>Source Files\Generator</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

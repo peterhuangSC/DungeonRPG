@@ -31,7 +31,6 @@ public:
 
 	virtual bool attackPlayer(Character* player);
 	void severTies();
-	void randMove();
 	void dropGold(); //may return Item instead of void in the future
 	void notifyObservers();
 };

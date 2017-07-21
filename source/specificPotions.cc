@@ -1,4 +1,5 @@
 #include <string>
+#include <cmath>
 #include "specificPotions.h"
 
 using namespace std;
@@ -22,9 +23,9 @@ RestoreHealth::RestoreHealth(shared_ptr<Object> pPlayer) :
 RestoreHealth::~RestoreHealth() {}
 
 void RestoreHealth::consumePotion(shared_ptr<Object> spPlayer) {
-	spPlayer->setHealth(spPlayer->getHealth + healthEffect);
+	spPlayer->setHealth(spPlayer->getHealth() + healthEffect);
 	if (spPlayer->getHeroType().compare("Drow") == 0) {
-		spPlayer->setHealth(spPlayer->getHealth + ceil(1.5 * healthEffect));
+		spPlayer->setHealth(spPlayer->getHealth() + ceil(1.5 * healthEffect));
 	}
 }
 
@@ -35,9 +36,9 @@ PoisonHealth::PoisonHealth(shared_ptr<Object> pPlayer) :
 PoisonHealth::~PoisonHealth() {}
 
 void PoisonHealth::consumePotion(shared_ptr<Object> spPlayer) {
-	spPlayer->setHealth(spPlayer->getHealth + healthEffect);
+	spPlayer->setHealth(spPlayer->getHealth() + healthEffect);
 	if (spPlayer->getHeroType().compare("Drow") == 0) {
-		spPlayer->setHealth(spPlayer->getHealth + floor(1.5 * healthEffect));
+		spPlayer->setHealth(spPlayer->getHealth() + floor(1.5 * healthEffect));
 	}
 }
 

@@ -39,10 +39,10 @@ int Potion::getDefenseEffect() {
 
 std::string Potion::getAttachedHeroName(std::shared_ptr<Object> myObj) {
 	if (myObj.get() == nullptr) { return "NULLHERO"; }
-	else if (myObj->getType == '@') {
+	else if (myObj->getType() == '@') {
 		return myObj->getHeroType();
 	}
-	else if (myObj->getType == 'P') {
+	else if (myObj->getType() == 'P') {
 		std::string heroName = getAttachedHeroName(player);
 		return heroName;
 	}

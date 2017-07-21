@@ -116,6 +116,7 @@
     <ClInclude Include="dwarf.h" />
     <ClInclude Include="elf.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="EnemyGenerator.h" />
     <ClInclude Include="goblin.h" />
     <ClInclude Include="gold.h" />
     <ClInclude Include="halfling.h" />
@@ -126,6 +127,7 @@
     <ClInclude Include="object.h" />
     <ClInclude Include="orc.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="PlayerGenerator.h" />
     <ClInclude Include="potion.h" />
     <ClInclude Include="shade.h" />
     <ClInclude Include="specificPotions.h" />
@@ -139,6 +141,7 @@
     <ClCompile Include="dwarf.cc" />
     <ClCompile Include="elf.cc" />
     <ClCompile Include="enemy.cc" />
+    <ClCompile Include="EnemyGenerator.cc" />
     <ClCompile Include="goblin.cc" />
     <ClCompile Include="gold.cc" />
     <ClCompile Include="halfling.cc" />
@@ -149,6 +152,7 @@
     <ClCompile Include="object.cc" />
     <ClCompile Include="orc.cc" />
     <ClCompile Include="player.cc" />
+    <ClCompile Include="PlayerGenerator.cc" />
     <ClCompile Include="potion.cc" />
     <ClCompile Include="shade.cc" />
     <ClCompile Include="specificPotions.cc" />

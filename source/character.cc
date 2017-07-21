@@ -58,3 +58,12 @@ int Character::getDefense() {
 void Character::setDefense(int newDefense) {
 	this->defense = newDefense;
 }
+
+string Character::getHeroType() {
+	return "Character";
+}
+
+string Character::getEnemyType() {
+	return "Character";
+}
+

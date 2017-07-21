@@ -1,4 +1,5 @@
 #include <string>
+#include <cmath>
 #include "elf.h"
 
 //additional attributes: const string elfMobID = "Elf", const int elfGold = 1

@@ -12,7 +12,8 @@ public:
 	Gold(int gValue, int gQuantity, bool gGuarded);
 	~Gold();
 
-	void consume(Character* player) override;
+	//fix implement@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	bool consumeGold(std::shared_ptr<Object> spPlayer) override;
 
 	char getItemType() override;
 

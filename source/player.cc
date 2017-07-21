@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <cmath>
 #include "player.h"
 
 using namespace std;

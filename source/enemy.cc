@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <cmath>
 #include "enemy.h"
 
 using namespace std;
@@ -11,7 +12,7 @@ using namespace std;
 
 //default enemy is human
 Enemy::Enemy(int health = 140, int attack = 20, int defense = 20, 
-	string myEnemyType = "Human", int goldDrop = 2, char mapSymbol) : 
+	string myEnemyType = "Human", int goldDrop = 2, char mapSymbol = 'H') : 
 	Character(health, attack, defense, mapSymbol), 
 	enemyLevel{ 1 }, goldDrop{ 2 },	enemyType{ myEnemyType }, 
 	isHostile { true }, isMovable{ true } {}
@@ -58,30 +59,6 @@ bool Enemy::attackPlayer(Character* player) {
 	}
 	else {
 		return true;
-	}
-}
-
-void Enemy::randMove() {
-	int moveRandomizer = rand() % 8;
-	switch (moveRandomizer) {
-	case 0:
-		//move NW if left is movable
-		//if move is success then break; else don't use break;
-	case 1:
-		//move NO
-	case 2:
-		//move NE
-	case 3:
-		//move EA
-	case 4:
-		//move SE
-	case 5:
-		//move SO
-	case 6:
-		//move SW
-	case 7:
-		//move WE
-	case 8:
 	}
 }
 

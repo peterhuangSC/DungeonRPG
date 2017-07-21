@@ -32,7 +32,9 @@ int Object::getAttackEffect() { return 0; }
 
 int Object::getDefenseEffect() { return 0; }
 
-void Object::notify(Object* who) {
+void Object::addGold(int myGold) {}
+
+void Object::notify(std::shared_ptr<Object> who) {
 	// to be implemented
 }
 
@@ -42,3 +44,5 @@ int Object::consumePotion() {
 }
 
 void Object::consumePotion(std::shared_ptr<Object> myObj) {}
+
+bool Object::consumeGold(std::shared_ptr<Object> myObj) {}

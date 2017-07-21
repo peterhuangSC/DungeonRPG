@@ -13,7 +13,15 @@ Gold::Gold(int gValue = 1, int gQuantity = 1, bool gGuarded = false) :
 
 Gold::~Gold() {}
 
-void Gold::consume(Character* player) {}
+//this method return true if player is successful to pick up the gold
+bool Gold::consumeGold(shared_ptr<Object> spPlayer) {
+	//double check how gold picking up works when theres 2 piles ie human
+	if (!guarded) {
+		spPlayer->addGold(amount * quantity);
+		return true;
+	}
+	return false;
+}
 
 char Gold::getItemType() {
 	return this->mapSymbol;
@@ -35,14 +43,14 @@ void Gold::setQuantity(int newQty) {
 }
 
 bool Gold::isGuarded() {
-	return this->isGuarded;
+	return this->guarded;
 }
 
 void Gold::setGuarded() {
-	this->isGuarded = true;
+	this->guarded = true;
 }
 
 void Gold::setUnguarded() {
-	this->isGuarded = false;
+	this->guarded = false;
 }
 
