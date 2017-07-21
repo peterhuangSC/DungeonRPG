@@ -7,7 +7,7 @@ using namespace std;
 //                       const int goldStealRate = 5
 
 //default stats: health 110, attack 15, defense 20
-Goblin::Goblin(int health = 110, int attack = 15, int defense = 20) :
+Goblin::Goblin(int health, int attack, int defense) :
 	Player(health, attack, defense, goblinHeroID) {}
 
 Goblin::~Goblin() {}

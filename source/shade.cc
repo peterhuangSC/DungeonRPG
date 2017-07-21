@@ -3,7 +3,7 @@
 
 //additional attributes: const string shadeHeroID = "Shade"
 
-Shade::Shade(int health = 125, int attack = 25, int defense = 25) :
+Shade::Shade(int health, int attack, int defense) :
 	Player(health, attack, defense, shadeHeroID) {}
 
 Shade::~Shade() {}

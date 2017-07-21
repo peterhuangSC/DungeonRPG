@@ -8,7 +8,7 @@ class Goblin : public Player {
 	const std::string goblinHeroID = "Goblin";
 	const int goldStealRate = 5;
 public:
-	Goblin(int health, int attack, int defense);
+	Goblin(int health = 110, int attack = 15, int defense = 20);
 	~Goblin();
 
 	void pickPocket();

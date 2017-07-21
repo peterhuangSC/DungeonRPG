@@ -5,7 +5,7 @@
 //note: when attaching potions, check to make sure effects are 1.5x
 
 //default stats: health 150, attack 25, defense 15
-Drow::Drow(int health = 150, int attack = 25, int defense = 15) :
+Drow::Drow(int health, int attack, int defense) :
 	Player(health, attack, defense, drowHeroID) {}
 
 Drow::~Drow() {}

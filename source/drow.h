@@ -8,7 +8,7 @@ class Drow : public Player {
 	const std::string drowHeroID = "Drow";
 	const double potionEffectRate = 1.5;
 public:
-	Drow(int health, int attack, int defense);
+	Drow(int health = 150, int attack = 25, int defense = 15);
 	~Drow();
 };
 

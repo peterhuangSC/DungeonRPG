@@ -9,7 +9,7 @@ using namespace std;
 // const int healthGainRate = 5;
 
 //default stats: health 50, attack 25, defense 25, note also sets max health to 50 to start
-Vampire::Vampire(int health = 50, int attack = 25, int defense = 25) :
+Vampire::Vampire(int health, int attack, int defense) :
 	Player(health, attack, defense, vampireHeroID) {}
 
 Vampire::~Vampire() {}

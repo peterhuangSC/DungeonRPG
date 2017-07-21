@@ -8,7 +8,7 @@ class Dwarf : public Enemy {
 	const std::string dwarfMobID = "Dwarf";
 	const int dwarfGold = 1;
 public:
-	Dwarf(int health, int attack, int defense);
+	Dwarf(int health = 100, int attack = 20, int defense = 30);
 	~Dwarf();
 
 };

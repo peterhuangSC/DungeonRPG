@@ -9,7 +9,7 @@ class Vampire : public Player {
 	const int healthGainRate = 5;
 	
 public:
-	Vampire(int health, int attack, int defense);
+	Vampire(int health = 50, int attack = 25, int defense = 25);
 	~Vampire();
 
 	void setHealth(int newHealth) override;

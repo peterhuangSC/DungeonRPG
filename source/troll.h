@@ -9,7 +9,7 @@ class Troll : public Player {
 	const int healthGainRate = 5;
 
 public:
-	Troll(int health, int attack, int defense);
+	Troll(int health = 120, int attack = 25, int defense = 15);
 	~Troll();
 };
 

@@ -5,7 +5,7 @@
 //additional attributes: const string dwarfMobID = "Dwarf", const int dwarfGold = 1
 
 //default stats: Health 100, Attack 20, Defense 30, Gold: 1 pile
-Dwarf::Dwarf(int health = 100, int attack = 20, int defense = 30) :
+Dwarf::Dwarf(int health, int attack, int defense) :
 	Enemy(health, attack, defense, dwarfMobID, dwarfGold, 'W') {
 
 	//this->type = 'W';

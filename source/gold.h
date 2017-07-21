@@ -9,7 +9,7 @@ protected:
 	int quantity;
 	bool guarded;
 public:
-	Gold(int gValue, int gQuantity, bool gGuarded);
+	Gold(int gValue = 1, int gQuantity = 1, bool gGuarded = false);
 	~Gold();
 
 	//fix implement@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
