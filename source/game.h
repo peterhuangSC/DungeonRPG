@@ -5,18 +5,17 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "player.h"
 
 
 class Object;
-class Character;
-class Player;
 /////////////////////////////////////////////////////////////////
 
 //Cell Class
 class Cell{
     char Type;
     int room;
-    Object *onCell;
+    std::shared_ptr<Object> onCell;
     std::vector<Cell*> Observers;
 
     public:
@@ -24,8 +23,9 @@ class Cell{
     ~Cell();
 
     //Puts an object on Cell if empty
-    bool setonCell(Object &o);
+    bool setonCell(std::shared_ptr<Object> o);
 
+    //Getters
     char getType() const;
     int  getRoom() const;
 
@@ -33,7 +33,7 @@ class Cell{
     void notifyAll() const;
 
     //When notified, call notify of object in this cell
-    void notify(Object *who);
+    void notify(std::shared_ptr<Object> who);
 
 friend class Floor; // So floors can set type (can make setter)
 };
@@ -41,12 +41,12 @@ friend class Floor; // So floors can set type (can make setter)
 
 //Room Class, mostly for RNG purposes
 class Room{
-    int free;
+    int free = 0;
     std::vector<Cell*> freeCells;
     public:
     int getFree() const;
     int addFree(Cell *c);
-    void removeFree(int i);
+    Cell *removeFree();
 };
 /////////////////////////////////////////////////////////////////
 
@@ -57,6 +57,10 @@ class Floor {
     public:
     Floor(int dimx, int dimy);
 
+    int getx();
+    int gety();
+
+    void init(std::shared_ptr<Object> player);
     char Cellstr(int y,int x) const;
     void addCell(int y,int x,char c);
 };
@@ -65,12 +69,11 @@ class Floor {
 //Information, for storing floor information
 struct Info{
     int dimy;
-    Player *player;
+    std::shared_ptr<Object> player;
     int level;
     public:
-    Info(int dimy, Player *player);
+    Info(int dimy, std::shared_ptr<Object> player);
     void levelUp();
-
     friend std::ostream &operator<<(std::ostream &out, const Info info);
 };
 
@@ -84,11 +87,17 @@ class Map{
     std::vector<Floor> Maps;
 
     //The Player
-    Player *player;
+    std::shared_ptr<Object> player;
+    int x,y;
+    int findx();
+    int findy();
 
     //Information
     Info info;
-    
+
+    //Initialize the current level;
+    void newLevel();
+
     public:
     //Create all floors of map
     Map(int dimx, int dimy, std::string filename, std::string race);
@@ -96,6 +105,8 @@ class Map{
     char Cellstr(int y, int x) const;
 
     friend std::ostream &operator<<(std::ostream &out, const Map floor);
+
+
 };
 
 std::ostream &operator<<(std::ostream &out, const Map floor);
