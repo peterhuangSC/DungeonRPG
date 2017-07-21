@@ -79,6 +79,7 @@ bool Player::attackEnemy(shared_ptr<Character> enemy) {
 		else this->addGold(1);
 		return true;
 	}
+	return false;
 }
 
 /*
