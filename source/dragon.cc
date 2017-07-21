@@ -6,7 +6,7 @@
 
 //default stats: Health 150, Attack 20, Defense 20, Gold: 1 pile
 Dragon::Dragon(int health, int attack, int defense) :
-	Enemy(health, attack, defense, dragonMobID, dragonGold, 'D') {
+	Enemy(health, attack, defense, "Dragon", 'D') {
 	
 	//this->type = 'D';
 	

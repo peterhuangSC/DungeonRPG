@@ -6,7 +6,7 @@
 
 //default stats: Health 100, Attack 20, Defense 30, Gold: 1 pile
 Dwarf::Dwarf(int health, int attack, int defense) :
-	Enemy(health, attack, defense, dwarfMobID, dwarfGold, 'W') {
+	Enemy(health, attack, defense, "Dwarf", 'W') {
 
 	//this->type = 'W';
 

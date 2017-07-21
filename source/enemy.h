@@ -12,7 +12,6 @@ class Enemy : public Character {
 	
 protected:
 	int enemyLevel;
-	int goldDrop;
 	std::string enemyType;
 
 	bool isMovable;
@@ -20,7 +19,7 @@ protected:
 	
 public:
 	Enemy(int health = 140, int attack = 20, int defense = 20,
-		std::string myEnemyType = "Human", int goldDrop = 2, char mapSymbol = 'H');
+		std::string myEnemyType = "Human", char mapSymbol = 'H');
 	~Enemy();
 
 	int getLevel();

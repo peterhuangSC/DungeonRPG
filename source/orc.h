@@ -6,9 +6,7 @@
 #include "enemy.h"
 
 class Orc : public Enemy {
-	const std::string orcMobID = "Orc";
-	const int orcGold = 1;
-	const double goblinDamage = 1.5;
+	double goblinDamage;
 public:
 	//default stats: Health 180, Attack 30, Defense 25, Gold: 1 pile
 	Orc(int health = 180, int attack = 30, int defense = 25);

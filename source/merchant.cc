@@ -6,9 +6,7 @@
 
 //default stats: Health 30, Attack 70, Defense 5, <Gold: 1 pile?? check this>
 Merchant::Merchant(int health, int attack, int defense) :
-	Enemy(health, attack, defense, merchantMobID, merchantGold, 'M') {
-
-	//this->type = 'M'; //replaces the @ initialized from the character constructor
+	Enemy(health, attack, defense, "Merchant", 'M') {
 
 	this->isMovable = true;
 	this->isHostile = false;

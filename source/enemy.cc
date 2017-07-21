@@ -10,10 +10,9 @@ using namespace std;
 
 
 //default enemy is human
-Enemy::Enemy(int health, int attack, int defense, 
-	string myEnemyType, int goldDrop, char mapSymbol) : 
+Enemy::Enemy(int health, int attack, int defense, string myEnemyType, char mapSymbol) : 
 	Character(health, attack, defense, mapSymbol), 
-	enemyLevel{ 1 }, goldDrop{ 2 },	enemyType{ myEnemyType }, 
+	enemyLevel{ 1 }, enemyType{ myEnemyType }, 
 	isHostile { true }, isMovable{ true } {}
 
 Enemy::~Enemy() {

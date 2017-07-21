@@ -8,7 +8,8 @@ using namespace std;
 
 //default stats: Health 180, Attack 30, Defense 25, Gold: 1 pile
 Orc::Orc(int health, int attack, int defense) :
-	Enemy(health, attack, defense, orcMobID, orcGold, 'O') {
+	Enemy(health, attack, defense, "Orc", 'O'),
+	goblinDamage{ 1.5 } {
 
 	//this->type = 'O'; //replaces the @ initialized from the character constructor
 

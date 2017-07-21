@@ -6,7 +6,7 @@
 
 //default stats: Health 140, Attack 20, Defense 20, Gold: 2 piles
 Human::Human(int health, int attack, int defense) :
-	Enemy(health, attack, defense, humanMobID, humanGold, 'H') {
+	Enemy(health, attack, defense, "Human", 'H') {
 
 	//this->type = 'H'; //replaces the @ initialized from the character constructor
 

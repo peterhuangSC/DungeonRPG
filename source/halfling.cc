@@ -6,7 +6,8 @@
 
 //default stats: Health 100, Attack 15, Defense 20, Gold: 1 pile
 Halfling::Halfling(int health, int attack, int defense) :
-	Enemy(health, attack, defense, halflingMobID, halflingGold, 'L') {
+	Enemy(health, attack, defense, "Halfling", 'L'),
+	dodgeRate{ 0.5 } {
 
 	//this->type = 'L'; //replaces the @ initialized from the character constructor
 
