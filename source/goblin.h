@@ -2,6 +2,7 @@
 #define __GOBLIN_H__
 
 #include <string>
+#include <memory>
 #include "player.h"
 
 class Goblin : public Player {
@@ -13,7 +14,7 @@ public:
 	~Goblin();
 
 	void pickPocket();
-	bool attackEnemy(Character* p) override;
+	bool attackEnemy(std::shared_ptr<Character> p) override;
 };
 
 #endif

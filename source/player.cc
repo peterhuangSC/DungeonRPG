@@ -1,6 +1,4 @@
-#include <string>
 #include <iostream>
-#include <map>
 #include <cmath>
 #include "player.h"
 
@@ -51,7 +49,7 @@ void Player::addGold(int amount) {
 
 // this method performs the attack action
 // return val: true if enemy is slain by this attack, false if enemy alive
-bool Player::attackEnemy(Character* enemy) {
+bool Player::attackEnemy(shared_ptr<Character> enemy) {
 
 	if (enemy->getEnemyType().compare("Halfling") == 0) {
 		int halflingDodgeCheck = rand() % 2;

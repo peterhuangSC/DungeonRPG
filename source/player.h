@@ -2,6 +2,7 @@
 #define __PLAYER_H__
 
 #include <string>
+#include <memory>
 #include <map>
 #include "character.h"
 //#include "enemy.h"
@@ -21,16 +22,16 @@ public:
 		std::string myHeroType = "Shade");
 	~Player();
 
-	int getLevel();
+	int getLevel() override;
 	void setLevel(int newLevel);
 	std::string getHeroType() override;
 
 	int getGold();
 
-	void levelUp();
+	void levelUp() override;
 	void addGold(int myGold) override;
 
-	virtual bool attackEnemy(Character* enemy);
+	virtual bool attackEnemy(std::shared_ptr<Character> enemy);
 	void move(std::string direction); //implement coordinates?
 	void notifyObservers();
 };

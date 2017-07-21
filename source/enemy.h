@@ -2,7 +2,7 @@
 #define __ENEMY_H__
 
 #include <string>
-#include <map>
+#include <memory>
 #include "character.h"
 //#include "player.h"
 
@@ -29,7 +29,7 @@ public:
 
 	void levelUp();
 
-	virtual bool attackPlayer(Character* player);
+	virtual bool attackPlayer(std::shared_ptr<Character> player);
 	void severTies();
 	void dropGold(); //may return Item instead of void in the future
 	void notifyObservers();

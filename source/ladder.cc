@@ -2,8 +2,9 @@
 #include "ladder.h"
 #include "player.h"
 
-//char mapSymbol;
+using namespace std;
 
+//char mapSymbol;
 //int currentChamber;
 
 Ladder::Ladder() : Item('\\'), currentChamber{ 1 } {}
@@ -12,9 +13,10 @@ Ladder::Ladder(int chamber) : Item('\\'), currentChamber{ chamber } {}
 
 Ladder::~Ladder() {}
 
-void Ladder::consume(Player* player) {
+void Ladder::consumeLadder(shared_ptr<Object> player) {
 	if (player->getLevel() < 5 && player->getLevel() > 0) {
 		player->levelUp();
+		//remove potions
 	}
 	else if (player->getLevel() == 5) {
 		//you win the game

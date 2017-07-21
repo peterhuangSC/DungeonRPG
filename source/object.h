@@ -26,12 +26,15 @@ public:
 	virtual int getAttackEffect();
 	virtual int getDefenseEffect();
 
+	virtual int getLevel();
+	virtual void levelUp();
 	virtual void addGold(int myGold);
 
 	virtual void notify(std::shared_ptr<Object> who);
 	virtual int consumePotion();
 	virtual void consumePotion(std::shared_ptr<Object> myObj);
 	virtual bool consumeGold(std::shared_ptr<Object> myObj);
+	virtual void consumeLadder(std::shared_ptr<Object> player);
 };
 
 #endif

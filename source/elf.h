@@ -2,6 +2,7 @@
 #define __ELF_H__
 
 #include <string>
+#include <memory>
 #include "enemy.h"
 
 class Elf : public Enemy {
@@ -12,7 +13,7 @@ public:
 	Elf(int health = 140, int attack = 30, int defense = 10);
 	~Elf();
 
-	bool attackPlayer(Character* player) override;
+	bool attackPlayer(std::shared_ptr<Character> player) override;
 };
 
 #endif

@@ -2,6 +2,7 @@
 #define __ORC_H__
 
 #include <string>
+#include <memory>
 #include "enemy.h"
 
 class Orc : public Enemy {
@@ -13,7 +14,7 @@ public:
 	Orc(int health = 180, int attack = 30, int defense = 25);
 	~Orc();
 
-	bool attackPlayer(Character* player) override;
+	bool attackPlayer(std::shared_ptr<Character> player) override;
 };
 
 #endif

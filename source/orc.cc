@@ -2,6 +2,8 @@
 #include <cmath>
 #include "orc.h"
 
+using namespace std;
+
 //additional attributes: const string orcMobID = "Orc", const int orcGold = 1
 
 //default stats: Health 180, Attack 30, Defense 25, Gold: 1 pile
@@ -21,7 +23,7 @@ Orc::~Orc() {}
 
 // this method performs the attack action
 // return val: true if player(opponent) is slain by this attack, false if player is alive
-bool Orc::attackPlayer(Character* player) {
+bool Orc::attackPlayer(shared_ptr<Character> player) {
 	bool isPlayerSlain = false;
 
 	//one additional attack on every hero type except for Drow as they are a type of orc too

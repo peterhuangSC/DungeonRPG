@@ -2,6 +2,7 @@
 #define __VAMPIRE_H__
 
 #include <string>
+#include <memory>
 #include "player.h"
 
 class Vampire : public Player {
@@ -14,7 +15,7 @@ public:
 	~Vampire();
 
 	void setHealth(int newHealth) override;
-	bool attackEnemy(Character* enemy) override;	
+	bool attackEnemy(std::shared_ptr<Character> enemy) override;	
 };
 
 #endif

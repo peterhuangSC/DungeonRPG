@@ -1,6 +1,5 @@
 #include <string>
 #include <iostream>
-#include <map>
 #include <cmath>
 #include "enemy.h"
 
@@ -43,7 +42,7 @@ void Enemy::severTies() {
 
 // this method performs the attack action
 // return val: true if player(opponent) is slain by this attack, false if player is alive
-bool Enemy::attackPlayer(Character* player) {
+bool Enemy::attackPlayer(shared_ptr<Character> player) {
 	int accuracyRoll = rand() % 2;
 
 	if (accuracyRoll == 0) return false;

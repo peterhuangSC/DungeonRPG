@@ -2,6 +2,7 @@
 #define __LADDER_H__
 
 #include <iostream>
+#include <memory>
 #include "item.h"
 
 class Player;
@@ -15,7 +16,7 @@ public:
 	Ladder(int chamber);
 	~Ladder();
 
-	void consume(Player* player);
+	void consumeLadder(std::shared_ptr<Object> player) override;
 };
 
 #endif

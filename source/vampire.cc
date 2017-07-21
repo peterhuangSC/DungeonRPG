@@ -27,7 +27,7 @@ void Vampire::setHealth(int newHealth) {
 
 // this method performs the attack action
 // return val: true if enemy is slain by this attack, false if enemy alive
-bool Vampire::attackEnemy(Character* enemy) {
+bool Vampire::attackEnemy(shared_ptr<Character> enemy) {
 	if (enemy->getEnemyType().compare("Halfling") == 0) {
 		int halflingDodgeCheck = rand() % 2;
 		if (halflingDodgeCheck == 0) {

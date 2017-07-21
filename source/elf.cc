@@ -2,6 +2,8 @@
 #include <cmath>
 #include "elf.h"
 
+using namespace std;
+
 //additional attributes: const string elfMobID = "Elf", const int elfGold = 1
 
 //default stats: Health 140, Attack 30, Defense 10, Gold: 1 pile
@@ -21,7 +23,7 @@ Elf::~Elf() {}
 
 // this method performs the attack action
 // return val: true if player(opponent) is slain by this attack, false if player is alive
-bool Elf::attackPlayer(Character* player) {
+bool Elf::attackPlayer(shared_ptr<Character> player) {
 	bool isPlayerSlain = false;
 		
 	//one additional attack on every hero type except for Drow as they are a type of elf too

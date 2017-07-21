@@ -20,7 +20,7 @@ void Goblin::pickPocket() {
 
 // this method performs the attack action
 // return val: true if enemy is slain by this attack, false if enemy alive
-bool Goblin::attackEnemy(Character* enemy) {
+bool Goblin::attackEnemy(shared_ptr<Character> enemy) {
 	bool isEnemySlain = false;
 	
 	//step 1 attack enemy as original, as well as get if enemy slain or not

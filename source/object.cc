@@ -32,6 +32,8 @@ int Object::getAttackEffect() { return 0; }
 
 int Object::getDefenseEffect() { return 0; }
 
+int Object::getLevel() { return 1; }
+void Object::levelUp() {}
 void Object::addGold(int myGold) {}
 
 void Object::notify(std::shared_ptr<Object> who) {
@@ -46,3 +48,5 @@ int Object::consumePotion() {
 void Object::consumePotion(std::shared_ptr<Object> myObj) {}
 
 bool Object::consumeGold(std::shared_ptr<Object> myObj) {}
+
+void Object::consumeLadder(std::shared_ptr<Object> player) {}
