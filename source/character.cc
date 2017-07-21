@@ -68,7 +68,7 @@ void Character::consumePotion(shared_ptr<Potion> myPotion) {
 	//case 1: consume health related potions
 	if (myPotion->getPotionName().compare("Restore Health") ||
 		myPotion->getPotionName().compare("Poison Health")) {
-		this->setHealth(this->getHealth() + myPotion->getHealthEffect);
+		this->setHealth(this->getHealth() + myPotion->getHealthEffect());
 		//remove potion
 		return;
 	}

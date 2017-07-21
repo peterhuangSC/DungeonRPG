@@ -111,10 +111,20 @@ int Floor::gety(){
 };
 
 void Floor::init(shared_ptr<Object> player){
-    int r = rand() % 5;
-    Cell *me = rooms[++r].removeFree();
-    me->setonCell(player);
-    int noLadder = me->getRoom();
+    //Player room cannot be ladder room
+    int r = 1 + (rand() % 5);
+    int noLadder = r;
+
+    //Place the Player
+    rooms[r].removeFree()->setonCell(player);
+   
+    //Place a ladder
+     r = 1 + (rand() % 5);
+    if(r == noLadder) r = ++r % 5;
+
+
+
+    
 };
 
 
@@ -137,7 +147,6 @@ int Floor::move(string dir, int y, int x){
     if(type ==  '.' || type ==  '+' || type ==  '#'){
         cell->setonCell(curr->onCell);
         curr->onCell.reset();
-        cout << "Moved: " << dir << endl;
         return 3;
     }
     else if(type ==  'T' && cell->onCell->isGuarded()){
