@@ -146,6 +146,10 @@ ostream &operator<<(ostream &out, const Info info){
 Map::Map(int dimx, int dimy,string filename, string race): dimx{dimx}, dimy{dimy}, level{0}, info(dimy) {
     PlayerGenerator PG;
     player = PG.spawnPlayer(race[0]);
+    cout << "Type: " << player->getHeroType() << endl; 
+    cout << "atk: " << player->getHealth() << endl;
+    cout << "atk: " << player->getAttack() << endl;
+    cout << "def: " << player->getDefense() << endl;
     cout << player->getHeroType() << endl;
     info.player = player;
     Maps.assign(5,Floor(dimx,dimy));
