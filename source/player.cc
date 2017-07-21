@@ -11,8 +11,8 @@ using namespace std;
 //            potions<map> decorator..
 
 //default player is shade
-Player::Player(int health = 125, int attack = 25, int defense = 25, 
-	string myHeroType = "Shade") : Character(health, attack, defense, '@'), 
+Player::Player(int health, int attack, int defense, string myHeroType) : 
+	Character(health, attack, defense, '@'), 
 	curLevel{ 1 }, gold{ 0 }, heroType{ myHeroType } {
 	//nothing assigned yet for its decorator of potions
 	//might need to overload this later

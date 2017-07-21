@@ -18,7 +18,7 @@ protected:
 
 public:
 	Player(int health = 125, int attack = 25, int defense = 25,
-		string myHeroType = "Shade");
+		std::string myHeroType = "Shade");
 	~Player();
 
 	int getLevel();
