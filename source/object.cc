@@ -34,6 +34,7 @@ int Object::getDefenseEffect() { return 0; }
 
 int Object::getLevel() { return 1; }
 void Object::levelUp() {}
+int Object::getGold() {}
 void Object::addGold(int myGold) {}
 
 void Object::notify(std::shared_ptr<Object> who) {

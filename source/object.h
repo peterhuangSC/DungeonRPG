@@ -28,6 +28,7 @@ public:
 
 	virtual int getLevel();
 	virtual void levelUp();
+	virtual int getGold();
 	virtual void addGold(int myGold);
 
 	virtual void notify(std::shared_ptr<Object> who);
