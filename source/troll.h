@@ -5,8 +5,7 @@
 #include "player.h"
 
 class Troll : public Player {
-	const std::string trollHeroID = "Troll";
-	const int healthGainRate = 5;
+	int healthGainRate = 5;
 
 public:
 	//default stats: health 120, attack 25, defense 15

@@ -18,6 +18,9 @@ char Object::getType() {
 std::string Object::getHeroType() {
 	return "Object";
 }
+std::string Object::getEnemyType() {
+	return "Object";
+};
 
 int Object::getHealth() { return -1; }
 void Object::setHealth(int newHealth) {}

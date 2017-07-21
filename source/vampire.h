@@ -6,7 +6,6 @@
 #include "player.h"
 
 class Vampire : public Player {
-	const std::string vampireHeroID = "Vampire";
 	const int healthGainRate = 5;
 	
 public:

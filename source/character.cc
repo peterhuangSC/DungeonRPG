@@ -8,7 +8,7 @@ using namespace std;
 
 //methods below-------------------------------------
 Character::Character(int myHealth, int myAttack, int myDefense, char myType) :
-	Object(myType),	curHealth{ myHealth }, maxHealth{ myHealth }, attack{ myAttack }, defense{ mydefense } {
+	Object(myType),	curHealth{ myHealth }, maxHealth{ myHealth }, attack{ myAttack }, defense{ myDefense } {
 
 }
 
@@ -57,12 +57,3 @@ int Character::getDefense() {
 void Character::setDefense(int newDefense) {
 	this->defense = newDefense;
 }
-
-string Character::getHeroType() {
-	return "Character";
-}
-
-string Character::getEnemyType() {
-	return "Character";
-}
-

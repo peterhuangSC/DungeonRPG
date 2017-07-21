@@ -5,7 +5,6 @@
 #include "player.h"
 
 class Drow : public Player {
-	const std::string drowHeroID = "Drow";
 	const double potionEffectRate = 1.5;
 public:
 	//default stats: health 150, attack 25, defense 15

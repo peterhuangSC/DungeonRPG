@@ -16,6 +16,7 @@ public:
 	virtual char getType();
 
 	virtual std::string getHeroType();
+	virtual std::string getEnemyType();
 
 	virtual int getHealth();
 	virtual void setHealth(int newHealth);

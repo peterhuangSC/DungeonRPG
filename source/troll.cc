@@ -7,7 +7,7 @@ using namespace std;
 
 //default stats: health 120, attack 25, defense 15
 Troll::Troll(int health, int attack, int defense) :
-	Player(health, attack, defense, trollHeroID) {}
+	Player(health, attack, defense, "Troll") {}
 
 Troll::~Troll() {}
 

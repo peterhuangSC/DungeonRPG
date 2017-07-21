@@ -5,7 +5,6 @@
 #include "player.h"
 
 class Shade : public Player {
-	const std::string shadeHeroID = "Shade";
 public:
 	Shade(int health = 125, int attack = 25, int defense = 25);
 	~Shade();

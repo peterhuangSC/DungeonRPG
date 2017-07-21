@@ -6,7 +6,6 @@
 #include "player.h"
 
 class Goblin : public Player {
-	const std::string goblinHeroID = "Goblin";
 	const int goldStealRate = 5;
 public:
 	//default stats: health 110, attack 15, defense 20
