@@ -5,7 +5,7 @@
 //additional attributes: const string orcMobID = "Orc", const int orcGold = 1
 
 //default stats: Health 180, Attack 30, Defense 25, Gold: 1 pile
-Orc::Orc(int health = 180, int attack = 30, int defense = 25) :
+Orc::Orc(int health, int attack, int defense) :
 	Enemy(health, attack, defense, orcMobID, orcGold, 'O') {
 
 	//this->type = 'O'; //replaces the @ initialized from the character constructor

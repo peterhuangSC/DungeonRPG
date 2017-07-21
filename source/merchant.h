@@ -8,7 +8,8 @@ class Merchant : public Enemy {
 	const std::string merchantMobID = "Merchant";
 	const int merchantGold = 4;
 public:
-	Merchant(int health, int attack, int defense);
+	//default stats: Health 30, Attack 70, Defense 5, <Gold: 1 pile?? check this>
+	Merchant(int health = 30, int attack = 70, int defense = 5);
 	~Merchant();
 
 	//bool attackPlayer(Character* player) override;

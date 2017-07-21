@@ -9,7 +9,8 @@ class Halfling : public Enemy {
 	const int halflingGold = 1;
 	const double dodgeRate = 0.5;
 public:
-	Halfling(int health, int attack, int defense);
+	//default stats: Health 100, Attack 15, Defense 20, Gold: 1 pile
+	Halfling(int health = 100, int attack = 15, int defense = 20);
 	~Halfling();
 
 };

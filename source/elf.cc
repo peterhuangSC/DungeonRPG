@@ -5,7 +5,7 @@
 //additional attributes: const string elfMobID = "Elf", const int elfGold = 1
 
 //default stats: Health 140, Attack 30, Defense 10, Gold: 1 pile
-Elf::Elf(int health = 140, int attack = 30, int defense = 10) :
+Elf::Elf(int health, int attack, int defense) :
 	Enemy(health, attack, defense, elfMobID, elfGold, 'E') {
 
 	//this->type = 'E'; //replaces the @ initialized from the character constructor

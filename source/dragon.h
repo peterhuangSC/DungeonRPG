@@ -8,7 +8,8 @@ class Dragon : public Enemy {
 	const std::string dragonMobID = "Dragon";
 	const int dragonGold = 1;
 public:
-	Dragon(int health, int attack, int defense);
+	//default stats: Health 150, Attack 20, Defense 20, Gold: 1 pile
+	Dragon(int health = 150, int attack = 20, int defense = 20);
 	~Dragon();
 
 };

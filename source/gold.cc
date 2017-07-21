@@ -8,8 +8,8 @@ using namespace std;
 */
 
 
-Gold::Gold(int gValue, int gQuantity, bool gGuarded) :
-	Item('G'), amount{ gValue }, quantity{ gQuantity }, guarded{ gGuarded } {}
+Gold::Gold(int gValue, int gQuantity, bool gGuarded) : Item('G'), 
+	amount{ gValue }, quantity{ gQuantity }, guarded{ gGuarded } {}
 
 Gold::~Gold() {}
 

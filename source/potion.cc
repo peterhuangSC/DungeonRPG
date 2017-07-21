@@ -9,8 +9,9 @@ ATTRIBUTES: (protected)
   mapSymbol (item), type (object)
 */
 
-Potion::Potion(sshared_ptr<Object> myObj, string potName, string id,int hEff, int aEff, int dEff): 
-	Item('P'), player{ pPlayer }, potionName { potName }, potionID{ id },
+Potion::Potion(std::shared_ptr<Object> myObj, std::string potName, std::string id,
+	int hEff, int aEff, int dEff) :	Item('P'), 
+	player{ pPlayer }, potionName { potName }, potionID{ id },
 	healthEffect { hEff }, attackEffect{ aEff }, defenseEffect{ dEff } {}
 
 Potion::~Potion() {}

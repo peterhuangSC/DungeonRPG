@@ -8,6 +8,7 @@ class Goblin : public Player {
 	const std::string goblinHeroID = "Goblin";
 	const int goldStealRate = 5;
 public:
+	//default stats: health 110, attack 15, defense 20
 	Goblin(int health = 110, int attack = 15, int defense = 20);
 	~Goblin();
 

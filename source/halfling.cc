@@ -5,7 +5,7 @@
 //additional attributes: const string halflingMobID = "Halfling", const int halflingGold = 1
 
 //default stats: Health 100, Attack 15, Defense 20, Gold: 1 pile
-Halfling::Halfling(int health = 100, int attack = 15, int defense = 20) :
+Halfling::Halfling(int health, int attack, int defense) :
 	Enemy(health, attack, defense, halflingMobID, halflingGold, 'L') {
 
 	//this->type = 'L'; //replaces the @ initialized from the character constructor

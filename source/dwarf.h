@@ -8,6 +8,7 @@ class Dwarf : public Enemy {
 	const std::string dwarfMobID = "Dwarf";
 	const int dwarfGold = 1;
 public:
+	//default stats: Health 100, Attack 20, Defense 30, Gold: 1 pile
 	Dwarf(int health = 100, int attack = 20, int defense = 30);
 	~Dwarf();
 

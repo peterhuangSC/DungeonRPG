@@ -17,7 +17,8 @@ protected:
 	std::map <std::string, bool> potions;
 
 public:
-	Player(int health, int attack, int defense, std::string myHeroType);
+	Player(int health = 125, int attack = 25, int defense = 25,
+		string myHeroType = "Shade");
 	~Player();
 
 	int getLevel();

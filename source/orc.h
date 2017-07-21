@@ -9,7 +9,8 @@ class Orc : public Enemy {
 	const int orcGold = 1;
 	const double goblinDamage = 1.5;
 public:
-	Orc(int health, int attack, int defense);
+	//default stats: Health 180, Attack 30, Defense 25, Gold: 1 pile
+	Orc(int health = 180, int attack = 30, int defense = 25);
 	~Orc();
 
 	bool attackPlayer(Character* player) override;

@@ -19,8 +19,8 @@ protected:
 	bool isHostile;
 	
 public:
-	Enemy(int health, int attack, int defense, 
-		std::string myEnemyType, int goldDrop, char mapSymbol);
+	Enemy(int health = 140, int attack = 20, int defense = 20,
+		std::string myEnemyType = "Human", int goldDrop = 2, char mapSymbol = 'H');
 	~Enemy();
 
 	int getLevel();

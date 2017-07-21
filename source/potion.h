@@ -14,8 +14,8 @@ protected:
 	int attackEffect;
 	int defenseEffect;
 public:
-	Potion(std::shared_ptr<Object> pPlayer, std::string potName = "No Effect Potion", 
-	std::string id = "NEFF", int hEff = 0, int aEff = 0, int dEff = 0);
+	Potion(std::shared_ptr<Object> pPlayer, std::string potName = "No Effect Potion",
+		std::string id = "NEFF", int hEff = 0, int aEff = 0, int dEff = 0);
 	~Potion();
 
 	//accessors and mutators
