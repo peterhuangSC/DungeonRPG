@@ -13,7 +13,7 @@ public:
 	Item(char itemType);
 	~Item();
 
-	virtual void consume(Character* player) = 0;
+	//virtual void consume(Character* player) = 0;
 	virtual char getItemType();
 };
 

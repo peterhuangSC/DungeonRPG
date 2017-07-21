@@ -51,7 +51,6 @@ void Character::setAttack(int newAttack) {
 	this->attack = newAttack;
 }
 
-
 int Character::getDefense() {
 	return this->defense;
 }

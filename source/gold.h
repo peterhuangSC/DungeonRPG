@@ -9,8 +9,7 @@ protected:
 	int quantity;
 	bool guarded;
 public:
-	Gold();
-	Gold(std::string label, int value, int quantity = 1, bool guarded = false);
+	Gold(int gValue, int gQuantity, bool gGuarded);
 	~Gold();
 
 	void consume(Character* player) override;

@@ -21,13 +21,13 @@ public:
 	bool receiveDmg(int dmg);
 
 	//accessors and mutators
-	int getHealth();
-	virtual void setHealth(int newHealth);
+	int getHealth() override;
+	void setHealth(int newHealth) override;
 
-	int getAttack();
+	int getAttack() override;
 	void setAttack(int newAttack);
 
-	int getDefense();
+	int getDefense() override;
 	void setDefense(int newDefense);
 
 	virtual std::string getHeroType() = 0;
