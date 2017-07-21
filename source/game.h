@@ -74,6 +74,8 @@ struct Info{
     int level;
     public:
     Info(int dimy, std::shared_ptr<Object> player);
+    int getx();
+    int gety();
     void levelUp();
     friend std::ostream &operator<<(std::ostream &out, const Info info);
 };
@@ -90,8 +92,8 @@ class Map{
     //The Player
     std::shared_ptr<Object> player;
     int x,y;
-    int findx();
-    int findy();
+    int getx();
+    int gety();
 
     //Information
     Info info;

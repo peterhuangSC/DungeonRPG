@@ -11,7 +11,7 @@ static int ur5 = 15; static int uc5 = 5;  static int lr5 = 23; static int lc5 = 
 static int ur6 = 10; static int uc6 = 38; static int lr6 = 14; static int lc6 = 51;// Room 5
 
 int whatRoom(int y, int x, char c){
-    if(char == '.'){
+    if(c == '.'){
         if((ur1 <= y && uc1 <= x) && (y <= lr1 && x <= lc1))      return 1;
         else if((ur1 <= y && uc1 <= x) && (y <= lr1 && x <= lc1)) return 2;
         else if((ur1 <= y && uc1 <= x) && (y <= lr1 && x <= lc1)) return 3;
@@ -123,7 +123,7 @@ void Floor::init(shared_ptr<Object> player){
 /////////////////////////////////////////////////////////////////
 
 //Info Class// stores Maps information
-Info::Info(int dimy, shared_ptr<Object> player): dimy{dimy}, player{player}, level{1} {};
+Info::Info(int dimy, shared_ptr<Object> player): dimy{dimy}, player{player}, level{0} {};
 
 void Info::levelUp(){++level;};
 
@@ -131,7 +131,7 @@ ostream &operator<<(ostream &out, const Info info){
     string race = "Shade";
     string line(56 - race.length(),' ');
     out << "Race: " << race << " Gold: " << 0;
-    out << line << "Floor: " << info.level << endl;
+    out << line << "Floor: " << info.level + 1 << endl;
     out << "HP:  " << 0 << endl;
     out << "Atk: " << 0 << endl;
     out << "Def: " << 0 << endl;
