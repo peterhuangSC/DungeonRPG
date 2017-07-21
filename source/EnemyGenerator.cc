@@ -2,7 +2,7 @@
 
 using namespace std;
 
-shared_ptr<Enemy> spawnEnemy() {
+shared_ptr<Enemy> EnemyGenerator::spawnEnemy() {
 	shared_ptr<Enemy> currentEnemy;
 	int randGen = rand() % 18;
 	if (randGen == 0) randGen += 18;
@@ -36,7 +36,7 @@ shared_ptr<Enemy> spawnEnemy() {
 
 }
 
-shared_ptr<Enemy> spawnEnemy(char specificType) {
+shared_ptr<Enemy> EnemyGenerator::spawnEnemy(char specificType) {
 	switch (specificType) {
 	case 'H': //human
 		return make_shared<Human>();
