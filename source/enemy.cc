@@ -62,7 +62,7 @@ bool Enemy::attackPlayer(shared_ptr<Character> player) {
 
 void Enemy::dropGold() {
 	cerr << "Under construction" << endl;
-	cerr << "Dropping " << this->goldDrop << " amount of gold!" << endl;
+	//cerr << "Dropping " << this->goldDrop << " amount of gold!" << endl;
 }
 
 void Enemy::notifyObservers() {

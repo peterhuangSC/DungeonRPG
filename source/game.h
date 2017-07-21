@@ -64,6 +64,8 @@ class Floor {
     void init(std::shared_ptr<Object> player);
     char Cellstr(int y,int x) const;
     void addCell(int y,int x,char c);
+
+    int move(std::string dir, int y, int x);
 };
 /////////////////////////////////////////////////////////////////
 
@@ -105,6 +107,9 @@ class Map{
     Map(int dimx, int dimy, std::string filename, std::string race);
 
     char Cellstr(int y, int x) const;
+
+    //Movement
+    void move(std::string dir);
 
     friend std::ostream &operator<<(std::ostream &out, const Map floor);
 

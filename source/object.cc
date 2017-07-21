@@ -44,6 +44,8 @@ void Object::notify(std::shared_ptr<Object> who) {
 	// to be implemented
 }
 
+bool Object::isGuarded() {};
+
 int Object::consumePotion() {
 	return 0;
 	//no default implemetation required

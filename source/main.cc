@@ -69,17 +69,11 @@ int main(int argc, char* argv[]){
             }
             //Freeze enemies
             else if(command == "f"){
-                //map->freeze();
+                //map.freeze();
             }
             //Let's make a move
-            else if(command == "no"); //move player north
-            else if(command == "ne"); //move player north-east
-            else if(command == "ea"); //move player east
-            else if(command == "se"); //move player south-east
-            else if(command == "so"); //move player south
-            else if(command == "sw"); //move player south-west
-            else if(command == "we"); //move player west
-            else if(command == "nw"); //move player north-west
+            else if(command == "no" || command == "ne" || command == "ea" || command == "se"
+                 || command == "so" || command == "sw" || command == "we" || command == "nw") map.move(command);
 
             //Let's use a potion
             else if(command == "u"){

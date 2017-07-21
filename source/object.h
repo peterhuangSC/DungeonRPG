@@ -33,6 +33,9 @@ public:
 	virtual void addGold(int myGold);
 
 	virtual void notify(std::shared_ptr<Object> who);
+
+	virtual bool isGuarded();
+
 	virtual int consumePotion();
 	virtual void consumePotion(std::shared_ptr<Object> myObj);
 	virtual bool consumeGold(std::shared_ptr<Object> myObj);

@@ -32,12 +32,9 @@ Cell::~Cell()= default;
 
     //Puts an object on Cell if empty
 bool Cell::setonCell(shared_ptr<Object> o){
-    if(onCell) return false;
-    else{
         onCell = o;
         this->notifyAll();
         return true;
-    }
 };
 
     //Getters
@@ -120,6 +117,40 @@ void Floor::init(shared_ptr<Object> player){
     int noLadder = me->getRoom();
 };
 
+
+
+    //Movement
+int Floor::move(string dir, int y, int x){
+    Cell *curr = &ground[y][x];
+    Cell *cell;
+         if(dir == "no") cell = &ground[y-1][ x ];
+    else if(dir == "ne") cell = &ground[y-1][x+1];
+    else if(dir == "ea") cell = &ground[ y ][x+1];
+    else if(dir == "se") cell = &ground[y+1][x+1];
+    else if(dir == "so") cell = &ground[y+1][ x ];
+    else if(dir == "sw") cell = &ground[y+1][x-1];
+    else if(dir == "we") cell = &ground[ y ][x-1];
+    else if(dir == "nw") cell = &ground[y-1][x-1];
+
+    //Check if cell is valid;
+    char type = cell->getType();
+    if(type ==  '.' || type ==  '+' || type ==  '#'){
+        cell->setonCell(curr->onCell);
+        curr->onCell.reset();
+        cout << "Moved: " << dir << endl;
+        return 3;
+    }
+    else if(type ==  'T' && cell->onCell->isGuarded()){
+        return 2;
+    }
+    else if (type ==  '\\'){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+};
+
 /////////////////////////////////////////////////////////////////
 
 //Info Class// stores Maps information
@@ -182,10 +213,35 @@ Map::Map(int dimx, int dimy,string filename, string race): dimx{dimx}, dimy{dimy
         this->gety();
     };
 
+    
+
 //Gets the character in a cell on the current floor
 char Map::Cellstr(int y, int x) const{
     return Maps[level].Cellstr(y,x);
 };
+
+    //Movement
+void Map::move(string dir){
+    int result = Maps[level].move(dir, y, x);
+         if(result == 3) {
+            if(dir == "no") {--y;      }
+        else if(dir == "ne") {--y; ++x;}
+        else if(dir == "ea") {     ++x;}
+        else if(dir == "se") {++y; ++x;}
+        else if(dir == "so") {++y;     }
+        else if(dir == "sw") {++y; --x;}
+        else if(dir == "we") {     --x;}
+        else if(dir == "nw") {--y; --x;}
+        //set player action
+    }
+    else if(result == 2) {
+    }
+    else if(result == 1) {
+    }
+    else {
+    }
+};
+
 
 //Outputs current floor of Map
 ostream &operator<<(ostream &out, const Map floor){
