@@ -96,6 +96,12 @@
     <ClInclude Include="object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="potion.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="specificPotions.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="drow.cc">
@@ -154,6 +160,12 @@
     </ClCompile>
     <ClCompile Include="object.cc">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="potion.cc">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="specificPotions.cc">
+      <Filter>Source Files\Item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -126,7 +126,9 @@
     <ClInclude Include="object.h" />
     <ClInclude Include="orc.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="potion.h" />
     <ClInclude Include="shade.h" />
+    <ClInclude Include="specificPotions.h" />
     <ClInclude Include="troll.h" />
     <ClInclude Include="vampire.h" />
   </ItemGroup>
@@ -147,7 +149,9 @@
     <ClCompile Include="object.cc" />
     <ClCompile Include="orc.cc" />
     <ClCompile Include="player.cc" />
+    <ClCompile Include="potion.cc" />
     <ClCompile Include="shade.cc" />
+    <ClCompile Include="specificPotions.cc" />
     <ClCompile Include="troll.cc" />
     <ClCompile Include="vampire.cc" />
   </ItemGroup>
