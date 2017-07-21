@@ -13,6 +13,8 @@ Ladder::Ladder(int chamber) : Item('\\'), currentChamber{ chamber } {}
 
 Ladder::~Ladder() {}
 
+//thinking of swapping this function to be put in player, under construction
+// dont use this function
 void Ladder::consumeLadder(shared_ptr<Object> player) {
 	if (player->getLevel() < 5 && player->getLevel() > 0) {
 		player->levelUp();

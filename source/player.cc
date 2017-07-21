@@ -50,18 +50,31 @@ void Player::addGold(int amount) {
 // this method performs the attack action
 // return val: true if enemy is slain by this attack, false if enemy alive
 bool Player::attackEnemy(shared_ptr<Character> enemy) {
+	if (!enemy) return false;
+
+	//this below is your TRUE ATTACK
+	int atkIndex = 0;
+	int trueAttack = this->getAttack();
+	//if the player has consumed a potion previously!
+	if (this->getPotionBuffs()) {
+		trueAttack += this->getPotionBuffs()->potionBuffers()[atkIndex];
+	}
+	if (trueAttack < 0) trueAttack = 0;
 
 	if (enemy->getEnemyType().compare("Halfling") == 0) {
-		int halflingDodgeCheck = rand() % 2;
-		if (halflingDodgeCheck == 0) {
+		int halflingDodgeRand = rand() % 2;
+		if (halflingDodgeRand == 0) {
+			curAction = "misses attack on Halfling";
 			return false; //enemy is still alive (not slain), you miss your attack
 		}
 	}
 	
-	int myDamage = ceil((100 / (100 + enemy->getDefense()) * this->getAttack()));
+	int myDamage = ceil((100 / (100 + enemy->getDefense()) * trueAttack));
 	
 	//true if enemy is alive after receiving the damage you just dealt
 	bool isEnemyAlive = enemy->receiveDmg(myDamage);
+	curAction = "deals " + myDamage;
+	curAction += " damage to " + enemy->getEnemyType();
 
 	if (isEnemyAlive) {
 		return false;
@@ -93,37 +106,6 @@ if statement, to perform the below commands.
 4. else player->gold += 2; [DONE]
 */
 
-
-void Player::move(string direction) {
-	//use coordinates structure here 
-	//might need to pass in an instance of grid and check if valid
-	//check if needs equals ignore case
-	if (direction == "nw") {
-		//check if anything is occupying space and the space is a valid tile
-	}
-	else if (direction == "no") {
-		/*Implementation*/
-	}
-	else if (direction == "ne") {
-		/*Implementation*/
-	}
-	else if (direction == "ea") {
-		/*Implementation*/
-	}
-	else if (direction == "se") {
-		/*Implementation*/
-	}
-	else if (direction == "so") {
-		/*Implementation*/
-	}
-	else if (direction == "sw") {
-		/*Implementation*/
-	}
-	else if (direction == "we") {
-		/*Implementation*/
-	}
-
-}
 
 void Player::notifyObservers() {
 	cerr << "Notify Observers under construction" << endl;

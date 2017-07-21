@@ -9,18 +9,15 @@ ATTRIBUTES: (protected)
   mapSymbol (item), type (object)
 */
 
-Potion::Potion(shared_ptr<Object> pPlayer, string potName, string id,
+Potion::Potion(shared_ptr<Potion> nxtPotion, string potName, string id,
 	int hEff, int aEff, int dEff) :	Item('P'), 
-	player{ pPlayer }, potionName { potName }, potionID{ id },
+	nextPotion{ nxtPotion }, potionName { potName }, potionID{ id },
 	healthEffect { hEff }, attackEffect{ aEff }, defenseEffect{ dEff } {}
 
 Potion::~Potion() {}
 
 char Potion::getType() {
-	//if (pointer not null) this potion is decorated on a player	
-	if (player) return '@';
-	//else if the pointer is null then it is a potion that hasn't been picked up
-	else return 'P';
+	return 'P';
 }
 
 int Potion::getHealthEffect() {
@@ -35,8 +32,32 @@ int Potion::getDefenseEffect() {
 	return this->defenseEffect;
 }
 
+void Potion::setAttackEffect(int value) {
+	this->attackEffect = value;
+}
+
+void Potion::setDefenseEffect(int value) {
+	this->defenseEffect = value;
+}
+
+string Potion::getPotionName() {
+	return this->potionName;
+}
+
+void Potion::setNextPotion(shared_ptr<Potion> myPotion) {
+	this->nextPotion = myPotion;
+}
+
+vector<int> Potion::potionBuffers() {
+	vector<int> myPotBuf = { 0, 0 };
+	return myPotBuf;
+}
+
+
 //---------------------------helper-----------------------------//
 
+/*
+This is kind of obsolete right now, might come in handy later
 std::string Potion::getAttachedHeroName(std::shared_ptr<Object> myObj) {
 	if (myObj.get() == nullptr) { return "NULLHERO"; }
 	else if (myObj->getType() == '@') {
@@ -48,3 +69,4 @@ std::string Potion::getAttachedHeroName(std::shared_ptr<Object> myObj) {
 	}
 	return "Hero name not set!";
 }
+*/

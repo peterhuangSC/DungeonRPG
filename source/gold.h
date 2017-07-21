@@ -23,9 +23,9 @@ public:
 	int getQuantity();
 	void setQuantity(int newQty);
 
-	bool isGuarded();
-	void setGuarded();
-	void setUnguarded();
+	bool isGuarded() override;
+	void setGuarded() override;
+	void setUnguarded() override;
 };
 
 #endif

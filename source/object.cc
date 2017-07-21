@@ -29,12 +29,6 @@ int Object::getAttack() { return -1; }
 
 int Object::getDefense() { return -1; }
 
-int Object::getHealthEffect() { return 0; }
-
-int Object::getAttackEffect() { return 0; }
-
-int Object::getDefenseEffect() { return 0; }
-
 int Object::getLevel() { return 1; }
 void Object::levelUp() {}
 int Object::getGold() { return -1; }
@@ -44,14 +38,16 @@ void Object::notify(std::shared_ptr<Object> who) {
 	// to be implemented
 }
 
-int Object::consumePotion() {
-	return 0;
-	//no default implemetation required
-	//implementation is only required in Player and Potion classes
-}
-
-void Object::consumePotion(std::shared_ptr<Object> myObj) {}
-
 bool Object::consumeGold(std::shared_ptr<Object> myObj) { return false; }
 
 void Object::consumeLadder(std::shared_ptr<Object> player) {}
+
+bool Object::isGuarded() { return false; }
+
+void Object::setGuarded() {}
+void Object::setUnguarded() {}
+
+std::string Object::getAction() {
+	return "n/a";
+}
+void Object::setAction(std::string newAction) {}

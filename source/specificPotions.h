@@ -2,55 +2,52 @@
 #define __SPECIFIC_POTIONS_H__
 
 #include <string>
+#include <vector>
 #include <memory>
 #include "potion.h"
 
 class RestoreHealth : public Potion {
 public:
-	RestoreHealth(std::shared_ptr<Object> pPlayer);
+	RestoreHealth();
 	~RestoreHealth();
-
-	void consumePotion(std::shared_ptr<Object> spPlayer);
 };
 
 class PoisonHealth : public Potion {
 public:
-	PoisonHealth(std::shared_ptr<Object> pPlayer);
+	PoisonHealth();
 	~PoisonHealth();
-
-	void consumePotion(std::shared_ptr<Object> spPlayer);
 };
 
 class BoostAttack : public Potion {
 public:
-	BoostAttack(std::shared_ptr<Object> pPlayer);
+	BoostAttack(std::shared_ptr<Potion> np);
 	~BoostAttack();
 
-	int consumePotion();
+	std::vector<int> potionBuffers() override;
 };
 
 class WoundAttack : public Potion {
 public:
-	WoundAttack(std::shared_ptr<Object> pPlayer);
+	WoundAttack(std::shared_ptr<Potion> np);
 	~WoundAttack();
 
-	int consumePotion();
+	std::vector<int> potionBuffers() override;
 };
 
 class BoostDefense : public Potion {
 public:
-	BoostDefense(std::shared_ptr<Object> pPlayer);
+	BoostDefense(std::shared_ptr<Potion> np);
 	~BoostDefense();
 
-	int consumePotion();
+	std::vector<int> potionBuffers() override;
 };
 
 class WoundDefense : public Potion {
 public:
-	WoundDefense(std::shared_ptr<Object> pPlayer);
+	WoundDefense(std::shared_ptr<Potion> np);
 	~WoundDefense();
 
-	int consumePotion();
+	std::vector<int> potionBuffers() override;
 };
 
 #endif

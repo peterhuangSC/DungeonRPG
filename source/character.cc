@@ -4,11 +4,13 @@
 
 using namespace std;
 
-//attributes: curHealth, maxHealth, attack, defense
+//attributes: curHealth, maxHealth, attack, defense, shared_ptr<potion> potionBuffs
 
 //methods below-------------------------------------
 Character::Character(int myHealth, int myAttack, int myDefense, char myType) :
-	Object(myType),	curHealth{ myHealth }, maxHealth{ myHealth }, attack{ myAttack }, defense{ myDefense } {
+	Object(myType),	curHealth{ myHealth }, maxHealth{ myHealth }, 
+	attack{ myAttack }, defense{ myDefense }, potionBuffs{ nullptr }, 
+	curAction{ "default" } {
 
 }
 
@@ -56,4 +58,35 @@ int Character::getDefense() {
 
 void Character::setDefense(int newDefense) {
 	this->defense = newDefense;
+}
+
+shared_ptr<Potion> Character::getPotionBuffs() {
+	return this->potionBuffs;
+}
+
+void Character::consumePotion(shared_ptr<Potion> myPotion) {
+	//case 1: consume health related potions
+	if (myPotion->getPotionName().compare("Restore Health") ||
+		myPotion->getPotionName().compare("Poison Health")) {
+		this->setHealth(this->getHealth() + myPotion->getHealthEffect);
+		//remove potion
+		return;
+	}
+
+	//blue bar for boosted/weakened attack/defense
+	if (!potionBuffs) {
+		potionBuffs = myPotion; 
+	}
+	else {
+		myPotion->setNextPotion(potionBuffs);
+		potionBuffs = myPotion;
+	}
+}
+
+string Character::getAction() {
+	return this->curAction;
+}
+
+void Character::setAction(string newAction) {
+	this->curAction = newAction;
 }

@@ -17,124 +17,88 @@ mapSymbol (item), type (object)
 // PotionName, PotionID, HealthEff, AttackEff, DefenseEff
 
 //------------------------RESTORE HEALTH------------------------//
-RestoreHealth::RestoreHealth(shared_ptr<Object> pPlayer) : 
-	Potion(pPlayer, "Restore Health", "RH", 10, 0, 0) {}
+RestoreHealth::RestoreHealth() : 
+	Potion(nullptr, "Restore Health", "RH", 10, 0, 0) {}
 
 RestoreHealth::~RestoreHealth() {}
 
-void RestoreHealth::consumePotion(shared_ptr<Object> spPlayer) {
-	spPlayer->setHealth(spPlayer->getHealth() + healthEffect);
-	if (spPlayer->getHeroType().compare("Drow") == 0) {
-		spPlayer->setHealth(spPlayer->getHealth() + ceil(1.5 * healthEffect));
-	}
-}
-
 //------------------------POISON HEALTH------------------------//
-PoisonHealth::PoisonHealth(shared_ptr<Object> pPlayer) :
-	Potion(pPlayer, "Poison Health", "PH", -10, 0, 0) {}
+PoisonHealth::PoisonHealth() :
+	Potion(nullptr, "Poison Health", "PH", -10, 0, 0) {}
 
 PoisonHealth::~PoisonHealth() {}
 
-void PoisonHealth::consumePotion(shared_ptr<Object> spPlayer) {
-	spPlayer->setHealth(spPlayer->getHealth() + healthEffect);
-	if (spPlayer->getHeroType().compare("Drow") == 0) {
-		spPlayer->setHealth(spPlayer->getHealth() + floor(1.5 * healthEffect));
-	}
-}
-
 //------------------------BOOST ATTACK------------------------//
-BoostAttack::BoostAttack(shared_ptr<Object> pPlayer) :
-	Potion(pPlayer, "Boost Attack", "BA", 0, 5, 0) {}
+BoostAttack::BoostAttack(shared_ptr<Potion> np) :
+	Potion(np, "Boost Attack", "BA", 0, 5, 0) {}
 
 BoostAttack::~BoostAttack() {}
 
-/* 
-if player pointer is empty, this is the first potion the player is consuming
-you stack the effects of the potion onto the player's player stats
-else if player pointer is not empty, this is NOT the first consumed potion
-you stack the effects of the potion onto the previously decorated potion
-*/
-int BoostAttack::consumePotion() {	
+vector<int> BoostAttack::potionBuffers() {	
+	/*
 	string thisHero = "";
 	thisHero = getAttachedHeroName(player);
 
 	if (thisHero.compare("Drow") == 0) {
 		attackEffect = ceil(attackEffect * 1.5);
 	}
+	*/
+	vector<int> additionalStats = {attackEffect, 0};
 
-	if (!player) {
-		return player->getAttack() + attackEffect;
-	} 
-	else {
-		return player->consumePotion() + attackEffect;
+	if (nextPotion){
+		additionalStats[0] += nextPotion->potionBuffers()[0];
+		additionalStats[1] += nextPotion->potionBuffers()[1];
 	}
+	return additionalStats;
 }
 
 
 //------------------------WOUND ATTACK------------------------//
-WoundAttack::WoundAttack(shared_ptr<Object> pPlayer) :
-	Potion(pPlayer, "Wound Attack", "WA", 0, -5, 0) {}
+WoundAttack::WoundAttack(shared_ptr<Potion> np) :
+	Potion(np, "Wound Attack", "WA", 0, -5, 0) {}
 
 WoundAttack::~WoundAttack() {}
 
-int WoundAttack::consumePotion() {
-	string thisHero = "";
-	thisHero = getAttachedHeroName(player);
+vector<int> WoundAttack::potionBuffers() {
+	vector<int> additionalStats = { attackEffect, 0 };
 
-	if (thisHero.compare("Drow") == 0) {
-		attackEffect = floor(attackEffect * 1.5);
+	if (nextPotion) {
+		additionalStats[0] += nextPotion->potionBuffers()[0];
+		additionalStats[1] += nextPotion->potionBuffers()[1];
 	}
-
-	if (!player) {
-		return player->getAttack() + attackEffect;
-	}
-	else {
-		return player->consumePotion() + attackEffect;
-	}
+	return additionalStats;
 }
 
 //------------------------BOOST DEFENSE------------------------//
-BoostDefense::BoostDefense(shared_ptr<Object> pPlayer) :
-	Potion(pPlayer, "Boost Defense", "BD", 0, 0, 5) {}
+BoostDefense::BoostDefense(shared_ptr<Potion> np) :
+	Potion(np, "Boost Defense", "BD", 0, 0, 5) {}
 
 BoostDefense::~BoostDefense() {}
 
-int BoostDefense::consumePotion() {
-	string thisHero = "";
-	thisHero = getAttachedHeroName(player);
+vector<int> BoostDefense::potionBuffers() {
+	vector<int> additionalStats = { 0, defenseEffect };
 
-	if (thisHero.compare("Drow") == 0) {
-		defenseEffect = ceil(defenseEffect * 1.5);
+	if (nextPotion) {
+		additionalStats[0] += nextPotion->potionBuffers()[0];
+		additionalStats[1] += nextPotion->potionBuffers()[1];
 	}
-
-	if (!player) {
-		return player->getDefense() + defenseEffect;
-	}
-	else {
-		return player->consumePotion() + defenseEffect;
-	}
+	return additionalStats;
 }
 
 //------------------------WOUND DEFENSE------------------------//
-WoundDefense::WoundDefense(shared_ptr<Object> pPlayer) :
-	Potion(pPlayer, "Wound Defense", "WD", 0, 0, -5) {}
+WoundDefense::WoundDefense(shared_ptr<Potion> np) :
+	Potion(np, "Wound Defense", "WD", 0, 0, -5) {}
 
 WoundDefense::~WoundDefense() {}
 
-int WoundDefense::consumePotion() {
-	string thisHero = "";
-	thisHero = getAttachedHeroName(player);
+vector<int> WoundDefense::potionBuffers() {
+	vector<int> additionalStats = { 0, defenseEffect };
 
-	if (thisHero.compare("Drow") == 0) {
-		defenseEffect = floor(defenseEffect * 1.5);
+	if (nextPotion) {
+		additionalStats[0] += nextPotion->potionBuffers()[0];
+		additionalStats[1] += nextPotion->potionBuffers()[1];
 	}
-
-	if (!player) {
-		return player->getDefense() + defenseEffect;
-	}
-	else {
-		return player->consumePotion() + defenseEffect;
-	}
+	return additionalStats;
 }
 
 

@@ -15,7 +15,8 @@ protected:
 	int curLevel;
 	int gold;
 	std::string heroType;
-	std::map <std::string, bool> potions;
+	
+	//std::map <std::string, bool> potions;
 
 public:
 	Player(int health = 125, int attack = 25, int defense = 25,
@@ -32,7 +33,6 @@ public:
 	void addGold(int myGold) override;
 
 	virtual bool attackEnemy(std::shared_ptr<Character> enemy);
-	void move(std::string direction); //implement coordinates?
 	void notifyObservers();
 };
 

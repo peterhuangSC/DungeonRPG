@@ -2,7 +2,9 @@
 #define __CHARACTER_H__
 
 #include <string>
+#include <memory>
 #include "object.h"
+#include "potion.h"
 
 class Character : public Object {
 
@@ -12,6 +14,9 @@ protected:
 
 	int attack;
 	int defense;
+
+	std::shared_ptr<Potion> potionBuffs;
+	std::string curAction;
 
 public:
 	Character(int health, int attack, int defense, char myType);
@@ -30,6 +35,12 @@ public:
 	int getDefense() override;
 	void setDefense(int newDefense);
 
+	std::shared_ptr<Potion> getPotionBuffs();
+
+	virtual void consumePotion(std::shared_ptr<Potion> myPotion);
+
+	std::string getAction() override;
+	void setAction(std::string newAction) override;
 };
 
 #endif
