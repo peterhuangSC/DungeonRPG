@@ -46,4 +46,5 @@ std::string Potion::getAttachedHeroName(std::shared_ptr<Object> myObj) {
 		std::string heroName = getAttachedHeroName(player);
 		return heroName;
 	}
+	return "Hero name not set!";
 }
