@@ -11,8 +11,8 @@ using namespace std;
 
 
 //default enemy is human
-Enemy::Enemy(int health = 140, int attack = 20, int defense = 20, 
-	string myEnemyType = "Human", int goldDrop = 2, char mapSymbol = 'H') : 
+Enemy::Enemy(int health, int attack, int defense, 
+	string myEnemyType, int goldDrop, char mapSymbol) : 
 	Character(health, attack, defense, mapSymbol), 
 	enemyLevel{ 1 }, goldDrop{ 2 },	enemyType{ myEnemyType }, 
 	isHostile { true }, isMovable{ true } {}
