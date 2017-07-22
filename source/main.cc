@@ -55,28 +55,30 @@ int main(int argc, char* argv[]){
 
 
         //Start the game, read commands, one line at a time
-        while(map.getLevel() != 5 && getline(cin,line)) {
-            istringstream line_in{line};
-            line_in >> command;
-            //Quit the game
-            if(command == "q") {
-            cout << "Quitting Game..." << endl;
-            return 0;
-            }
-            //Restart the game
-            else if(command == "r" || map.getLevel() == 5) {
-            cout << "Restarting Game..." << endl;
-            break;
-            }
-            //Freeze enemies
-            else if(command == "f"){
-                //map.freeze();
-            }
-            //Let's make a move
-            else if(command == "no" || command == "ne" || command == "ea" || command == "se"
-                 || command == "so" || command == "sw" || command == "we" || command == "nw") map.move(command);
-
-            
+		while (map.getLevel() != 5 && getline(cin, line)) {
+			istringstream line_in{ line };
+			line_in >> command;
+			//Quit the game
+			if (command == "q") {
+				cout << "Quitting Game..." << endl;
+				return 0;
+			}
+			//Restart the game
+			else if (command == "r" || map.getLevel() == 5) {
+				cout << "Restarting Game..." << endl;
+				break;
+			}
+			//Freeze enemies
+			else if (command == "f") {
+				//map.freeze();
+			}
+			//Let's make a move
+			else if (command == "no" || command == "ne" || command == "ea" || command == "se"
+				|| command == "so" || command == "sw" || command == "we" || command == "nw") {
+				map.move(command);
+				/*#peter: you might need indiv cases so you can output
+				 .. Player has moved North! .. south, southwest, etc.. */
+			}
 
             //Let's use a potion
             else if(command == "u"){
@@ -96,8 +98,9 @@ int main(int argc, char* argv[]){
 
             //Not a valid command
             else cout << "Invalid Command" << endl;
-
-            if(map.getLevel() != 5) cout <<  map << endl;
+			
+			//#peter: dont need endl here as map ostream endl's
+			if (map.getLevel() != 5) cout << map;// << endl; 
         }
 
         //Endgame Process

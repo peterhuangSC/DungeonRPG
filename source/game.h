@@ -79,8 +79,8 @@ struct Info{
     std::shared_ptr<Object> player;
     int level;
     Info(int dimy);
-    int getx();
-    int gety();
+    int getx(); //#peter: function definition not found <warning>
+    int gety(); //#peter: function definition not found <warning>
     void levelUp();
     friend std::ostream &operator<<(std::ostream &out, const Info info);
 };

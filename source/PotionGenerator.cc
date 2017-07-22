@@ -13,6 +13,7 @@ shared_ptr<Potion> PotionGenerator::spawnPotion() {
 	case 4: return make_shared<WoundAttack>(nullptr);
 	case 5: return make_shared<BoostAttack>(nullptr);
 	case 6: return make_shared<WoundDefense>(nullptr);
+	default: return make_shared<RestoreHealth>();
 	}
 
 }
@@ -25,5 +26,6 @@ shared_ptr<Potion> PotionGenerator::spawnPotion(int type) {
 	case 4: return make_shared<WoundAttack>(nullptr);
 	case 5: return make_shared<BoostAttack>(nullptr);
 	case 6: return make_shared<WoundDefense>(nullptr);
+	default: return make_shared<RestoreHealth>();
 	}
 }

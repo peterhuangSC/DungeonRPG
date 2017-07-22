@@ -133,7 +133,7 @@ void Floor::init(shared_ptr<Object> player){
     //Movement
 int Floor::move(string dir, int y, int x){
     Cell *curr = &ground[y][x];
-    Cell *cell;
+    Cell *cell = curr;
          if(dir == "no") cell = &ground[y-1][ x ];
     else if(dir == "ne") cell = &ground[y-1][x+1];
     else if(dir == "ea") cell = &ground[ y ][x+1];
@@ -144,7 +144,7 @@ int Floor::move(string dir, int y, int x){
     else if(dir == "nw") cell = &ground[y-1][x-1];
 
     //Check if cell is valid;
-    char type = cell->getType();
+	char type = cell->getType();
     if(type ==  '.' || type ==  '+' || type ==  '#'){
         cell->setonCell(curr->onCell);
         curr->onCell.reset();
@@ -176,7 +176,7 @@ ostream &operator<<(ostream &out, const Info info){
     out << "HP:  " << info.player->getHealth() << endl;
     out << "Atk: " << info.player->getAttack() << endl;
     out << "Def: " << info.player->getDefense() << endl;
-    out << "Action: " << endl;
+	out << "Action: " << endl;
     return out;
 };
 /////////////////////////////////////////////////////////////////
@@ -203,7 +203,8 @@ Map::Map(int dimx, int dimy,string filename, string race): dimx{dimx}, dimy{dimy
                 char c = line[x];
                 Maps[i].addCell(y,x,c);
             }
-            cout << endl;
+            //cout << endl; 
+			//#peter: this was the line that printed a bunch of blank lines during init
         }
     }
     this->init_Level();
