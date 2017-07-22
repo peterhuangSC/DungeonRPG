@@ -6,6 +6,7 @@ using namespace std;
 
 static int dimx = 79;
 static int dimy = 25;
+static bool playing = true;
 /////////////////////////////////////////////////////////////////
 
 int main(int argc, char* argv[]){
@@ -18,7 +19,7 @@ int main(int argc, char* argv[]){
 /////////////////////////////////////////////////////////////////
 
     //Begin a game
-    bool playing = true;
+    playing = true;
     while(playing){
     cout << "At any time you may quit by typing: q" << endl;
 /////////////////////////////////////////////////////////////////
@@ -54,7 +55,7 @@ int main(int argc, char* argv[]){
 
 
         //Start the game, read commands, one line at a time
-        while(getline(cin,line)) {
+        while(map.getLevel() != 5 && getline(cin,line)) {
             istringstream line_in{line};
             line_in >> command;
             //Quit the game
@@ -63,7 +64,7 @@ int main(int argc, char* argv[]){
             return 0;
             }
             //Restart the game
-            else if(command == "r") {
+            else if(command == "r" || map.getLevel() == 5) {
             cout << "Restarting Game..." << endl;
             break;
             }
@@ -75,37 +76,28 @@ int main(int argc, char* argv[]){
             else if(command == "no" || command == "ne" || command == "ea" || command == "se"
                  || command == "so" || command == "sw" || command == "we" || command == "nw") map.move(command);
 
+            
+
             //Let's use a potion
             else if(command == "u"){
-                line_in >> direction;
-                     if(direction == "no"); //use potion north
-                else if(direction == "ne"); //use potion north-east
-                else if(direction == "ea"); //use potion east
-                else if(direction == "se"); //use potion south-east
-                else if(direction == "so"); //use potion south
-                else if(direction == "sw"); //use potion south-west
-                else if(direction == "we"); //use potion west
-                else if(direction == "nw"); //use potion north-west
+                line_in >> command;
+                    if(command == "no" || command == "ne" || command == "ea" || command == "se"
+                    || command == "so" || command == "sw" || command == "we" || command == "nw");
                 else cout << "Invalid Direction" << endl;
             }
 
             //Let's smash some skulls
             else if(command == "a"){
                 line_in >> direction;
-                     if(direction == "no"); //attack enemy north
-                else if(direction == "ne"); //attack enemy north-east
-                else if(direction == "ea"); //attack enemy east
-                else if(direction == "se"); //attack enemy south-east
-                else if(direction == "so"); //attack enemy south
-                else if(direction == "sw"); //attack enemy south-west
-                else if(direction == "we"); //attack enemy west
-                else if(direction == "nw"); //attack enemy north-west
+                if(command == "no" || command == "ne" || command == "ea" || command == "se"
+                || command == "so" || command == "sw" || command == "we" || command == "nw");
                 else cout << "Invalid Direction" << endl;
             }
 
             //Not a valid command
             else cout << "Invalid Command" << endl;
-            cout << map;
+
+            if(map.getLevel() != 5) cout <<  map << endl;
         }
 
         //Endgame Process
@@ -117,6 +109,7 @@ int main(int argc, char* argv[]){
         else{
             cout << "Quit the game?(y/n)" << endl;
             cin >> quit;
+            getline(cin,command);//Throw away rest of line
             if(quit == 'y') playing = false;
             else if(quit == 'n') playing = true;
             else {
@@ -124,6 +117,5 @@ int main(int argc, char* argv[]){
                 playing = false;
             }
         }
-
     }
 }

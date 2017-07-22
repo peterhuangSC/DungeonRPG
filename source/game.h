@@ -8,8 +8,13 @@
 #include <memory>
 #include "player.h"
 #include "PlayerGenerator.h"
+#include "LadderGenerator.h"
+#include "PotionGenerator.h"
+#include "GoldGenerator.h"
+#include "EnemyGenerator.h"
 
 class Object;
+
 /////////////////////////////////////////////////////////////////
 
 //Cell Class
@@ -21,7 +26,6 @@ class Cell{
 
     public:
     Cell();
-    ~Cell();
 
     //Puts an object on Cell if empty
     bool setonCell(std::shared_ptr<Object> o);
@@ -107,6 +111,7 @@ class Map{
     Map(int dimx, int dimy, std::string filename, std::string race);
 
     char Cellstr(int y, int x) const;
+    int getLevel();
 
     //Movement
     void move(std::string dir);

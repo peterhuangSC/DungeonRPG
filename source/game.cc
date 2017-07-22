@@ -28,7 +28,6 @@ int whatRoom(int y, int x, char c){
 //Cell Class//
 
 Cell::Cell(): Type{' '}, room{0}, onCell{nullptr} {};
-Cell::~Cell()= default;
 
     //Puts an object on Cell if empty
 bool Cell::setonCell(shared_ptr<Object> o){
@@ -111,6 +110,12 @@ int Floor::gety(){
 };
 
 void Floor::init(shared_ptr<Object> player){
+    //Generators
+    LadderGenerator LG;
+    PotionGenerator PG;
+    GoldGenerator   GG;
+    EnemyGenerator  EG;
+    
     //Player room cannot be ladder room
     int r = 1 + (rand() % 5);
     int noLadder = r;
@@ -121,13 +126,9 @@ void Floor::init(shared_ptr<Object> player){
     //Place a ladder
      r = 1 + (rand() % 5);
     if(r == noLadder) r = ++r % 5;
+    rooms[r].removeFree()->setonCell(LG.spawnLadder(r));
 
-
-
-    
 };
-
-
 
     //Movement
 int Floor::move(string dir, int y, int x){
@@ -149,7 +150,7 @@ int Floor::move(string dir, int y, int x){
         curr->onCell.reset();
         return 3;
     }
-    else if(type ==  'T' && cell->onCell->isGuarded()){
+    else if(type ==  'G' && cell->onCell->isGuarded()){
         return 2;
     }
     else if (type ==  '\\'){
@@ -209,18 +210,23 @@ Map::Map(int dimx, int dimy,string filename, string race): dimx{dimx}, dimy{dimy
 };
 
     //get the position of the player when the level starts
-    void Map::getx(){
-        x = Maps[level].getx();
-    };
-    void Map::gety(){
-        y = Maps[level].gety();
-    };
+void Map::getx(){
+    x = Maps[level].getx();
+};
+void Map::gety(){
+    y = Maps[level].gety();
+};
     //Initialize the current Level
-    void Map::init_Level(){
+void Map::init_Level(){
+    if(level != 5){
         Maps[level].init(player);
         this->getx();
-        this->gety();
-    };
+        this->gety();            
+    }
+    else {
+        cout << "CONGRATS, YOU WON! YOUR SCORE WAS: " << 0 << endl;
+    }
+};
 
     
 
@@ -229,11 +235,13 @@ char Map::Cellstr(int y, int x) const{
     return Maps[level].Cellstr(y,x);
 };
 
+int Map::getLevel(){ return level;};
+
     //Movement
 void Map::move(string dir){
     int result = Maps[level].move(dir, y, x);
          if(result == 3) {
-            if(dir == "no") {--y;      }
+             if(dir == "no") {--y;      }
         else if(dir == "ne") {--y; ++x;}
         else if(dir == "ea") {     ++x;}
         else if(dir == "se") {++y; ++x;}
@@ -246,6 +254,9 @@ void Map::move(string dir){
     else if(result == 2) {
     }
     else if(result == 1) {
+        ++level;
+        info.levelUp();
+        this->init_Level();
     }
     else {
     }
