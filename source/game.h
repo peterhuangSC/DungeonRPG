@@ -62,8 +62,7 @@ class Floor {
     public:
     Floor(int dimx, int dimy);
 
-    int getx();
-    int gety();
+    int get(char var);
 
     void init(std::shared_ptr<Object> player);
     char Cellstr(int y,int x) const;
@@ -75,10 +74,10 @@ class Floor {
 
 //Information, for storing floor information
 struct Info{
-    int dimy;
+    int dimx;
     std::shared_ptr<Object> player;
     int level;
-    Info(int dimy);
+    Info(int dimx, std::shared_ptr<Object> player);
     int getx(); //#peter: function definition not found <warning>
     int gety(); //#peter: function definition not found <warning>
     void levelUp();
@@ -93,31 +92,41 @@ class Map{
     //The Layout
     int dimx,dimy,level;
     std::vector<Floor> Maps;
+    bool frozen;
 
     //The Player
     std::shared_ptr<Object> player;
     int x,y;
-    void getx();
-    void gety();
 
     //Information
     Info info;
 
+//Methods
+
+    //Get some info
+    void get();
+    char Cellstr(int x, int y) const;
+
     //Initialize the current level;
     void init_Level();
 
-    public:
+public:
     //Create all floors of map
-    Map(int dimx, int dimy, std::string filename, std::string race);
+    Map(std::string filename, std::string race);
 
-    char Cellstr(int y, int x) const;
-    int getLevel();
+    //Freeze the enemies
+    void freeze();
 
     //Movement
     void move(std::string dir);
 
-    friend std::ostream &operator<<(std::ostream &out, const Map floor);
+    //Use Potion
+    void potion(std::string dir);
 
+    //Attack Enemy
+    void attack(std::string dir);
+    
+    friend std::ostream &operator<<(std::ostream &out, const Map floor);
 };
 
 std::ostream &operator<<(std::ostream &out, const Map floor);

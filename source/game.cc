@@ -2,6 +2,11 @@
 
 using namespace std;
 
+extern bool playing;
+static int dim_x = 79;
+static int dim_y = 25;
+static PlayerGenerator PG;
+
 //Hard Coded Rooms 
 static int ur1 = 3;  static int uc1 = 3;  static int lr1 = 8;  static int lc1 = 30;// Room 1
 static int ur2 = 3;  static int uc2 = 39; static int lr2 = 8;  static int lc2 = 63;// Room 2
@@ -87,24 +92,16 @@ void Floor::addCell(int y,int x,char c){
     rooms[ground[y][x].room].addFree(&ground[y][x]);
 };
 
-
-int Floor::getx(){
+    //Finds player on this floor
+int Floor::get(char var){
     int dimy = ground.size();
     int dimx = ground[0].size();
     for(int y = 0; y < dimy; ++y){
         for(int x = 0; x < dimx; ++x){
-            if(ground[y][x].getType() == '@') return x;
-        }
-    }
-};
-
-
-int Floor::gety(){
-    int dimy = ground.size();
-    int dimx = ground[0].size();
-    for(int y = 0; y < dimy; ++y){
-        for(int x = 0; x < dimx; ++x){
-            if(ground[y][x].getType() == '@') return y;
+            if(ground[y][x].getType() == '@') {
+                if(var == 'y') return y;
+                if(var == 'x') return x;
+            }
         }
     }
 };
@@ -116,18 +113,31 @@ void Floor::init(shared_ptr<Object> player){
     GoldGenerator   GG;
     EnemyGenerator  EG;
     
-    //Player room cannot be ladder room
-    int r = 1 + (rand() % 5);
-    int noLadder = r;
-
     //Place the Player
+    int r = 1 + (rand() % 5);
     rooms[r].removeFree()->setonCell(player);
-   
+    int noLadder = r; //Ladder & Player can't start in same room 
+
     //Place a ladder
      r = 1 + (rand() % 5);
     if(r == noLadder) r = ++r % 5;
     rooms[r].removeFree()->setonCell(LG.spawnLadder(r));
 
+    //Place the potions
+    for(int i = 0; i < 10; ++i){
+        r = 1 + (rand() % 5);
+        rooms[r].removeFree()->setonCell(PG.spawnPotion());
+    }
+    //Place the gold
+    for(int i = 0; i < 10; ++i){
+        r = 1 + (rand() % 5);
+        rooms[r].removeFree()->setonCell(GG.spawnGold());
+    }
+    //Place the enemies
+    for(int i = 0; i < 20; ++i){
+        r = 1 + (rand() % 5);
+        rooms[r].removeFree()->setonCell(EG.spawnEnemy());
+    }
 };
 
     //Movement
@@ -164,38 +174,61 @@ int Floor::move(string dir, int y, int x){
 /////////////////////////////////////////////////////////////////
 
 //Info Class// stores Maps information
-Info::Info(int dimy): dimy{dimy}, level{0} {};
+Info::Info(int dimx, shared_ptr<Object> player): dimx{dimx}, level{0}, player{player} {};
 
 void Info::levelUp(){++level;};
 
 ostream &operator<<(ostream &out, const Info info){
-    string race = info.player->getHeroType();
-    string line(56 - race.length(),' ');
-    out << "Race: " << race << " Gold: " <<  0; //info.player->getGold();
-    out << line << "Floor: " << info.level + 1 << endl;
-    out << "HP:  " << info.player->getHealth() << endl;
+    int size = 22 + info.player->getHeroType().length() + to_string(info.player->getGold()).length();
+    string line(info.dimx - size,' ');
+    cout << "Race: " << info.player->getHeroType() << "  Gold: " << info.player->getGold();
+    cout << line << "Floor: " << info.level + 1 << endl;
+    out << "HP : " << info.player->getHealth() << endl;
     out << "Atk: " << info.player->getAttack() << endl;
     out << "Def: " << info.player->getDefense() << endl;
-	out << "Action: " << endl;
+	out << "Action: " << info.player->getAction() << endl;
     return out;
 };
 /////////////////////////////////////////////////////////////////
 
 //Map class// Stores an instance of the game
 
+    //Find the position of player
+void Map::get(){
+    y = Maps[level].get('y');
+    x = Maps[level].get('x');
+};
+
+    //The char in this cell on the current floor
+char Map::Cellstr(int y, int x) const{
+    return Maps[level].Cellstr(y,x);
+};
+
+    //Initialize the current Level
+void Map::init_Level(){
+    if(level == 5){
+        playing = false;
+        cout << "\n\n\n\n         CONGRATS, YOU WON THE GAME!\n" << endl; 
+        cout <<         "             YOUR SCORE WAS: " << player->getGold() << "\n\n\n" << endl;
+    }
+    else {
+        Maps[level].init(player);
+        player->setAction("Player Enters Level " + to_string(level));;
+        this->get();     
+    }
+};
+
     //Create all floors of map
-Map::Map(int dimx, int dimy,string filename, string race): dimx{dimx}, dimy{dimy}, level{0}, info(dimy) {
-    PlayerGenerator PG;
-    player = PG.spawnPlayer(race[0]);
-    cout << "Type: " << player->getHeroType() << endl; 
-    cout << "atk: " << player->getHealth() << endl;
-    cout << "atk: " << player->getAttack() << endl;
-    cout << "def: " << player->getDefense() << endl;
-    cout << player->getHeroType() << endl;
-    info.player = player;
+Map::Map(string filename, string race): 
+dimx{dim_x}, dimy{dim_y}, level{0}, frozen{false}, 
+player{PG.spawnPlayer(race[0])}, info(dim_x, player) {
+    cout << "here1" << endl << dim_x << endl << dim_y << endl;
+    cout << "here2" << endl << dimx << endl << dimy << endl;
     Maps.assign(5,Floor(dimx,dimy));
     ifstream file (filename);
     string line;
+    cout << dimx << endl;
+    cout << dimy << endl;
     for(int i = 0; i < 5; ++i){ 
         for(int y = 0; y < dimy; ++y){
             getline(file, line);
@@ -203,54 +236,29 @@ Map::Map(int dimx, int dimy,string filename, string race): dimx{dimx}, dimy{dimy
                 char c = line[x];
                 Maps[i].addCell(y,x,c);
             }
-            //cout << endl; 
-			//#peter: this was the line that printed a bunch of blank lines during init
         }
     }
     this->init_Level();
 };
 
-    //get the position of the player when the level starts
-void Map::getx(){
-    x = Maps[level].getx();
-};
-void Map::gety(){
-    y = Maps[level].gety();
-};
-    //Initialize the current Level
-void Map::init_Level(){
-    if(level != 5){
-        Maps[level].init(player);
-        this->getx();
-        this->gety();            
-    }
-    else {
-        cout << "CONGRATS, YOU WON! YOUR SCORE WAS: " << 0 << endl;
-    }
-};
+    //Freeze
+    void Map::freeze(){frozen = !frozen;};
 
-    
-
-//Gets the character in a cell on the current floor
-char Map::Cellstr(int y, int x) const{
-    return Maps[level].Cellstr(y,x);
-};
-
-int Map::getLevel(){ return level;};
 
     //Movement
 void Map::move(string dir){
     int result = Maps[level].move(dir, y, x);
          if(result == 3) {
-             if(dir == "no") {--y;      }
-        else if(dir == "ne") {--y; ++x;}
-        else if(dir == "ea") {     ++x;}
-        else if(dir == "se") {++y; ++x;}
-        else if(dir == "so") {++y;     }
-        else if(dir == "sw") {++y; --x;}
-        else if(dir == "we") {     --x;}
-        else if(dir == "nw") {--y; --x;}
+             if(dir == "no") {--y;    ; player->setAction("Player moves North.");}
+        else if(dir == "ne") {--y; ++x; player->setAction("Player moves North-East.");}
+        else if(dir == "ea") {     ++x; player->setAction("Player moves East.");}
+        else if(dir == "se") {++y; ++x; player->setAction("Player moves South-East.");}
+        else if(dir == "so") {++y;      player->setAction("Player moves South.");}
+        else if(dir == "sw") {++y; --x; player->setAction("Player moves South-West.");}
+        else if(dir == "we") {     --x; player->setAction("Player moves West.");}
+        else if(dir == "nw") {--y; --x; player->setAction("Player moves North-West.");}
         //set player action
+
     }
     else if(result == 2) {
     }
@@ -260,16 +268,22 @@ void Map::move(string dir){
         this->init_Level();
     }
     else {
+        player->setAction("Something is in your way");
     }
 };
 
+    //Potions
+    void Map::potion(string dir){};
+
+    //Attacking
+    void Map::attack(string dir){};
 
 //Outputs current floor of Map
 ostream &operator<<(ostream &out, const Map floor){
-    int dimx = floor.dimx;
-    int dimy = floor.dimy;
-    for(int y = 0; y < dimy; ++y){
-        for(int x = 0; x < dimx; ++x){
+    string spacing(28, '\n');
+    cout << spacing;
+    for(int y = 0; y < dim_y; ++y){
+        for(int x = 0; x < dim_x; ++x){
             out << floor.Cellstr(y,x);
         }
         out << endl;

@@ -4,9 +4,7 @@
 #include "game.h"
 using namespace std;
 
-static int dimx = 79;
-static int dimy = 25;
-static bool playing = true;
+bool playing = true;
 /////////////////////////////////////////////////////////////////
 
 int main(int argc, char* argv[]){
@@ -34,52 +32,51 @@ int main(int argc, char* argv[]){
         //Player must choose race
         cout << "Choose a Race, one of:  s, d, v, g, t" << endl;
         
-        if(!getline(cin,line)) return 0;
-        istringstream line_in{line};
-        line_in >> race;
+        if(!getline(cin,race)) return 0;
 
         //Which race did they choose?
         if(race == "q") {
             cout << "Quitting Game..." << endl;
             return 0;
         }
-        //Create a map of dimensions dimx*dimy
-        //Use the default file if none specified
+    //Create a map//
         //Sets the race of the character
-        Map map(dimx, dimy, "default.txt", race);
+
+        //Use the default file if none specified, random gen
+        //if(argc == 1) 
+        Map map("default.txt", race);
+        //Otherwise use the one specified
+        //else Map map(argv[2], race);
         cout << map;
+
 /////////////////////////////////////////////////////////////////
-        //Print valid comands
+    //Print valid comands//
         //cout << "Valid Commands are:" << endl;
         //cout << "\t" << "Just did a tab" << endl;
 
-
-        //Start the game, read commands, one line at a time
-		while (map.getLevel() != 5 && getline(cin, line)) {
+    //Start the game, read commands, one line at a time//
+		while (playing && getline(cin, line)) {
 			istringstream line_in{ line };
 			line_in >> command;
+
 			//Quit the game
 			if (command == "q") {
 				cout << "Quitting Game..." << endl;
 				return 0;
 			}
 			//Restart the game
-			else if (command == "r" || map.getLevel() == 5) {
+			else if (command == "r") {
 				cout << "Restarting Game..." << endl;
 				break;
 			}
 			//Freeze enemies
 			else if (command == "f") {
-				//map.freeze();
+				map.freeze();
 			}
 			//Let's make a move
 			else if (command == "no" || command == "ne" || command == "ea" || command == "se"
-				|| command == "so" || command == "sw" || command == "we" || command == "nw") {
-				map.move(command);
-				/*#peter: you might need indiv cases so you can output
-				 .. Player has moved North! .. south, southwest, etc.. */
-			}
-
+				  || command == "so" || command == "sw" || command == "we" || command == "nw")
+				{map.move(command);}
             //Let's use a potion
             else if(command == "u"){
                 line_in >> command;
@@ -87,7 +84,6 @@ int main(int argc, char* argv[]){
                     || command == "so" || command == "sw" || command == "we" || command == "nw");
                 else cout << "Invalid Direction" << endl;
             }
-
             //Let's smash some skulls
             else if(command == "a"){
                 line_in >> direction;
@@ -95,15 +91,12 @@ int main(int argc, char* argv[]){
                 || command == "so" || command == "sw" || command == "we" || command == "nw");
                 else cout << "Invalid Direction" << endl;
             }
-
             //Not a valid command
             else cout << "Invalid Command" << endl;
-			
-			//#peter: dont need endl here as map ostream endl's
-			if (map.getLevel() != 5) cout << map;// << endl; 
+			if(playing) cout << map; 
         }
 
-        //Endgame Process
+    //Endgame Process//
         //EOF ends the game
         if(cin.eof()) playing = false;
         //Restart the game
