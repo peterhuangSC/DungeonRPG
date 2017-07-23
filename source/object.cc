@@ -58,4 +58,4 @@ void Object::setAction(std::string newAction) {}
 
 void Object::severTies() {}
 
-bool Object::canMove() { return true; }
+bool Object::canMove() { return false; }

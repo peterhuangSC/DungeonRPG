@@ -36,8 +36,6 @@ public:
 
 	virtual bool attackEnemy(std::shared_ptr<Character> enemy);
 	void notifyObservers();
-
-	bool canMove() override;
 };
 
 #endif

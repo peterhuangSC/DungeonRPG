@@ -5,6 +5,7 @@
 #include "enemy.h"
 
 class Merchant : public Enemy {
+	static bool mercHostile; //
 
 public:
 	//default stats: Health 30, Attack 70, Defense 5, <Gold: 1 pile?? check this>

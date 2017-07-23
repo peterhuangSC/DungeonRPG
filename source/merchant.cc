@@ -18,11 +18,12 @@ Merchant::Merchant(int health, int attack, int defense) :
 Merchant::~Merchant() {}
 
 bool Merchant::canMove() {
-	if (isHostile) return true;
+	if (mercHostile) return true;
 	else return false;
 }
 
 bool Merchant::receiveDmg(int dmg) {
+	this->mercHostile = true;
 	//merchant attributes after it is attacked the first time
 	//but the map/game class has to be also changed so all merchants are set 
 	//to hostile after the first one is attacked
