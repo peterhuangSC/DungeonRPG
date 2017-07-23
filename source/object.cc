@@ -1,8 +1,6 @@
 #include <string>
 #include "object.h"
 
-class Gold;
-
 Object::Object(char typeSymbol) : type{ typeSymbol } {
 	//no implementation currently
 }
@@ -35,7 +33,7 @@ int Object::getLevel() { return 1; }
 void Object::levelUp() {} //overriden in player - increase level and delete buffer potions
 int Object::getGold() { return -1; }
 void Object::addGold(int myGold) {}
-bool Object::addGold(std::shared_ptr<Gold> myGold) { return false; }
+bool Object::addGoldItem(std::shared_ptr<Gold> myGold) { return false; }
 
 void Object::notify(std::shared_ptr<Object> who) {
 	// to be implemented

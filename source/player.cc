@@ -48,7 +48,7 @@ void Player::addGold(int amount) {
 	this->gold += amount;
 }
 
-bool Player::addGold(shared_ptr<Gold> myGold) {
+bool Player::addGoldItem(shared_ptr<Gold> myGold) {
 	if (myGold->isGuarded() == true) {
 		//action: the gold is guarded, you cannot pick it up
 		return false;

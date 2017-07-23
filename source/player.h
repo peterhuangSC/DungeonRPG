@@ -32,7 +32,7 @@ public:
 
 	void levelUp() override;
 	void addGold(int myGold) override;
-	bool addGold(std::shared_ptr<Gold> myGold) override;
+	bool addGoldItem(std::shared_ptr<Gold> myGold) override;
 
 	virtual bool attackEnemy(std::shared_ptr<Character> enemy);
 	void notifyObservers();

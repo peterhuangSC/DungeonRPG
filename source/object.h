@@ -4,6 +4,8 @@
 #include <string>
 #include <memory>
 
+class Gold;
+
 class Object {
 	//no private fields needed so far
 protected:
@@ -27,7 +29,7 @@ public:
 	virtual void levelUp();
 	virtual int getGold();
 	virtual void addGold(int myGold);
-	virtual bool addGold(std::shared_ptr<Gold> myGold); //returns true if pick up success
+	virtual bool addGoldItem(std::shared_ptr<Gold> myGold); //returns true if pick up success
 
 	virtual void notify(std::shared_ptr<Object> who);
 	//virtual bool consumeGold(std::shared_ptr<Object> myObj);
