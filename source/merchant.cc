@@ -17,5 +17,10 @@ Merchant::Merchant(int health, int attack, int defense) :
 
 Merchant::~Merchant() {}
 
+bool Merchant::canMove() {
+	if (isHostile) return true;
+	else return false;
+}
+
 //severTies() already exists from the superclass
 

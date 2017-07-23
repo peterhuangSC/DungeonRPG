@@ -79,3 +79,11 @@ void Enemy::dropGold() {
 void Enemy::notifyObservers() {
 	cerr << "Notify Observers under construction" << endl;
 }
+
+bool Enemy::canMove() {
+	return true;
+
+	//might do this implementation later
+	//if (isMovable) return true;
+	//else return false;
+}

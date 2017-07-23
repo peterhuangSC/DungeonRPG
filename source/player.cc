@@ -111,3 +111,8 @@ if statement, to perform the below commands.
 void Player::notifyObservers() {
 	cerr << "Notify Observers under construction" << endl;
 }
+
+bool Player::canMove() {
+	//player cannot get stunned and stuff so
+	return true;
+}

@@ -38,6 +38,10 @@ public:
 
 	virtual std::string getAction();
 	virtual void setAction(std::string newAction);
+
+	virtual void severTies();
+
+	virtual bool canMove();
 };
 
 #endif

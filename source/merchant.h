@@ -11,6 +11,8 @@ public:
 	Merchant(int health = 30, int attack = 70, int defense = 5);
 	~Merchant();
 
+	bool canMove() override;
+
 	//bool attackPlayer(Character* player) override;
 	//severTies() already exists from the superclass
 };

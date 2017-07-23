@@ -18,3 +18,7 @@ Dragon::Dragon(int health, int attack, int defense) :
 }
 
 Dragon::~Dragon() {}
+
+bool Dragon::canMove() {
+	return false;
+}
