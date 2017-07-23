@@ -62,6 +62,9 @@ bool Player::addGoldItem(shared_ptr<Object> myGold) {
 	}
 	else if (goldQty > 1) {
 		this->addGold(goldAmount * goldQty);
+		curAction += " PC collected " + goldQty;
+		curAction += " pile(s) of " + goldAmount;
+		curAction += " gold.";
 		//action: you have picked up [goldQty] piles of [goldAmount] gold
 		return true;
 	}
