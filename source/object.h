@@ -27,9 +27,10 @@ public:
 	virtual void levelUp();
 	virtual int getGold();
 	virtual void addGold(int myGold);
+	//virtual bool addGold(std::shared_ptr<Gold> myGold); //returns true if pick up success
 
 	virtual void notify(std::shared_ptr<Object> who);
-	virtual bool consumeGold(std::shared_ptr<Object> myObj);
+	//virtual bool consumeGold(std::shared_ptr<Object> myObj);
 	virtual void consumeLadder(std::shared_ptr<Object> player);
 
 	virtual bool isGuarded();

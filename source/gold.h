@@ -13,7 +13,7 @@ public:
 	~Gold();
 
 	//fix implement@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	bool consumeGold(std::shared_ptr<Object> spPlayer) override;
+	//bool consumeGold(std::shared_ptr<Object> spPlayer) override;
 
 	char getItemType() override;
 

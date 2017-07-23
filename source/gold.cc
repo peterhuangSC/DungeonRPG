@@ -13,7 +13,7 @@ Gold::Gold(int gValue, int gQuantity, bool gGuarded) : Item('G'),
 
 Gold::~Gold() {}
 
-//this method return true if player is successful to pick up the gold
+/*this method return true if player is successful to pick up the gold
 bool Gold::consumeGold(shared_ptr<Object> spPlayer) {
 	//double check how gold picking up works when theres 2 piles ie human
 	if (!guarded) {
@@ -21,7 +21,7 @@ bool Gold::consumeGold(shared_ptr<Object> spPlayer) {
 		return true;
 	}
 	return false;
-}
+}*/
 
 char Gold::getItemType() {
 	return this->mapSymbol;

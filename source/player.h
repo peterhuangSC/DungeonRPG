@@ -5,6 +5,7 @@
 #include <memory>
 #include <map>
 #include "character.h"
+#include "gold.h"
 //#include "enemy.h"
 
 class Enemy;
@@ -31,6 +32,7 @@ public:
 
 	void levelUp() override;
 	void addGold(int myGold) override;
+	bool addGold(std::shared_ptr<Gold> myGold);
 
 	virtual bool attackEnemy(std::shared_ptr<Character> enemy);
 	void notifyObservers();

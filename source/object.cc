@@ -33,12 +33,13 @@ int Object::getLevel() { return 1; }
 void Object::levelUp() {} //overriden in player - increase level and delete buffer potions
 int Object::getGold() { return -1; }
 void Object::addGold(int myGold) {}
+//bool Object::addGold(std::shared_ptr<Object> myGold) { return false; }
 
 void Object::notify(std::shared_ptr<Object> who) {
 	// to be implemented
 }
 
-bool Object::consumeGold(std::shared_ptr<Object> myObj) { return false; }
+//bool Object::consumeGold(std::shared_ptr<Object> myObj) { return false; }
 
 void Object::consumeLadder(std::shared_ptr<Object> player) {}
 

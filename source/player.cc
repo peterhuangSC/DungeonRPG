@@ -48,11 +48,33 @@ void Player::addGold(int amount) {
 	this->gold += amount;
 }
 
+bool Player::addGold(shared_ptr<Gold> myGold) {
+	if (myGold->isGuarded() == true) {
+		//action: the gold is guarded, you cannot pick it up
+		return false;
+	}
+	int goldQty = myGold->getQuantity(); //number of gold piles in that block
+	int goldAmount = myGold->getValue(); //amount of gold per block
+	if (goldQty == 1) {
+		this->addGold(goldAmount);
+		//action: you have picked up [goldAmount] gold
+		return true;
+	}
+	else if (goldQty > 1) {
+		this->addGold(goldAmount * goldQty);
+		//action: you have picked up [goldQty] piles of [goldAmount] gold
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 // this method performs the attack action
 // return val: true if enemy is slain by this attack, false if enemy alive
 bool Player::attackEnemy(shared_ptr<Character> enemy) {
 	if (!enemy) return false;
-
+	
 	//this below is your TRUE ATTACK
 	int atkIndex = 0;
 	int trueAttack = this->getAttack();
