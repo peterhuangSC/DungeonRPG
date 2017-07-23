@@ -12,6 +12,8 @@ public:
 	~Dragon();
 		
 	bool canMove() override;
+
+	bool receiveDmg(int dmg) override;
 };
 
 #endif

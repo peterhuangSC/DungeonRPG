@@ -13,6 +13,8 @@ public:
 
 	bool canMove() override;
 
+	bool receiveDmg(int dmg) override;
+
 	//bool attackPlayer(Character* player) override;
 	//severTies() already exists from the superclass
 };

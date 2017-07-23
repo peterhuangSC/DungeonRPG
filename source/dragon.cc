@@ -22,3 +22,20 @@ Dragon::~Dragon() {}
 bool Dragon::canMove() {
 	return false;
 }
+
+bool Dragon::receiveDmg(int dmg) {
+	//dragon is now hostile
+	//but more so this has to be set in the map b/c if you move within
+	//+/- 1 vertical +/- 1 horizontal of dragon and/or its hoard hostile is set to true
+	//and this can only be done in map or game due to the coordinates known there
+	if (this->isHostile == false) this->isHostile = true;
+
+	this->setHealth(this->curHealth - dmg);
+	if (this->curHealth <= 0) {
+		this->setHealth(0);
+		return false;
+	}
+	else {
+		return true;
+	}
+}
