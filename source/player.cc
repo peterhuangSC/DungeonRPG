@@ -39,8 +39,9 @@ int Player::getGold() {
 //this method levels up the player by one level
 void Player::levelUp() {
 	this->setLevel(this->getLevel() + 1);
+	this->potionBuffs.reset(); //reset non-perma potions 
 	//implement notification of others like map and enemy?
-	//reset potion decorators
+	//reset potion
 }
 
 void Player::addGold(int amount) {

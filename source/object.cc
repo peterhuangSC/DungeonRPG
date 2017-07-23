@@ -30,7 +30,7 @@ int Object::getAttack() { return -1; }
 int Object::getDefense() { return -1; }
 
 int Object::getLevel() { return 1; }
-void Object::levelUp() {}
+void Object::levelUp() {} //overriden in player - increase level and delete buffer potions
 int Object::getGold() { return -1; }
 void Object::addGold(int myGold) {}
 
