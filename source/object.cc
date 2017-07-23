@@ -29,11 +29,14 @@ int Object::getAttack() { return -1; }
 
 int Object::getDefense() { return -1; }
 
+int Object::getValue() { return 0; }
+int Object::getQuantity() { return 0; }
+
 int Object::getLevel() { return 1; }
 void Object::levelUp() {} //overriden in player - increase level and delete buffer potions
 int Object::getGold() { return -1; }
 void Object::addGold(int myGold) {}
-bool Object::addGoldItem(std::shared_ptr<Gold> myGold) { return false; }
+bool Object::addGoldItem(std::shared_ptr<Object> myGold) { return false; }
 
 void Object::notify(std::shared_ptr<Object> who) {
 	// to be implemented

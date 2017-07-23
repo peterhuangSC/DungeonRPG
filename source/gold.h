@@ -17,10 +17,10 @@ public:
 
 	char getItemType() override;
 
-	int getValue();
+	int getValue() override;
 	void setValue(int newValue);
 
-	int getQuantity();
+	int getQuantity() override;
 	void setQuantity(int newQty);
 
 	bool isGuarded() override;
