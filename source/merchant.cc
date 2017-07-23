@@ -4,6 +4,8 @@
 
 //additional attributes: const string merchantMobID = "Merchant", const int merchantGold = 1
 
+bool Merchant::mercHostile = false;
+
 //default stats: Health 30, Attack 70, Defense 5, <Gold: 1 pile?? check this>
 Merchant::Merchant(int health, int attack, int defense) :
 	Enemy(health, attack, defense, "Merchant", 'M') {
@@ -23,7 +25,7 @@ bool Merchant::canMove() {
 }
 
 bool Merchant::receiveDmg(int dmg) {
-	this->mercHostile = true;
+	mercHostile = true;
 	//merchant attributes after it is attacked the first time
 	//but the map/game class has to be also changed so all merchants are set 
 	//to hostile after the first one is attacked
