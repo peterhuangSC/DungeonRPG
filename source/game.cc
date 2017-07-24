@@ -161,7 +161,7 @@ void Floor::attachObs(){
     }
 }
 
-    //Moves all movables randomly at end of turn
+    //Performs actions at end of enemy turn
 void Floor::endTurn(){
     int dimy = ground.size();
     int dimx = ground[0].size();
@@ -169,14 +169,15 @@ void Floor::endTurn(){
         for(int x = 0; x < dimx; ++x){
             if(ground[y][x].onCell && ground[y][x].onCell->canMove()){
                 bool attacked = false;
-                /* Attack the character if near
-                for(auto obs: ground[y][x].Observers){
-                    if(*obs->onCell->getType() == '@'){
+                // Attack the character if near
+                int size = ground[y][x].Observers.size();
+                for(int o = 0; o < size; ++o){
+                    if(ground[y][x].Observers[o]->onCell->getType() == '@'){
                         attacked = true;
-                        if(ground[y][x]->onCell->attackPlayer(*obs->onCell)) return;
+                        if(ground[y][x].onCell->attackPlayer(ground[y][x].Observers[o]->onCell)) return;
                     }
                 }
-                */
+                //No player, we will move randomly
                 if(!attacked){
                     Cell &newCell = randMove(ground[y][x]);
                     if(&ground[y][x] != &newCell){
@@ -205,14 +206,14 @@ int Floor::move(string dir, int y, int x){
     //Check if cell is valid;
 	char type = cell->getType();
     if(type ==  '.' || type ==  '+' || type ==  '#' || (type == 'G' && !cell->onCell->isGuarded())){
-             if(dir == "no") {curr->onCell->setAction("Player moves North.");}
-        else if(dir == "ne") {curr->onCell->setAction("Player moves North-East.");}
-        else if(dir == "ea") {curr->onCell->setAction("Player moves East.");}
-        else if(dir == "se") {curr->onCell->setAction("Player moves South-East.");}
-        else if(dir == "so") {curr->onCell->setAction("Player moves South.");}
-        else if(dir == "sw") {curr->onCell->setAction("Player moves South-West.");}
-        else if(dir == "we") {curr->onCell->setAction("Player moves West.");}
-        else if(dir == "nw") {curr->onCell->setAction("Player moves North-West.");}
+             if(dir == "no") {curr->onCell->setAction("PC moves North.");}
+        else if(dir == "ne") {curr->onCell->setAction("PC moves North-East.");}
+        else if(dir == "ea") {curr->onCell->setAction("PC moves East.");}
+        else if(dir == "se") {curr->onCell->setAction("PC moves South-East.");}
+        else if(dir == "so") {curr->onCell->setAction("PC moves South.");}
+        else if(dir == "sw") {curr->onCell->setAction("PC moves South-West.");}
+        else if(dir == "we") {curr->onCell->setAction("PC moves West.");}
+        else if(dir == "nw") {curr->onCell->setAction("PC moves North-West.");}
 
         //If gold on Cell, and unguarded
         if(type == 'G') curr->onCell->addGoldItem(cell->onCell);
@@ -264,7 +265,6 @@ void Floor::potion(string dir, int y, int x){
 void Floor::attack(string dir, int y, int x){
     Cell *curr = &ground[y][x];
     Cell *cell = curr;
-    cout << "here1" << endl;
          if(dir == "no") cell = &ground[y-1][ x ];
     else if(dir == "ne") cell = &ground[y-1][x+1];
     else if(dir == "ea") cell = &ground[ y ][x+1];
@@ -274,7 +274,8 @@ void Floor::attack(string dir, int y, int x){
     else if(dir == "we") cell = &ground[ y ][x-1];
     else if(dir == "nw") cell = &ground[y-1][x-1];
 
-    if(cell->onCell->getEnemyType() != "Object"){
+    if(cell->onCell && cell->onCell->getEnemyType() != "Object"){
+        curr->onCell->setAction("");
         cell->onCell = curr->onCell->attackEnemy(cell->onCell);
     }
     else{
@@ -384,7 +385,10 @@ player{PG.spawnPlayer(race[0])}, info(dim_x, player) {
 };
 
     //Freeze
-    void Map::freeze(){frozen = !frozen;};
+    void Map::freeze(){
+        frozen = !frozen;
+        player->setAction("Game frozen. All enemies won't move");
+        };
 
     //Movement
 void Map::move(string dir){

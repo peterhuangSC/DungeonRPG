@@ -26,6 +26,7 @@ int main(int argc, char* argv[]){
         string line;
         string race;
         string command;
+        string direction;
         char quit;
 
         //Player must choose race
@@ -78,18 +79,18 @@ int main(int argc, char* argv[]){
 				{map.move(command);}
             //Let's use a potion
             else if(command == "u"){
-                line_in >> command;
-                    if(command == "no" || command == "ne" || command == "ea" || command == "se"
-                    || command == "so" || command == "sw" || command == "we" || command == "nw")
-                    {map.potion(command);}
+                line_in >> direction;
+                    if(direction == "no" || direction == "ne" || direction == "ea" || direction == "se"
+                    || direction == "so" || direction == "sw" || direction == "we" || direction == "nw")
+                    {map.potion(direction);}
                 else cout << "Invalid Direction" << endl;
             }
             //Let's smash some skulls
             else if(command == "a"){
-                line_in >> command;
-                if(command == "no" || command == "ne" || command == "ea" || command == "se"
-                || command == "so" || command == "sw" || command == "we" || command == "nw")
-                {map.attack(command);}
+                line_in >> direction;
+                if(direction == "no" || direction == "ne" || direction == "ea" || direction == "se"
+                || direction == "so" || direction == "sw" || direction == "we" || direction == "nw")
+                {map.attack(direction);}
                 else cout << "Invalid Direction" << endl;
             }
             //Not a valid command
