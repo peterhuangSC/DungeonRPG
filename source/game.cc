@@ -59,6 +59,7 @@ void Cell::notifyAll() const{
 void Cell::notify(shared_ptr<Object> who){
     if(onCell) onCell->notify(who);
 };
+
 /////////////////////////////////////////////////////////////////
 
 //Room Class// mostly for RNG purposes
@@ -140,6 +141,43 @@ void Floor::init(shared_ptr<Object> player){
     }
 };
 
+void Floor::attachObs(){
+    int dimy = ground.size();
+    int dimx = ground[0].size();
+    for(int y = 0; y < dimy; ++y){
+        for(int x = 0; x < dimx; ++x){
+            Cell &cell = ground[y][x];
+            if(cell.getType() == '.'){
+                if(ground[ y ][x-1].getType() == '.') cell.Observers.push_back(&ground[ y ][x-1]);
+                if(ground[y-1][ x ].getType() == '.') cell.Observers.push_back(&ground[y-1][ x ]);
+                if(ground[ y ][x+1].getType() == '.') cell.Observers.push_back(&ground[ y ][x+1]);
+                if(ground[y+1][ x ].getType() == '.') cell.Observers.push_back(&ground[y+1][ x ]);
+                if(ground[y-1][x-1].getType() == '.') cell.Observers.push_back(&ground[y-1][x-1]);
+                if(ground[y+1][x-1].getType() == '.') cell.Observers.push_back(&ground[y+1][x-1]);
+                if(ground[y-1][x+1].getType() == '.') cell.Observers.push_back(&ground[y-1][x+1]);
+                if(ground[y+1][x+1].getType() == '.') cell.Observers.push_back(&ground[y+1][x+1]);
+            }
+        }
+    }
+}
+
+    //Moves all movables randomly at end of turn
+void Floor::endTurn(){
+    int dimy = ground.size();
+    int dimx = ground[0].size();
+    for(int y = 0; y < dimy; ++y){
+        for(int x = 0; x < dimx; ++x){
+            if(ground[y][x].onCell && ground[y][x].onCell->canMove()){
+                Cell &newCell = randMove(ground[y][x]);
+                if(&ground[y][x] != &newCell){
+                    newCell.setonCell(ground[y][x].onCell);
+                    ground[y][x].onCell.reset();
+                }
+            }
+        }
+    }
+};
+
     //Movement
 int Floor::move(string dir, int y, int x){
     Cell *curr = &ground[y][x];
@@ -155,20 +193,92 @@ int Floor::move(string dir, int y, int x){
 
     //Check if cell is valid;
 	char type = cell->getType();
-    if(type ==  '.' || type ==  '+' || type ==  '#'){
+    if(type ==  '.' || type ==  '+' || type ==  '#' || (type == 'G' && !cell->onCell->isGuarded())){
+             if(dir == "no") {curr->onCell->setAction("Player moves North.");}
+        else if(dir == "ne") {curr->onCell->setAction("Player moves North-East.");}
+        else if(dir == "ea") {curr->onCell->setAction("Player moves East.");}
+        else if(dir == "se") {curr->onCell->setAction("Player moves South-East.");}
+        else if(dir == "so") {curr->onCell->setAction("Player moves South.");}
+        else if(dir == "sw") {curr->onCell->setAction("Player moves South-West.");}
+        else if(dir == "we") {curr->onCell->setAction("Player moves West.");}
+        else if(dir == "nw") {curr->onCell->setAction("Player moves North-West.");}
+
+        //If gold on Cell, and unguarded
+        if(type == 'G') curr->onCell->addGoldItem(cell->onCell);
         cell->setonCell(curr->onCell);
         curr->onCell.reset();
         return 3;
     }
+    //If gold on Cell, but guarded
     else if(type ==  'G' && cell->onCell->isGuarded()){
+        curr->onCell->setAction("Something is in your way.");
+        curr->onCell->addGoldItem(cell->onCell);
         return 2;
     }
+    //If Level Up
     else if (type ==  '\\'){
+        curr->onCell;
         return 1;
     }
+    //Something in the way
     else{
+        curr->onCell->setAction("Something is in your way");
         return 0;
     }
+};
+
+    //Consume a Potion
+void Floor::potion(string dir, int y, int x){
+    Cell *curr = &ground[y][x];
+    Cell *cell = curr;
+         if(dir == "no") cell = &ground[y-1][ x ];
+    else if(dir == "ne") cell = &ground[y-1][x+1];
+    else if(dir == "ea") cell = &ground[ y ][x+1];
+    else if(dir == "se") cell = &ground[y+1][x+1];
+    else if(dir == "so") cell = &ground[y+1][ x ];
+    else if(dir == "sw") cell = &ground[y+1][x-1];
+    else if(dir == "we") cell = &ground[ y ][x-1];
+    else if(dir == "nw") cell = &ground[y-1][x-1];
+
+    if(cell->getType() == 'P'){
+        curr->onCell->setAction("");
+        curr->onCell->consumePotion(cell->onCell);
+    }
+    else{
+        curr->onCell->setAction("Thats not a potion!");
+    }
+}
+    //Attack an enemy
+void Floor::attack(string dir, int y, int x){
+    Cell *curr = &ground[y][x];
+    Cell *cell = curr;
+         if(dir == "no") cell = &ground[y-1][ x ];
+    else if(dir == "ne") cell = &ground[y-1][x+1];
+    else if(dir == "ea") cell = &ground[ y ][x+1];
+    else if(dir == "se") cell = &ground[y+1][x+1];
+    else if(dir == "so") cell = &ground[y+1][ x ];
+    else if(dir == "sw") cell = &ground[y+1][x-1];
+    else if(dir == "we") cell = &ground[ y ][x-1];
+    else if(dir == "nw") cell = &ground[y-1][x-1];
+
+    if(cell->onCell){
+
+    }
+    else{
+        curr->onCell->setAction("Thats not a enemy!");
+    }
+}
+
+
+//Takes in current cell, returns random free adjacent cell
+Cell &Floor::randMove(Cell &cell){
+    int tries = 100;
+    int r;
+    while(tries--){
+        r = rand() % cell.Observers.size();
+        if(cell.Observers[r]->getType() == '.') return *cell.Observers[r];
+    }
+    return cell;
 };
 
 /////////////////////////////////////////////////////////////////
@@ -213,22 +323,29 @@ void Map::init_Level(){
     }
     else {
         Maps[level].init(player);
-        player->setAction("Player Enters Level " + to_string(level));;
+        player->setAction("Player Enters Level " + to_string(level+1));;
         this->get();     
     }
 };
+
+    //End the turn
+void Map::endTurn(){
+    if(!frozen) Maps[level].endTurn();
+    if(player->getHealth() < 0){
+        cout << *this;
+        playing = false;
+        cout << "\n\n\n\n         GAME OVER, YOU HAVE DIED!\n" << endl; 
+        cout <<         "             YOUR SCORE WAS: " << player->getGold() << "\n\n\n" << endl;
+    }
+}
 
     //Create all floors of map
 Map::Map(string filename, string race): 
 dimx{dim_x}, dimy{dim_y}, level{0}, frozen{false}, 
 player{PG.spawnPlayer(race[0])}, info(dim_x, player) {
-    cout << "here1" << endl << dim_x << endl << dim_y << endl;
-    cout << "here2" << endl << dimx << endl << dimy << endl;
     Maps.assign(5,Floor(dimx,dimy));
     ifstream file (filename);
     string line;
-    cout << dimx << endl;
-    cout << dimy << endl;
     for(int i = 0; i < 5; ++i){ 
         for(int y = 0; y < dimy; ++y){
             getline(file, line);
@@ -238,8 +355,12 @@ player{PG.spawnPlayer(race[0])}, info(dim_x, player) {
             }
         }
     }
+    for(int i = 0; i < 5; ++i){ 
+        Maps[i].attachObs();
+    }
     this->init_Level();
 };
+
 
     //Freeze
     void Map::freeze(){frozen = !frozen;};
@@ -249,16 +370,14 @@ player{PG.spawnPlayer(race[0])}, info(dim_x, player) {
 void Map::move(string dir){
     int result = Maps[level].move(dir, y, x);
          if(result == 3) {
-             if(dir == "no") {--y;    ; player->setAction("Player moves North.");}
-        else if(dir == "ne") {--y; ++x; player->setAction("Player moves North-East.");}
-        else if(dir == "ea") {     ++x; player->setAction("Player moves East.");}
-        else if(dir == "se") {++y; ++x; player->setAction("Player moves South-East.");}
-        else if(dir == "so") {++y;      player->setAction("Player moves South.");}
-        else if(dir == "sw") {++y; --x; player->setAction("Player moves South-West.");}
-        else if(dir == "we") {     --x; player->setAction("Player moves West.");}
-        else if(dir == "nw") {--y; --x; player->setAction("Player moves North-West.");}
-        //set player action
-
+             if(dir == "no") {--y;    ;}
+        else if(dir == "ne") {--y; ++x;}
+        else if(dir == "ea") {     ++x;}
+        else if(dir == "se") {++y; ++x;}
+        else if(dir == "so") {++y;     }
+        else if(dir == "sw") {++y; --x;}
+        else if(dir == "we") {     --x;}
+        else if(dir == "nw") {--y; --x;}
     }
     else if(result == 2) {
     }
@@ -268,15 +387,20 @@ void Map::move(string dir){
         this->init_Level();
     }
     else {
-        player->setAction("Something is in your way");
+
     }
+    if(result != 1) endTurn();
 };
 
     //Potions
-    void Map::potion(string dir){};
+    void Map::potion(string dir){   
+        Maps[level].potion(dir, y, x);
+        endTurn();
+    };
 
     //Attacking
-    void Map::attack(string dir){};
+    void Map::attack(string dir){}
+    ;
 
 //Outputs current floor of Map
 ostream &operator<<(ostream &out, const Map floor){

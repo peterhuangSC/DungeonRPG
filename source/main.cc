@@ -81,7 +81,8 @@ int main(int argc, char* argv[]){
             else if(command == "u"){
                 line_in >> command;
                     if(command == "no" || command == "ne" || command == "ea" || command == "se"
-                    || command == "so" || command == "sw" || command == "we" || command == "nw");
+                    || command == "so" || command == "sw" || command == "we" || command == "nw")
+                    {map.potion(comand);};
                 else cout << "Invalid Direction" << endl;
             }
             //Let's smash some skulls
@@ -90,6 +91,7 @@ int main(int argc, char* argv[]){
                 if(command == "no" || command == "ne" || command == "ea" || command == "se"
                 || command == "so" || command == "sw" || command == "we" || command == "nw");
                 else cout << "Invalid Direction" << endl;
+                {map.attack(command);}
             }
             //Not a valid command
             else cout << "Invalid Command" << endl;

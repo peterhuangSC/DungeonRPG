@@ -64,11 +64,16 @@ class Floor {
 
     int get(char var);
 
-    void init(std::shared_ptr<Object> player);
     char Cellstr(int y,int x) const;
     void addCell(int y,int x,char c);
+    void init(std::shared_ptr<Object> player);
+    void attachObs();
+    void endTurn();
 
     int move(std::string dir, int y, int x);
+    void potion(std::string dir, int y, int x);
+    void attack(std::string dir, int y, int x);
+    Cell &randMove(Cell &cell);
 };
 /////////////////////////////////////////////////////////////////
 
@@ -109,6 +114,9 @@ class Map{
 
     //Initialize the current level;
     void init_Level();
+
+    //End the current turn
+    void endTurn();
 
 public:
     //Create all floors of map

@@ -58,14 +58,14 @@ bool Player::addGoldItem(shared_ptr<Object> myGold) {
 	int goldAmount = myGold->getValue(); //amount of gold per block
 	if (goldQty == 1) {
 		this->addGold(goldAmount);
-		curAction += "   PC collected " + to_string(goldAmount);
+		curAction += " PC collected " + to_string(goldAmount);
 		curAction += " gold.";
 		//action: you have picked up [goldAmount] gold
 		return true;
 	}
 	else if (goldQty > 1) {
 		this->addGold(goldAmount * goldQty);
-		curAction += "   PC collected " + to_string(goldQty);
+		curAction += " PC collected " + to_string(goldQty);
 		curAction += " piles of " + to_string(goldAmount);
 		curAction += " gold.";
 		//action: you have picked up [goldQty] piles of [goldAmount] gold
