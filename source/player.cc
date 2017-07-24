@@ -72,7 +72,7 @@ bool Player::addGoldItem(shared_ptr<Object> myGold) {
 		return true;
 	}
 	else {
-		curAction += "   PC was unsuccessful at collecting gold.";
+		curAction += " PC was unsuccessful at collecting gold.";
 		return false;
 	}
 }
