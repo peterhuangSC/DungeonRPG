@@ -168,10 +168,21 @@ void Floor::endTurn(){
     for(int y = 0; y < dimy; ++y){
         for(int x = 0; x < dimx; ++x){
             if(ground[y][x].onCell && ground[y][x].onCell->canMove()){
-                Cell &newCell = randMove(ground[y][x]);
-                if(&ground[y][x] != &newCell){
-                    newCell.setonCell(ground[y][x].onCell);
-                    ground[y][x].onCell.reset();
+                bool attacked = false;
+                /* Attack the character if near
+                for(auto obs: ground[y][x].Observers){
+                    if(*obs->onCell->getType() == '@'){
+                        attacked = true;
+                        if(ground[y][x]->onCell->attackPlayer(*obs->onCell)) return;
+                    }
+                }
+                */
+                if(!attacked){
+                    Cell &newCell = randMove(ground[y][x]);
+                    if(&ground[y][x] != &newCell){
+                        newCell.setonCell(ground[y][x].onCell);
+                        ground[y][x].onCell.reset();
+                    }
                 }
             }
         }
@@ -253,6 +264,7 @@ void Floor::potion(string dir, int y, int x){
 void Floor::attack(string dir, int y, int x){
     Cell *curr = &ground[y][x];
     Cell *cell = curr;
+    cout << "here1" << endl;
          if(dir == "no") cell = &ground[y-1][ x ];
     else if(dir == "ne") cell = &ground[y-1][x+1];
     else if(dir == "ea") cell = &ground[ y ][x+1];
@@ -262,8 +274,8 @@ void Floor::attack(string dir, int y, int x){
     else if(dir == "we") cell = &ground[ y ][x-1];
     else if(dir == "nw") cell = &ground[y-1][x-1];
 
-    if(cell->onCell){
-
+    if(cell->onCell->getEnemyType() != "Object"){
+        cell->onCell = curr->onCell->attackEnemy(cell->onCell);
     }
     else{
         curr->onCell->setAction("Thats not a enemy!");
@@ -331,13 +343,22 @@ void Map::init_Level(){
 
     //End the turn
 void Map::endTurn(){
+    if(player->getHealth() < 0){
+        cout << *this;
+        playing = false;
+        cout << "\n\n\n\n         GAME OVER, YOU HAVE DIED!\n" << endl; 
+        cout <<         "             YOUR SCORE WAS: " << player->getGold() << "\n\n\n" << endl;
+        return;
+    }
     if(!frozen) Maps[level].endTurn();
     if(player->getHealth() < 0){
         cout << *this;
         playing = false;
         cout << "\n\n\n\n         GAME OVER, YOU HAVE DIED!\n" << endl; 
         cout <<         "             YOUR SCORE WAS: " << player->getGold() << "\n\n\n" << endl;
+        return;
     }
+    player->endTurnEffect();
 }
 
     //Create all floors of map
@@ -362,10 +383,8 @@ player{PG.spawnPlayer(race[0])}, info(dim_x, player) {
     this->init_Level();
 };
 
-
     //Freeze
     void Map::freeze(){frozen = !frozen;};
-
 
     //Movement
 void Map::move(string dir){
@@ -401,8 +420,10 @@ void Map::move(string dir){
     };
 
     //Attacking
-    void Map::attack(string dir){}
-    ;
+    void Map::attack(string dir){
+        Maps[level].attack(dir, y, x);
+        endTurn();
+    };
 
 //Outputs current floor of Map
 ostream &operator<<(ostream &out, const Map floor){
@@ -417,3 +438,6 @@ ostream &operator<<(ostream &out, const Map floor){
     out << floor.info;
     return out;
 };
+
+
+
