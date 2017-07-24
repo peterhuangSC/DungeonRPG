@@ -78,3 +78,7 @@ std::vector<int> Object::potionBuffers() {
 	std::vector<int> tempVec = { 0, 0 };
 	return tempVec;
 }
+
+void Object::setKnown() {}
+
+void Object::pickPocket() {}

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <memory>
+#include <algorithm>
 #include "object.h"
 #include "potion.h"
 
@@ -27,7 +28,7 @@ public:
 
 	//accessors and mutators
 	int getHealth() override;
-	void setHealth(int newHealth) override;
+	virtual void setHealth(int newHealth) override;
 
 	int getAttack() override;
 	void setAttack(int newAttack);

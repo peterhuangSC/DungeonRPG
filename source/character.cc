@@ -45,7 +45,13 @@ void Character::setHealth(int newHealth) {
 }
 
 int Character::getAttack() {
-	return this->attack;
+	if (this->potionBuffs) {
+		int addedAttack = this->potionBuffs->potionBuffers()[0];
+		return max(this->attack + addedAttack, 0);
+	}
+	else {
+		return max(this->attack, 0);
+	}
 }
 
 void Character::setAttack(int newAttack) {
@@ -53,7 +59,13 @@ void Character::setAttack(int newAttack) {
 }
 
 int Character::getDefense() {
-	return this->defense;
+	if (this->potionBuffs) {
+		int addedDefense = this->potionBuffs->potionBuffers()[1];
+		return max(this->defense + addedDefense, 0);
+	}
+	else {
+		return max(this->defense, 0);
+	}
 }
 
 void Character::setDefense(int newDefense) {
@@ -66,10 +78,12 @@ shared_ptr<Object> Character::getPotionBuffs() {
 
 void Character::consumePotion(shared_ptr<Object> myPotion) {
 	//case 1: consume health related potions
+	myPotion->setKnown();
 	if (myPotion->getPotionName().compare("Restore Health") ||
 		myPotion->getPotionName().compare("Poison Health")) {
 		this->setHealth(this->getHealth() + myPotion->getHealthEffect());
-		//remove potion
+		curAction += " PC consumed a: " + myPotion->getPotionName();
+		curAction += ".";
 		return;
 	}
 
@@ -81,6 +95,8 @@ void Character::consumePotion(shared_ptr<Object> myPotion) {
 		myPotion->setNextPotion(potionBuffs);
 		potionBuffs = myPotion;
 	}
+	curAction += " PC consumed a: " + myPotion->getPotionName();
+	curAction += ".";
 }
 
 string Character::getAction() {

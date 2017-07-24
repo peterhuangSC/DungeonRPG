@@ -22,11 +22,19 @@ RestoreHealth::RestoreHealth() :
 
 RestoreHealth::~RestoreHealth() {}
 
+void RestoreHealth::setKnown() {
+	rhVisible = true;
+}
+
 //------------------------POISON HEALTH------------------------//
 PoisonHealth::PoisonHealth() :
 	Potion(nullptr, "Poison Health", "PH", -10, 0, 0) {}
 
 PoisonHealth::~PoisonHealth() {}
+
+void PoisonHealth::setKnown() {
+	phVisible = true;
+}
 
 //------------------------BOOST ATTACK------------------------//
 BoostAttack::BoostAttack(shared_ptr<Potion> np) :
@@ -52,6 +60,9 @@ vector<int> BoostAttack::potionBuffers() {
 	return additionalStats;
 }
 
+void BoostAttack::setKnown() {
+	baVisible = true;
+}
 
 //------------------------WOUND ATTACK------------------------//
 WoundAttack::WoundAttack(shared_ptr<Potion> np) :
@@ -67,6 +78,10 @@ vector<int> WoundAttack::potionBuffers() {
 		additionalStats[1] += nextPotion->potionBuffers()[1];
 	}
 	return additionalStats;
+}
+
+void WoundAttack::setKnown() {
+	waVisible = true;
 }
 
 //------------------------BOOST DEFENSE------------------------//
@@ -85,6 +100,10 @@ vector<int> BoostDefense::potionBuffers() {
 	return additionalStats;
 }
 
+void BoostDefense::setKnown() {
+	bdVisible = true;
+}
+
 //------------------------WOUND DEFENSE------------------------//
 WoundDefense::WoundDefense(shared_ptr<Potion> np) :
 	Potion(np, "Wound Defense", "WD", 0, 0, -5) {}
@@ -101,4 +120,6 @@ vector<int> WoundDefense::potionBuffers() {
 	return additionalStats;
 }
 
-
+void BoostDefense::setKnown() {
+	bdVisible = true;
+}

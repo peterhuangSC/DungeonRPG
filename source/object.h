@@ -64,6 +64,10 @@ public:
 	virtual void setNextPotion(std::shared_ptr<Object> myPotion);
 
 	virtual std::vector<int> potionBuffers();
+
+	virtual void setKnown();
+
+	virtual void pickPocket();
 };
 
 #endif

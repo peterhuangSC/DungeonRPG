@@ -83,13 +83,7 @@ bool Player::attackEnemy(shared_ptr<Character> enemy) {
 	if (!enemy) return false;
 	
 	//this below is your TRUE ATTACK
-	int atkIndex = 0;
 	int trueAttack = this->getAttack();
-	//if the player has consumed a potion previously!
-	if (this->getPotionBuffs()) {
-		trueAttack += this->getPotionBuffs()->potionBuffers()[atkIndex];
-	}
-	if (trueAttack < 0) trueAttack = 0;
 
 	if (enemy->getEnemyType().compare("Halfling") == 0) {
 		int halflingDodgeRand = rand() % 2;

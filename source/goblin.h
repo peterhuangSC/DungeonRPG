@@ -12,7 +12,7 @@ public:
 	Goblin(int health = 110, int attack = 15, int defense = 20);
 	~Goblin();
 
-	void pickPocket();
+	void pickPocket() override;
 	bool attackEnemy(std::shared_ptr<Character> p) override;
 };
 

@@ -50,12 +50,7 @@ bool Enemy::attackPlayer(shared_ptr<Character> player) {
 	//else accuracyRoll == 1, proceed with the attack => enemy doesn't miss
 
 	//computing player's true defense
-	int defIndex = 1;
 	int truePlayerDef = player->getDefense();
-	if (player->getPotionBuffs()) {
-		truePlayerDef += player->getPotionBuffs()->potionBuffers()[defIndex];
-	}
-	if (truePlayerDef < 0) truePlayerDef = 0;
 	
 	int myDamage = ceil((100 / (100 + truePlayerDef) * this->getAttack()));
 
