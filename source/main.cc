@@ -44,15 +44,12 @@ int main(int argc, char* argv[]){
 
         //Use the default file if none specified, random gen
         //if(argc == 1) 
-        Map map("default.txt", race);
+        Map map(race);
         //Otherwise use the one specified
-        //else Map map(argv[2], race);
+        else Map map(race, false, argv[2]);
         cout << map;
 
 /////////////////////////////////////////////////////////////////
-    //Print valid comands//
-        //cout << "Valid Commands are:" << endl;
-        //cout << "\t" << "Just did a tab" << endl;
 
     //Start the game, read commands, one line at a time//
 		while (playing && getline(cin, line)) {
