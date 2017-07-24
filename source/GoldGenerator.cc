@@ -21,7 +21,7 @@ shared_ptr<Gold> GoldGenerator::spawnGold() {
 	case 2: return make_shared<Gold>(2, 1, false);
 	case 3: return make_shared<Gold>(2, 1, false);
 	case 4: return make_shared<Gold>(2, 1, false); 
-	case 5: return make_shared<Gold>(1, 6, true); //DH
+	case 5: return make_shared<Gold>(6, 1, true); //DH
 	case 6: return make_shared<Gold>(1, 1, false);
 	case 7: return make_shared<Gold>(2, 1, false);
 	case 8: return make_shared<Gold>(1, 1, false);

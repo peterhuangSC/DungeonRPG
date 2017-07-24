@@ -3,10 +3,13 @@
 
 #include <string>
 #include <memory>
+#include <vector>
 
 class Object {
 	//no private fields needed so far
 protected:
+	std::shared_ptr<Object> potionBuffs;
+
 	char type;
 	void setType(char newType);
 public: 
@@ -46,6 +49,21 @@ public:
 	virtual void severTies();
 
 	virtual bool canMove();
+
+	virtual void consumePotion(std::shared_ptr<Object> myPotion);
+
+	virtual std::string getPotionName();
+	virtual int getHealthEffect();
+
+	virtual int getAttackEffect();
+	virtual int getDefenseEffect();
+
+	virtual void setAttackEffect(int value);
+	virtual void setDefenseEffect(int value);
+
+	virtual void setNextPotion(std::shared_ptr<Object> myPotion);
+
+	virtual std::vector<int> potionBuffers();
 };
 
 #endif

@@ -60,11 +60,11 @@ void Character::setDefense(int newDefense) {
 	this->defense = newDefense;
 }
 
-shared_ptr<Potion> Character::getPotionBuffs() {
+shared_ptr<Object> Character::getPotionBuffs() {
 	return this->potionBuffs;
 }
 
-void Character::consumePotion(shared_ptr<Potion> myPotion) {
+void Character::consumePotion(shared_ptr<Object> myPotion) {
 	//case 1: consume health related potions
 	if (myPotion->getPotionName().compare("Restore Health") ||
 		myPotion->getPotionName().compare("Poison Health")) {
