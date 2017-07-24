@@ -11,6 +11,7 @@ class PotionGenerator {
 public:
 	std::shared_ptr<Potion> spawnPotion();
 	std::shared_ptr<Potion> spawnPotion(int type);
+	void reset();
 };
 
 #endif

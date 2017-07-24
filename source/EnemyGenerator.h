@@ -16,6 +16,7 @@ class EnemyGenerator {
 public:
 	std::shared_ptr<Enemy> spawnEnemy();
 	std::shared_ptr<Enemy> spawnEnemy(char specificType);
+	void reset();
 };
 
 #endif

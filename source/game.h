@@ -134,6 +134,9 @@ public:
 
     //Attack Enemy
     void attack(std::string dir);
+
+    //EndGame Process
+    void endGame();
     
     friend std::ostream &operator<<(std::ostream &out, const Map floor);
 };

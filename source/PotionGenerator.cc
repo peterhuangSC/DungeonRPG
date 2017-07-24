@@ -29,3 +29,12 @@ shared_ptr<Potion> PotionGenerator::spawnPotion(int type) {
 	default: return make_shared<RestoreHealth>();
 	}
 }
+
+void PotionGenerator::reset(){
+	spawnPotion(1)->resetStatic();
+	spawnPotion(2)->resetStatic();
+	spawnPotion(3)->resetStatic();
+	spawnPotion(4)->resetStatic();
+	spawnPotion(5)->resetStatic();
+	spawnPotion(6)->resetStatic();
+};

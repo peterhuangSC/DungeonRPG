@@ -57,3 +57,13 @@ shared_ptr<Enemy> EnemyGenerator::spawnEnemy(char specificType) {
 		return make_shared<Human>();
 	}
 }
+
+void EnemyGenerator::reset(){
+	spawnEnemy('H')->resetStatic();
+	spawnEnemy('W')->resetStatic();
+	spawnEnemy('E')->resetStatic();
+	spawnEnemy('O')->resetStatic();
+	spawnEnemy('M')->resetStatic();
+	spawnEnemy('D')->resetStatic();
+	spawnEnemy('L')->resetStatic();
+};

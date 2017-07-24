@@ -5,7 +5,13 @@ using namespace std;
 extern bool playing;
 static int dim_x = 79;
 static int dim_y = 25;
-static PlayerGenerator PG;
+
+//Generators
+static PlayerGenerator CG;
+static LadderGenerator LG;
+static PotionGenerator PG;
+static GoldGenerator   GG;
+static EnemyGenerator  EG;
 
 //Hard Coded Rooms 
 static int ur1 = 3;  static int uc1 = 3;  static int lr1 = 8;  static int lc1 = 30;// Room 1
@@ -36,8 +42,7 @@ Cell::Cell(): Type{' '}, room{0}, onCell{nullptr} {};
 
     //Puts an object on Cell if empty
 bool Cell::setonCell(shared_ptr<Object> o){
-        onCell = o;
-        this->notifyAll();
+        onCell = o; 
         return true;
 };
 
@@ -108,11 +113,7 @@ int Floor::get(char var){
 };
 
 void Floor::init(shared_ptr<Object> player){
-    //Generators
-    LadderGenerator LG;
-    PotionGenerator PG;
-    GoldGenerator   GG;
-    EnemyGenerator  EG;
+
     
     //Place the Player
     int r = 1 + (rand() % 5);
@@ -378,7 +379,7 @@ void Map::endTurn(){
     //Create all floors of map
 Map::Map(string filename, string race): 
 dimx{dim_x}, dimy{dim_y}, level{0}, frozen{false}, 
-player{PG.spawnPlayer(race[0])}, info(dim_x, player) {
+player{CG.spawnPlayer(race[0])}, info(dim_x, player) {
     Maps.assign(5,Floor(dimx,dimy));
     ifstream file (filename);
     string line;
@@ -432,16 +433,25 @@ void Map::move(string dir){
 };
 
     //Potions
-    void Map::potion(string dir){   
-        Maps[level].potion(dir, y, x);
-        endTurn();
-    };
+void Map::potion(string dir){   
+    Maps[level].potion(dir, y, x);
+    endTurn();
+};
 
     //Attacking
-    void Map::attack(string dir){
-        Maps[level].attack(dir, y, x);
-        endTurn();
-    };
+void Map::attack(string dir){
+    Maps[level].attack(dir, y, x);
+    endTurn();
+};
+
+    //EndGame Process
+void Map::endGame(){
+    CG.reset();
+    LG.reset();
+    GG.reset();
+    PG.reset();
+    EG.reset();
+};
 
 //Outputs current floor of Map
 ostream &operator<<(ostream &out, const Map floor){
