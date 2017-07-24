@@ -16,12 +16,22 @@ shared_ptr<Gold> GoldGenerator::spawnGold() {
 	Gold parameters: value, quantity, guarded
 	*/
 
+	shared_ptr<Gold> dragonHoard = make_shared<Gold>(6, 1, true);
+	if (randGen == 5) {		
+		EnemyGenerator enemyGen;
+		//set the DH's assoc obj to dragon
+		dragonHoard->setAssocObject(enemyGen.spawnEnemy('D'));
+		//set the dragon's assoc obj to DH
+		dragonHoard->getAssocObject()->setAssocObject(dragonHoard);
+	}
+
 	switch (randGen) {
 	case 1: return make_shared<Gold>(2, 1, false);
 	case 2: return make_shared<Gold>(2, 1, false);
 	case 3: return make_shared<Gold>(2, 1, false);
 	case 4: return make_shared<Gold>(2, 1, false); 
-	case 5: return make_shared<Gold>(6, 1, true); //DH
+	case 5: return dragonHoard;
+		//return make_shared<Gold>(6, 1, true); //DH
 	case 6: return make_shared<Gold>(1, 1, false);
 	case 7: return make_shared<Gold>(2, 1, false);
 	case 8: return make_shared<Gold>(1, 1, false);
@@ -35,13 +45,23 @@ This method generates a specific type of gold pile(s) in a tile location with yo
 specifications. Types: s - small pile, n - normal pile, d - dragon hoard, m - merchant, h - human
 */
 shared_ptr<Gold> GoldGenerator::spawnGold(char specificType) {
+
+	shared_ptr<Gold> dragonHoard = make_shared<Gold>(6, 1, true);
+	if (specificType == 'd') {
+		EnemyGenerator enemyGen;
+		//set the DH's assoc obj to dragon
+		dragonHoard->setAssocObject(enemyGen.spawnEnemy('D'));
+		//set the dragon's assoc obj to DH
+		dragonHoard->getAssocObject()->setAssocObject(dragonHoard);
+	}
+
 	switch (specificType) {
 	case 's': //small pile
 		return make_shared<Gold>(1, 1, false);
 	case 'n': //normal pile
 		return make_shared<Gold>(2, 1, false);
 	case 'd': //dragon hoard
-		return make_shared<Gold>(6, 1, true);
+		return dragonHoard;
 	case 'm': //merchant's gold pile
 		return make_shared<Gold>(4, 1, false);
 	case 'h': //human 2x gold piles

@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include "gold.h"
+#include "EnemyGenerator.h"
 
 class GoldGenerator {
 public:

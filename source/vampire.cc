@@ -79,9 +79,13 @@ shared_ptr<Object> Vampire::attackEnemy(shared_ptr<Object> enemy) {
 			return goldGen.spawnGold('h');
 		}
 		else if (enemy->getEnemyType().compare("Dragon") == 0) {
+			if (enemy->getAssocObject()) {
+				enemy->getAssocObject()->setUnguarded(); //unguards the dragon hoard
+				enemy->getAssocObject()->resetAssocObject(); //reset DH's assoc obj sh_ptr
+				enemy->resetAssocObject(); //reset dragon's assoc obj sh_ptr
+			}
 			enemy.reset();
 			curAction += " The dragon hoard is now unguarded.";
-			//add unguard implementation later!
 			return enemy;
 		}
 		else if (enemy->getEnemyType().compare("Merchant") == 0) {

@@ -76,11 +76,6 @@ bool Enemy::attackPlayer(shared_ptr<Object> player) {
 	}
 }
 
-void Enemy::dropGold() {
-	cerr << "Under construction" << endl;
-	// use enemy generator and generate the correct amount of gold, let this be overriden
-}
-
 void Enemy::notifyObservers() {
 	cerr << "Notify Observers under construction" << endl;
 }

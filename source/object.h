@@ -10,6 +10,7 @@ class Object {
 protected:
 	std::shared_ptr<Object> potionBuffs;
 	bool hadTurn;
+	std::shared_ptr<Object> associatedObj;
 
 	char type;
 	void setType(char newType);
@@ -86,6 +87,17 @@ public:
 
 	void newTurn();
 	bool turnCompleted();
+
+	/*
+	associated object: the below are the 3 scenarios
+	  1. player walks on dragon hoard - it is guarded, so it is underneath the player, not picked up
+	  2. dragon to have an associated object, their hoard
+	  3. hoard to have its associated object (owner), their dragon
+	  the below are functions to get, set, and reset the associated object (associatedObj)
+	*/
+	std::shared_ptr<Object> getAssocObject();
+	void setAssocObject(std::shared_ptr<Object> ao);
+	void resetAssocObject();
 };
 
 #endif
