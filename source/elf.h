@@ -12,7 +12,7 @@ public:
 	Elf(int health = 140, int attack = 30, int defense = 10);
 	~Elf();
 
-	bool attackPlayer(std::shared_ptr<Character> player) override;
+	bool attackPlayer(std::shared_ptr<Object> player) override;
 };
 
 #endif

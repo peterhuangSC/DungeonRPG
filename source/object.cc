@@ -90,3 +90,6 @@ std::shared_ptr<Object> Object::attackEnemy(std::shared_ptr<Object> enemy) {
 bool Object::receiveDmg(int dmg) { return true; } //true if character is alive
 
 void Object::pickPocket() {}
+
+// returns true if player is slain by enemy
+bool Object::attackPlayer(std::shared_ptr<Object> player) { return false; }

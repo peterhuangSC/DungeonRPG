@@ -97,33 +97,35 @@ shared_ptr<Object> Player::attackEnemy(shared_ptr<Object> enemy) {
 		}
 	}
 	
-	int myDamage = ceil((100 / (100 + enemy->getDefense()) * trueAttack));
+	int myDamage = ceil((100 * trueAttack) / (100 + enemy->getDefense()));
 	
 	//true if enemy is alive after receiving the damage you just dealt
 	bool isEnemyAlive = enemy->receiveDmg(myDamage);
 	curAction = " PC deals " + to_string(myDamage);
 	curAction += " damage to " + enemy->getEnemyType();
+	curAction += " (" + to_string(enemy->getHealth());
+	curAction += " HP).";
 
 	if (isEnemyAlive) {
 		return enemy;
 	}
 	else {
 		curAction += " " + enemy->getEnemyType();
-		curAction += " has been slain by PC.";
-		if (enemy->getEnemyType().compare("Human")) {
+		curAction += " is slain.";
+		if (enemy->getEnemyType().compare("Human") == 0) {
 			GoldGenerator goldGen;
-			curAction += " Human drops some gold.";
+			curAction += " Human drops gold.";
 			return goldGen.spawnGold('h');
 		}
-		else if (enemy->getEnemyType().compare("Dragon")) {
+		else if (enemy->getEnemyType().compare("Dragon") == 0) {
 			enemy.reset();
 			curAction += " The dragon hoard is now unguarded.";
 			//add unguard implementation later!
 			return enemy;
 		}
-		else if (enemy->getEnemyType().compare("Merchant")) {
+		else if (enemy->getEnemyType().compare("Merchant") == 0) {
 			GoldGenerator goldGen;
-			curAction += " Merchant drops some gold.";
+			curAction += " Merchant drops gold.";
 			return goldGen.spawnGold('m');
 		}
 		else {

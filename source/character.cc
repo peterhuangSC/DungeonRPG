@@ -31,7 +31,7 @@ bool Character::receiveDmg(int dmg) {
 
 //accessors and mutators
 int Character::getHealth() {
-	return this->curHealth;
+	return max(this->curHealth, 0);
 }
 
 void Character::setHealth(int newHealth) {

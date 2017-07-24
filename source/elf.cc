@@ -21,7 +21,7 @@ Elf::~Elf() {}
 
 // this method performs the attack action
 // return val: true if player(opponent) is slain by this attack, false if player is alive
-bool Elf::attackPlayer(shared_ptr<Character> player) {
+bool Elf::attackPlayer(shared_ptr<Object> player) {
 	bool isPlayerSlain = false;
 		
 	//one additional attack on every hero type except for Drow as they are a type of elf too
@@ -31,6 +31,9 @@ bool Elf::attackPlayer(shared_ptr<Character> player) {
 	
 	//if the player is not dead the elf gets to attack again
 	if (isPlayerSlain == false) {
+		if (player->getHeroType().compare("Drow") != 0) {
+			curAction += " Elf attacks PC again.";
+		}
 		isPlayerSlain = Enemy::attackPlayer(player);
 	}
 

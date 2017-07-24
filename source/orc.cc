@@ -24,7 +24,7 @@ Orc::~Orc() {}
 
 // this method performs the attack action
 // return val: true if player(opponent) is slain by this attack, false if player is alive
-bool Orc::attackPlayer(shared_ptr<Character> player) {
+bool Orc::attackPlayer(shared_ptr<Object> player) {
 	bool isPlayerSlain = false;
 
 	//one additional attack on every hero type except for Drow as they are a type of orc too

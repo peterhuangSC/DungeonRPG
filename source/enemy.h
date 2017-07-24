@@ -28,7 +28,7 @@ public:
 
 	void levelUp();
 
-	virtual bool attackPlayer(std::shared_ptr<Character> player);
+	virtual bool attackPlayer(std::shared_ptr<Object> player) override;
 	virtual void severTies() override;
 	void dropGold(); //may return Item instead of void in the future
 	void notifyObservers();

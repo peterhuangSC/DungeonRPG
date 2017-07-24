@@ -41,12 +41,15 @@ void Enemy::severTies() {
 
 // this method performs the attack action
 // return val: true if player(opponent) is slain by this attack, false if player is alive
-bool Enemy::attackPlayer(shared_ptr<Character> player) {
+bool Enemy::attackPlayer(shared_ptr<Object> player) {
 	if (!player) return false;
 	
 	int accuracyRoll = rand() % 2;
 
-	if (accuracyRoll == 0) return false;
+	if (accuracyRoll == 0) { 
+		curAction += " Enemy misses attack on PC.";
+		return false; 
+	}
 	//else accuracyRoll == 1, proceed with the attack => enemy doesn't miss
 
 	//computing player's true defense
@@ -56,12 +59,14 @@ bool Enemy::attackPlayer(shared_ptr<Character> player) {
 
 	//true if enemy is alive after receiving the damage you just dealt
 	bool isPlayerAlive = player->receiveDmg(myDamage);
+	curAction += " PC receives " + to_string(myDamage);
+	curAction += " damage from Enemy.";
 
 	if (isPlayerAlive) {
-		//check others like: isAlive method
 		return false;
 	}
 	else {
+		curAction += " PC is slain by enemy.";
 		return true;
 	}
 }

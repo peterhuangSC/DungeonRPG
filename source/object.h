@@ -77,6 +77,8 @@ public:
 	virtual bool receiveDmg(int dmg);
 
 	virtual void pickPocket();
+
+	virtual bool attackPlayer(std::shared_ptr<Object> player);
 };
 
 #endif

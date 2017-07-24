@@ -12,7 +12,7 @@ public:
 	Orc(int health = 180, int attack = 30, int defense = 25);
 	~Orc();
 
-	bool attackPlayer(std::shared_ptr<Character> player) override;
+	bool attackPlayer(std::shared_ptr<Object> player) override;
 };
 
 #endif
