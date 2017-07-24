@@ -52,7 +52,7 @@ class Room{
     int getFree() const;
     int addFree(Cell *c);
     Cell *removeFree();
-};
+};  
 /////////////////////////////////////////////////////////////////
 
 //Floor Class, stores this floor

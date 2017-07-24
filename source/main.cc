@@ -13,7 +13,7 @@ int main(int argc, char* argv[]){
     if(argc > 2){
         cerr << "Only one file... please" << endl;
         return 1;
-    }
+    }  
 /////////////////////////////////////////////////////////////////
 
     //Begin a game

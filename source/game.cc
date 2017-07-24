@@ -388,7 +388,7 @@ void Map::move(string dir){
         this->init_Level();
         player->levelUp();
     }
-    else {
+    else {  
 
     }
     if(result != 1) endTurn();
