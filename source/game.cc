@@ -22,7 +22,7 @@ static int ur5 = 15; static int uc5 = 5;  static int lr5 = 23; static int lc5 = 
 static int ur6 = 10; static int uc6 = 38; static int lr6 = 14; static int lc6 = 51;// Room 5
 
 int whatRoom(int y, int x, char c){
-    if(c == '.'){
+    if(c == '.' || c == '+'){
              if((ur1 <= y && uc1 <= x) && (y <= lr1 && x <= lc1)) return 1;
         else if((ur2 <= y && uc2 <= x) && (y <= lr2 && x <= lc2)) return 2;
         else if((ur3 <= y && uc3 <= x) && (y <= lr3 && x <= lc3)) return 2;
@@ -114,7 +114,6 @@ int Floor::get(char var){
 
 void Floor::init(shared_ptr<Object> player){
 
-    
     //Place the Player
     int r = 1 + (rand() % 5);
     rooms[r].removeFree()->setonCell(player);
@@ -168,7 +167,7 @@ void Floor::endTurn(){
     int dimx = ground[0].size();
     for(int y = 0; y < dimy; ++y){
         for(int x = 0; x < dimx; ++x){
-            if(ground[y][x].onCell && ground[y][x].onCell->canMove()){
+            if(ground[y][x].onCell && !ground[y][x].onCell->turnCompleted() && ground[y][x].onCell->canMove()){
                 bool attacked = false;
                 // Attack the character if near
                 int size = ground[y][x].Observers.size();
@@ -186,6 +185,13 @@ void Floor::endTurn(){
                         ground[y][x].onCell.reset();
                     }
                 }
+            }
+        }
+    }
+    for(int y = 0; y < dimy; ++y){
+        for(int x = 0; x < dimx; ++x){
+            if(ground[y][x].onCell){
+                ground[y][x].onCell->newTurn();
             }
         }
     }
