@@ -13,5 +13,11 @@ Troll::Troll(int health, int attack, int defense) :
 Troll::~Troll() {}
 
 void Troll::endTurnEffect() {
-	this->curHealth = min(this->curHealth + healthGainRate, this->maxHealth);
+	if (curHealth < maxHealth) {		
+		this->curAction += " PC regenerated " 
+			+ to_string(min(healthGainRate, maxHealth - curHealth));
+		this->curAction += " health points.";
+		// now change curHealth, since the above uses the original values
+		this->curHealth = min(this->curHealth + healthGainRate, this->maxHealth);
+	}	
 }
