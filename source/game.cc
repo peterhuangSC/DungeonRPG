@@ -218,6 +218,7 @@ int Floor::move(string dir, int y, int x){
         //If gold on Cell, and unguarded
         if(type == 'G') curr->onCell->addGoldItem(cell->onCell);
         cell->setonCell(curr->onCell);
+        cell->notifyAll();
         curr->onCell.reset();
         return 3;
     }
@@ -234,7 +235,7 @@ int Floor::move(string dir, int y, int x){
     }
     //Something in the way
     else{
-        curr->onCell->setAction("Something is in your way");
+        curr->onCell->setAction("Something is in your way.");
         return 0;
     }
 };
@@ -310,7 +311,19 @@ ostream &operator<<(ostream &out, const Info info){
     out << "HP : " << info.player->getHealth() << endl;
     out << "Atk: " << info.player->getAttack() << endl;
     out << "Def: " << info.player->getDefense() << endl;
-	out << "Action: " << info.player->getAction() << endl;
+    istringstream saction{info.player->getAction()};
+    string action = "";
+    string word;
+    int line_size = 0;
+    while(saction >> word){
+        action += word + " ";
+        line_size += word.length() +1;
+        if(line_size >= info.dimx - 15){
+            action += "\n        ";
+            line_size = 0;
+        }
+    }   
+	out << "Action: " << action << endl;
     return out;
 };
 /////////////////////////////////////////////////////////////////
@@ -387,7 +400,8 @@ player{PG.spawnPlayer(race[0])}, info(dim_x, player) {
     //Freeze
     void Map::freeze(){
         frozen = !frozen;
-        player->setAction("Game frozen. All enemies won't move");
+        if(frozen) player->setAction("Game frozen. All enemies won't move");
+        if(!frozen) player->setAction("Game unfrozen. All enemies can move");
         };
 
     //Movement

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include <memory>
 #include "player.h"
 #include "PlayerGenerator.h"
