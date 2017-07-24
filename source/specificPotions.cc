@@ -17,6 +17,8 @@ mapSymbol (item), type (object)
 // PotionName, PotionID, HealthEff, AttackEff, DefenseEff
 
 //------------------------RESTORE HEALTH------------------------//
+bool RestoreHealth::rhVisible = false;
+
 RestoreHealth::RestoreHealth() : 
 	Potion(nullptr, "Restore Health", "RH", 10, 0, 0) {}
 
@@ -27,6 +29,8 @@ void RestoreHealth::setKnown() {
 }
 
 //------------------------POISON HEALTH------------------------//
+bool PoisonHealth::phVisible = false;
+
 PoisonHealth::PoisonHealth() :
 	Potion(nullptr, "Poison Health", "PH", -10, 0, 0) {}
 
@@ -37,6 +41,8 @@ void PoisonHealth::setKnown() {
 }
 
 //------------------------BOOST ATTACK------------------------//
+bool BoostAttack::baVisible = false;
+
 BoostAttack::BoostAttack(shared_ptr<Potion> np) :
 	Potion(np, "Boost Attack", "BA", 0, 5, 0) {}
 
@@ -65,6 +71,8 @@ void BoostAttack::setKnown() {
 }
 
 //------------------------WOUND ATTACK------------------------//
+bool WoundAttack::waVisible = false;
+
 WoundAttack::WoundAttack(shared_ptr<Potion> np) :
 	Potion(np, "Wound Attack", "WA", 0, -5, 0) {}
 
@@ -85,6 +93,8 @@ void WoundAttack::setKnown() {
 }
 
 //------------------------BOOST DEFENSE------------------------//
+bool BoostDefense::bdVisible = false;
+
 BoostDefense::BoostDefense(shared_ptr<Potion> np) :
 	Potion(np, "Boost Defense", "BD", 0, 0, 5) {}
 
@@ -105,6 +115,8 @@ void BoostDefense::setKnown() {
 }
 
 //------------------------WOUND DEFENSE------------------------//
+bool WoundDefense::wdVisible = false;
+
 WoundDefense::WoundDefense(shared_ptr<Potion> np) :
 	Potion(np, "Wound Defense", "WD", 0, 0, -5) {}
 
@@ -120,6 +132,6 @@ vector<int> WoundDefense::potionBuffers() {
 	return additionalStats;
 }
 
-void BoostDefense::setKnown() {
-	bdVisible = true;
+void WoundDefense::setKnown() {
+	wdVisible = true;
 }
