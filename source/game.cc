@@ -172,7 +172,7 @@ void Floor::endTurn(){
                 // Attack the character if near
                 int size = ground[y][x].Observers.size();
                 for(int o = 0; o < size; ++o){
-                    if(ground[y][x].Observers[o]->onCell->getType() == '@'){
+                    if(ground[y][x].Observers[o]->getType() == '@'){
                         attacked = true;
                         if(ground[y][x].onCell->attackPlayer(ground[y][x].Observers[o]->onCell)) return;
                     }
@@ -344,7 +344,7 @@ void Map::init_Level(){
 
     //End the turn
 void Map::endTurn(){
-    if(player->getHealth() < 0){
+    if(player->getHealth() <= 0){
         cout << *this;
         playing = false;
         cout << "\n\n\n\n         GAME OVER, YOU HAVE DIED!\n" << endl; 
@@ -352,7 +352,7 @@ void Map::endTurn(){
         return;
     }
     if(!frozen) Maps[level].endTurn();
-    if(player->getHealth() < 0){
+    if(player->getHealth() <= 0){
         cout << *this;
         playing = false;
         cout << "\n\n\n\n         GAME OVER, YOU HAVE DIED!\n" << endl; 

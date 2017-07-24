@@ -55,6 +55,7 @@ std::string Object::getAction() {
 	return "n/a";
 }
 void Object::setAction(std::string newAction) {}
+void Object::appendAction(std::string appAction) {}
 
 void Object::severTies() {}
 

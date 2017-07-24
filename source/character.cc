@@ -105,3 +105,8 @@ string Character::getAction() {
 void Character::setAction(string newAction) {
 	this->curAction = newAction;
 }
+
+void Character::appendAction(string appAction) {
+	this->curAction += appAction;
+}
+

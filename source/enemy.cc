@@ -47,7 +47,7 @@ bool Enemy::attackPlayer(shared_ptr<Object> player) {
 	int accuracyRoll = rand() % 2;
 
 	if (accuracyRoll == 0) { 
-		curAction += " Enemy misses attack on PC.";
+		player->appendAction(" Enemy misses attack on PC.");
 		return false; 
 	}
 	//else accuracyRoll == 1, proceed with the attack => enemy doesn't miss
@@ -55,18 +55,20 @@ bool Enemy::attackPlayer(shared_ptr<Object> player) {
 	//computing player's true defense
 	int truePlayerDef = player->getDefense();
 	
-	int myDamage = ceil((100 / (100 + truePlayerDef) * this->getAttack()));
+	int myDamage = ceil((100 * this->getAttack())/ (100 + truePlayerDef));
 
 	//true if enemy is alive after receiving the damage you just dealt
 	bool isPlayerAlive = player->receiveDmg(myDamage);
-	curAction += " PC receives " + to_string(myDamage);
-	curAction += " damage from Enemy.";
+	
+
+	player->appendAction(" PC receives " + to_string(myDamage));
+	player->appendAction(" damage from Enemy.");
 
 	if (isPlayerAlive) {
 		return false;
 	}
 	else {
-		curAction += " PC is slain by enemy.";
+		player->appendAction(" PC is slain by enemy.");
 		return true;
 	}
 }

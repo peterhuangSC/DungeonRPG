@@ -45,6 +45,7 @@ public:
 
 	virtual std::string getAction();
 	virtual void setAction(std::string newAction);
+	virtual void appendAction(std::string appAction);
 
 	virtual void severTies();
 

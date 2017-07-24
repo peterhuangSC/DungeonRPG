@@ -42,6 +42,7 @@ public:
 
 	std::string getAction() override;
 	void setAction(std::string newAction) override;
+	void appendAction(std::string appAction) override;
 };
 
 #endif

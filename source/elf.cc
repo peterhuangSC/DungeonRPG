@@ -32,7 +32,7 @@ bool Elf::attackPlayer(shared_ptr<Object> player) {
 	//if the player is not dead the elf gets to attack again
 	if (isPlayerSlain == false) {
 		if (player->getHeroType().compare("Drow") != 0) {
-			curAction += " Elf attacks PC again.";
+			player->appendAction(" Elf attacks PC again.");
 		}
 		isPlayerSlain = Enemy::attackPlayer(player);
 	}
