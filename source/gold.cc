@@ -45,7 +45,7 @@ void Gold::setUnguarded() {
 }
 
 void Gold::notify(shared_ptr<Object> player) {
-	if (!isGuarded) {
+	if (!isGuarded()) {
 		player->appendAction(" PC sees treasure.");
 	}
 	else {
