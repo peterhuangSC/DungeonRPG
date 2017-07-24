@@ -243,6 +243,7 @@ void Floor::potion(string dir, int y, int x){
     if(cell->getType() == 'P'){
         curr->onCell->setAction("");
         curr->onCell->consumePotion(cell->onCell);
+        cell->onCell.reset();
     }
     else{
         curr->onCell->setAction("Thats not a potion!");
@@ -385,6 +386,7 @@ void Map::move(string dir){
         ++level;
         info.levelUp();
         this->init_Level();
+        player->levelUp();
     }
     else {
 
