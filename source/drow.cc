@@ -13,7 +13,7 @@ Drow::Drow(int health, int attack, int defense) :
 
 Drow::~Drow() {}
 
-void Drow::consumePotion(shared_ptr<Potion> myPotion) {
+void Drow::consumePotion(shared_ptr<Object> myPotion) {
 	//case 1: consume health related potions
 	if (myPotion->getPotionName().compare("Restore Health") ||
 		myPotion->getPotionName().compare("Poison Health")) {

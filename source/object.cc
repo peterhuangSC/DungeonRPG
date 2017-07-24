@@ -59,3 +59,22 @@ void Object::setAction(std::string newAction) {}
 void Object::severTies() {}
 
 bool Object::canMove() { return false; }
+
+void Object::consumePotion(std::shared_ptr<Object> myPotion) {}
+
+std::string Object::getPotionName() { return "n/a"; }
+
+int Object::getHealthEffect() { return 0; }
+
+int Object::getAttackEffect() { return 0; }
+int Object::getDefenseEffect() { return 0; }
+
+void Object::setAttackEffect(int value) {}
+void Object::setDefenseEffect(int value) {}
+
+void Object::setNextPotion(std::shared_ptr<Object> myPotion) {}
+
+std::vector<int> Object::potionBuffers() { 
+	std::vector<int> tempVec = { 0, 0 };
+	return tempVec;
+}

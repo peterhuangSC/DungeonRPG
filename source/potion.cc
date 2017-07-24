@@ -44,7 +44,7 @@ string Potion::getPotionName() {
 	return this->potionName;
 }
 
-void Potion::setNextPotion(shared_ptr<Potion> myPotion) {
+void Potion::setNextPotion(shared_ptr<Object> myPotion) {
 	this->nextPotion = myPotion;
 }
 

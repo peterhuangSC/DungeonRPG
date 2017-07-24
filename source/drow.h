@@ -11,7 +11,7 @@ public:
 	Drow(int health = 150, int attack = 25, int defense = 15);
 	~Drow();
 
-	void consumePotion(std::shared_ptr<Potion> myPotion) override;
+	void consumePotion(std::shared_ptr<Object> myPotion) override;
 };
 
 #endif

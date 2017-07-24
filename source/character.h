@@ -15,7 +15,7 @@ protected:
 	int attack;
 	int defense;
 
-	std::shared_ptr<Potion> potionBuffs;
+	std::shared_ptr<Object> potionBuffs;
 	std::string curAction;
 
 public:
@@ -35,9 +35,9 @@ public:
 	int getDefense() override;
 	void setDefense(int newDefense);
 
-	std::shared_ptr<Potion> getPotionBuffs();
+	std::shared_ptr<Object> getPotionBuffs();
 
-	virtual void consumePotion(std::shared_ptr<Potion> myPotion);
+	virtual void consumePotion(std::shared_ptr<Object> myPotion);
 
 	std::string getAction() override;
 	void setAction(std::string newAction) override;

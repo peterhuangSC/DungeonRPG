@@ -30,7 +30,7 @@ bool Merchant::receiveDmg(int dmg) {
 	//but the map/game class has to be also changed so all merchants are set 
 	//to hostile after the first one is attacked
 	if (this->isHostile == false) this->isHostile = true;
-	if (this->isMovable == false) this->isMovable == true;
+	if (this->isMovable == false) this->isMovable = true;
 
 	this->setHealth(this->curHealth - dmg);
 	if (this->curHealth <= 0) {

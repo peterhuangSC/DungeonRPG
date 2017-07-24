@@ -14,7 +14,7 @@ protected:
 	int attackEffect;
 	int defenseEffect;
 
-	std::shared_ptr<Potion> nextPotion;
+	std::shared_ptr<Object> nextPotion;
 public:
 	Potion(std::shared_ptr<Potion> nextPotion, std::string potName = "No Effect Potion",
 		std::string id = "NEFF", int hEff = 0, int aEff = 0, int dEff = 0);
@@ -22,17 +22,17 @@ public:
 
 	//accessors and mutators
 	char getType() override;
-	int getHealthEffect();
-	int getAttackEffect();
-	int getDefenseEffect();
+	int getHealthEffect() override;
+	int getAttackEffect() override;
+	int getDefenseEffect() override;
 
-	void setAttackEffect(int value);
-	void setDefenseEffect(int value);
+	void setAttackEffect(int value) override;
+	void setDefenseEffect(int value) override;
 
-	std::string getPotionName();
-	void setNextPotion(std::shared_ptr<Potion> myPotion);
+	std::string getPotionName() override;
+	void setNextPotion(std::shared_ptr<Object> myPotion) override;
 
-	virtual std::vector<int> potionBuffers();
+	virtual std::vector<int> potionBuffers() override;
 
 	//---------------------------helper-----------------------------//
 	//std::string getAttachedHeroName(std::shared_ptr<Object> myObj);
