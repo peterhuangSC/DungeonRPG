@@ -15,10 +15,11 @@ Drow::~Drow() {}
 
 void Drow::consumePotion(shared_ptr<Object> myPotion) {
 	//case 1: consume health related potions
-	if (myPotion->getPotionName().compare("Restore Health") ||
-		myPotion->getPotionName().compare("Poison Health")) {
+	if (myPotion->getPotionName().compare("Restore Health") == 0 ||
+		myPotion->getPotionName().compare("Poison Health") == 0) {
 		this->setHealth(this->getHealth() + ceil(potionEffectRate * myPotion->getHealthEffect()));
-		//remove potion
+		curAction += " PC consumed a: " + myPotion->getPotionName();
+		curAction += ".";
 		return;
 	}
 
@@ -33,4 +34,6 @@ void Drow::consumePotion(shared_ptr<Object> myPotion) {
 		myPotion->setNextPotion(potionBuffs);
 		potionBuffs = myPotion;
 	}
+	curAction += " PC consumed a: " + myPotion->getPotionName();
+	curAction += ".";
 }
