@@ -1,7 +1,8 @@
 #include <string>
 #include "object.h"
 
-Object::Object(char typeSymbol) : type{ typeSymbol }, potionBuffs{ nullptr } {
+Object::Object(char typeSymbol) : type{ typeSymbol }, 
+	potionBuffs{ nullptr },	hadTurn{ false } {
 	//no implementation currently
 }
 
@@ -96,3 +97,17 @@ void Object::pickPocket() {}
 bool Object::attackPlayer(std::shared_ptr<Object> player) { return false; }
 
 void Object::resetStatic() {}
+
+void Object::newTurn() {
+	hadTurn = false;
+}
+
+bool Object::turnCompleted() {
+	if (hadTurn == true) { //they had their turn
+		return true;
+	}
+	else { //they didn't have their turn
+		hadTurn = true;
+		return false;
+	}
+}

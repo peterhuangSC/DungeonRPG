@@ -9,6 +9,7 @@ class Object {
 	//no private fields needed so far
 protected:
 	std::shared_ptr<Object> potionBuffs;
+	bool hadTurn;
 
 	char type;
 	void setType(char newType);
@@ -82,6 +83,9 @@ public:
 	virtual bool attackPlayer(std::shared_ptr<Object> player);
 
 	virtual void resetStatic();
+
+	void newTurn();
+	bool turnCompleted();
 };
 
 #endif
