@@ -22,7 +22,7 @@ static int ur5 = 15; static int uc5 = 5;  static int lr5 = 23; static int lc5 = 
 static int ur6 = 10; static int uc6 = 38; static int lr6 = 14; static int lc6 = 51;// Room 5
 
 int whatRoom(int y, int x, char c){
-    if(c == '.' || c == '+'){
+    if(c == '.'){
              if((ur1 <= y && uc1 <= x) && (y <= lr1 && x <= lc1)) return 1;
         else if((ur2 <= y && uc2 <= x) && (y <= lr2 && x <= lc2)) return 2;
         else if((ur3 <= y && uc3 <= x) && (y <= lr3 && x <= lc3)) return 2;
@@ -42,7 +42,7 @@ Cell::Cell(): Type{' '}, room{0}, onCell{nullptr} {};
 
     //Puts an object on Cell if empty
 bool Cell::setonCell(shared_ptr<Object> o){
-        onCell = o; 
+        onCell = o;
         return true;
 };
 
@@ -134,6 +134,19 @@ void Floor::init(shared_ptr<Object> player){
         r = 1 + (rand() % 5);
         rooms[r].removeFree()->setonCell(GG.spawnGold());
     }
+    //Put associated objects beside the guarded objects
+    int dimy = ground.size();
+    int dimx = ground[0].size();
+    for(int y = 0; y < dimy; ++y){
+        for(int x = 0; x < dimx; ++x){
+            if(ground[y][x].onCell && ground[y][x].onCell->isGuarded()){
+                Cell &newCell = randMove(ground[y][x]);
+                if(&ground[y][x] != &newCell){
+                    newCell.setonCell(ground[y][x].onCell->getAssocObject());
+                }
+            }
+        }
+    }
     //Place the enemies
     for(int i = 0; i < 20; ++i){
         r = 1 + (rand() % 5);
@@ -147,15 +160,15 @@ void Floor::attachObs(){
     for(int y = 0; y < dimy; ++y){
         for(int x = 0; x < dimx; ++x){
             Cell &cell = ground[y][x];
-            if(cell.getType() == '.'){
-                if(ground[ y ][x-1].getType() == '.') cell.Observers.push_back(&ground[ y ][x-1]);
-                if(ground[y-1][ x ].getType() == '.') cell.Observers.push_back(&ground[y-1][ x ]);
-                if(ground[ y ][x+1].getType() == '.') cell.Observers.push_back(&ground[ y ][x+1]);
-                if(ground[y+1][ x ].getType() == '.') cell.Observers.push_back(&ground[y+1][ x ]);
-                if(ground[y-1][x-1].getType() == '.') cell.Observers.push_back(&ground[y-1][x-1]);
-                if(ground[y+1][x-1].getType() == '.') cell.Observers.push_back(&ground[y+1][x-1]);
-                if(ground[y-1][x+1].getType() == '.') cell.Observers.push_back(&ground[y-1][x+1]);
-                if(ground[y+1][x+1].getType() == '.') cell.Observers.push_back(&ground[y+1][x+1]);
+            if(cell.getType() == '.'|| cell.getType() == '+'){
+                if(ground[ y ][x-1].getType() == '.' || ground[ y ][x-1].getType() == '+') cell.Observers.push_back(&ground[ y ][x-1]);
+                if(ground[y-1][ x ].getType() == '.' || ground[y-1][ x ].getType() == '+') cell.Observers.push_back(&ground[y-1][ x ]);
+                if(ground[ y ][x+1].getType() == '.' || ground[ y ][x+1].getType() == '+') cell.Observers.push_back(&ground[ y ][x+1]);
+                if(ground[y+1][ x ].getType() == '.' || ground[y+1][ x ].getType() == '+') cell.Observers.push_back(&ground[y+1][ x ]);
+                if(ground[y-1][x-1].getType() == '.' || ground[y-1][x-1].getType() == '+') cell.Observers.push_back(&ground[y-1][x-1]);
+                if(ground[y+1][x-1].getType() == '.' || ground[y+1][x-1].getType() == '+') cell.Observers.push_back(&ground[y+1][x-1]);
+                if(ground[y-1][x+1].getType() == '.' || ground[y-1][x+1].getType() == '+') cell.Observers.push_back(&ground[y-1][x+1]);
+                if(ground[y+1][x+1].getType() == '.' || ground[y+1][x+1].getType() == '+') cell.Observers.push_back(&ground[y+1][x+1]);
             }
         }
     }
@@ -167,20 +180,34 @@ void Floor::endTurn(){
     int dimx = ground[0].size();
     for(int y = 0; y < dimy; ++y){
         for(int x = 0; x < dimx; ++x){
-            if(ground[y][x].onCell && !ground[y][x].onCell->turnCompleted() && ground[y][x].onCell->canMove()){
-                bool attacked = false;
+            bool attacked = false;
+            //Enemies attack players
+            if(ground[y][x].onCell && ground[y][x].onCell->getHostility()){
                 // Attack the character if near
                 int size = ground[y][x].Observers.size();
                 for(int o = 0; o < size; ++o){
-                    if(ground[y][x].Observers[o]->getType() == '@'){
+                    if(ground[y][x].Observers[o]->getType() == '@' && !ground[y][x].onCell->turnCompleted()){
                         attacked = true;
                         if(ground[y][x].onCell->attackPlayer(ground[y][x].Observers[o]->onCell)) return;
                     }
                 }
-                //No player, we will move randomly
+            }
+            //Guarded Objects tell their guard to attack player
+            if(ground[y][x].onCell && ground[y][x].onCell->isGuarded()){
+                // Tell my guard to attack the character if near
+                int size = ground[y][x].Observers.size();
+                for(int o = 0; o < size; ++o){
+                    if(ground[y][x].Observers[o]->getType() == '@' && !ground[y][x].onCell->getAssocObject()->turnCompleted()){
+                        attacked = true;
+                        if(ground[y][x].onCell->getAssocObject()->attackPlayer(ground[y][x].Observers[o]->onCell)) return;
+                    }
+                }
+            }
+            //Not hostile or there was no player, so we will move randomly
+            if(ground[y][x].onCell&& ground[y][x].onCell->canMove()){
                 if(!attacked){
                     Cell &newCell = randMove(ground[y][x]);
-                    if(&ground[y][x] != &newCell){
+                    if(&ground[y][x] != &newCell && !ground[y][x].onCell->turnCompleted()){
                         newCell.setonCell(ground[y][x].onCell);
                         ground[y][x].onCell.reset();
                     }
@@ -212,7 +239,7 @@ int Floor::move(string dir, int y, int x){
 
     //Check if cell is valid;
 	char type = cell->getType();
-    if(type ==  '.' || type ==  '+' || type ==  '#' || (type == 'G' && !cell->onCell->isGuarded())){
+    if(type ==  '.' || type ==  '+' || type ==  '#' || type == 'G'){
              if(dir == "no") {curr->onCell->setAction("PC moves North.");}
         else if(dir == "ne") {curr->onCell->setAction("PC moves North-East.");}
         else if(dir == "ea") {curr->onCell->setAction("PC moves East.");}
@@ -222,22 +249,25 @@ int Floor::move(string dir, int y, int x){
         else if(dir == "we") {curr->onCell->setAction("PC moves West.");}
         else if(dir == "nw") {curr->onCell->setAction("PC moves North-West.");}
 
-        //If gold on Cell, and unguarded
+
+        //If gold on Cell, 
         if(type == 'G') curr->onCell->addGoldItem(cell->onCell);
+        //Unguarded, do nothing, you succsessfully picked it up
+        //Guarded
+        shared_ptr<Object> wasHeld = curr->onCell->getAssocObject();
+        curr->onCell->resetAssocObject();
+        if(type == 'G' && cell->onCell->isGuarded()){
+            curr->onCell->setAssocObject(cell->onCell);
+        }
         cell->setonCell(curr->onCell);
         cell->notifyAll();
         curr->onCell.reset();
-        return 3;
-    }
-    //If gold on Cell, but guarded
-    else if(type ==  'G' && cell->onCell->isGuarded()){
-        curr->onCell->setAction("Something is in your way.");
-        curr->onCell->addGoldItem(cell->onCell);
+        curr->setonCell(wasHeld);
         return 2;
     }
     //If Level Up
     else if (type ==  '\\'){
-        curr->onCell;
+        curr->onCell = curr->onCell->getAssocObject();
         return 1;
     }
     //Something in the way
@@ -398,7 +428,7 @@ player{CG.spawnPlayer(race[0])}, info(dim_x, player) {
             }
         }
     }
-    for(int i = 0; i < 5; ++i){ 
+    for(int i = 0; i < 5; ++i){
         Maps[i].attachObs();
     }
     this->init_Level();
@@ -414,7 +444,7 @@ player{CG.spawnPlayer(race[0])}, info(dim_x, player) {
     //Movement
 void Map::move(string dir){
     int result = Maps[level].move(dir, y, x);
-         if(result == 3) {
+         if(result == 2) {
              if(dir == "no") {--y;    ;}
         else if(dir == "ne") {--y; ++x;}
         else if(dir == "ea") {     ++x;}
@@ -424,16 +454,11 @@ void Map::move(string dir){
         else if(dir == "we") {     --x;}
         else if(dir == "nw") {--y; --x;}
     }
-    else if(result == 2) {
-    }
     else if(result == 1) {
         ++level;
         info.levelUp();
         this->init_Level();
         player->levelUp();
-    }
-    else {  
-
     }
     if(result != 1) endTurn();
 };

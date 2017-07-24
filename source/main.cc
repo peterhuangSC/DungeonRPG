@@ -13,7 +13,7 @@ int main(int argc, char* argv[]){
     if(argc > 2){
         cerr << "Only one file... please" << endl;
         return 1;
-    }  
+    }
 /////////////////////////////////////////////////////////////////
 
     //Begin a game
@@ -61,6 +61,7 @@ int main(int argc, char* argv[]){
 
 			//Quit the game
 			if (command == "q") {
+                map.endGame();
 				cout << "Quitting Game..." << endl;
 				return 0;
 			}
@@ -102,13 +103,17 @@ int main(int argc, char* argv[]){
         //EOF ends the game
         if(cin.eof()) playing = false;
         //Restart the game
-        else if(command == "r"); //Do nothing, game will restart
+        else if(command == "r") map.endGame(); //Do nothing, game will restart
         //Otherwise, check if they want to continue
         else{
+            map.endGame();
             cout << "Quit the game?(y/n)" << endl;
             cin >> quit;
             getline(cin,command);//Throw away rest of line
-            if(quit == 'y') playing = false;
+            if(quit == 'y') {
+                playing = false;
+                cout << "Quitting Game..." << endl;
+            }                
             else if(quit == 'n') playing = true;
             else {
                 cout << "Invalid Answer: " << quit << "... Ending game" << endl;

@@ -10,7 +10,7 @@ Halfling::Halfling(int health, int attack, int defense) :
 	dodgeRate{ 0.5 } {
 
 	this->isMovable = true;
-	this->isHostile = false;
+	this->isHostile = true;
 
 	this->enemyLevel = 1;
 }
