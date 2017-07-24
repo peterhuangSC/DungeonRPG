@@ -60,3 +60,4 @@ shared_ptr<Gold> GoldGenerator::spawnGold(int amount, int quantity) {
 	return make_shared<Gold>(amount, quantity, false);
 }
 
+void GoldGenerator::reset() {}

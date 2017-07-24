@@ -44,3 +44,7 @@ bool Merchant::receiveDmg(int dmg) {
 
 //severTies() already exists from the superclass
 
+void Merchant::resetStatic() {
+	mercHostile = false;
+}
+

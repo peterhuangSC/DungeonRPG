@@ -94,3 +94,5 @@ void Object::pickPocket() {}
 
 // returns true if player is slain by enemy
 bool Object::attackPlayer(std::shared_ptr<Object> player) { return false; }
+
+void Object::resetStatic() {}

@@ -38,6 +38,10 @@ void RestoreHealth::notify(shared_ptr<Object> player) {
 	}
 }
 
+void RestoreHealth::resetStatic() {
+	rhVisible = false;
+}
+
 //------------------------POISON HEALTH------------------------//
 bool PoisonHealth::phVisible = false;
 
@@ -58,6 +62,10 @@ void PoisonHealth::notify(shared_ptr<Object> player) {
 	else {
 		player->appendAction(" PC sees an unknown potion.");
 	}
+}
+
+void PoisonHealth::resetStatic() {
+	phVisible = false;
 }
 
 //------------------------BOOST ATTACK------------------------//
@@ -100,6 +108,10 @@ void BoostAttack::notify(shared_ptr<Object> player) {
 	}
 }
 
+void BoostAttack::resetStatic() {
+	baVisible = false;
+}
+
 //------------------------WOUND ATTACK------------------------//
 bool WoundAttack::waVisible = false;
 
@@ -130,6 +142,10 @@ void WoundAttack::notify(shared_ptr<Object> player) {
 	else {
 		player->appendAction(" PC sees an unknown potion.");
 	}
+}
+
+void WoundAttack::resetStatic() {
+	waVisible = false;
 }
 
 //------------------------BOOST DEFENSE------------------------//
@@ -164,6 +180,10 @@ void BoostDefense::notify(shared_ptr<Object> player) {
 	}
 }
 
+void BoostDefense::resetStatic() {
+	bdVisible = false;
+}
+
 //------------------------WOUND DEFENSE------------------------//
 bool WoundDefense::wdVisible = false;
 
@@ -194,4 +214,8 @@ void WoundDefense::notify(shared_ptr<Object> player) {
 	else {
 		player->appendAction(" PC sees an unknown potion.");
 	}
+}
+
+void WoundDefense::resetStatic() {
+	wdVisible = false;
 }

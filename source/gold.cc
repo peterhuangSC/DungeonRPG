@@ -52,3 +52,4 @@ void Gold::notify(shared_ptr<Object> player) {
 		player->appendAction(" PC sees a guarded dragon hoard.");
 	}
 }
+

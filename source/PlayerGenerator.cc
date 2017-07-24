@@ -19,3 +19,5 @@ shared_ptr<Player> PlayerGenerator::spawnPlayer(char type) {
 		return make_shared<Shade>();
 	}
 }
+
+void PlayerGenerator::reset() {}

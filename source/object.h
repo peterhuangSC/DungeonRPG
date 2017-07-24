@@ -12,7 +12,7 @@ protected:
 
 	char type;
 	void setType(char newType);
-public: 
+public:
 	Object(char typeSymbol);
 	~Object();
 
@@ -80,6 +80,8 @@ public:
 	virtual void pickPocket();
 
 	virtual bool attackPlayer(std::shared_ptr<Object> player);
-};
+
+	virtual void resetStatic();
+}
 
 #endif
