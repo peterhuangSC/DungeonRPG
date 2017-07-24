@@ -17,14 +17,14 @@ void Drow::consumePotion(shared_ptr<Object> myPotion) {
 	//case 1: consume health related potions
 	if (myPotion->getPotionName().compare("Restore Health") == 0 ||
 		myPotion->getPotionName().compare("Poison Health") == 0) {
-		this->setHealth(this->getHealth() + ceil(potionEffectRate * myPotion->getHealthEffect()));
+		this->setHealth(this->getHealth() + potionEffectRate * myPotion->getHealthEffect());
 		curAction += " PC consumed a: " + myPotion->getPotionName();
 		curAction += ".";
 		return;
 	}
 
-	myPotion->setAttackEffect(ceil(potionEffectRate * myPotion->getAttackEffect()));
-	myPotion->setDefenseEffect(ceil(potionEffectRate * myPotion->getDefenseEffect()));
+	myPotion->setAttackEffect(potionEffectRate * myPotion->getAttackEffect());
+	myPotion->setDefenseEffect(potionEffectRate * myPotion->getDefenseEffect());
 
 	//blue bar for boosted/weakened attack/defense
 	if (!potionBuffs) {
