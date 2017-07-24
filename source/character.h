@@ -16,7 +16,7 @@ protected:
 	int attack;
 	int defense;
 
-	std::shared_ptr<Object> potionBuffs;
+//	std::shared_ptr<Object> potionBuffs;
 	std::string curAction;
 
 public:

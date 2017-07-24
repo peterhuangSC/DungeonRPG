@@ -9,8 +9,7 @@ using namespace std;
 //methods below-------------------------------------
 Character::Character(int myHealth, int myAttack, int myDefense, char myType) :
 	Object(myType),	curHealth{ myHealth }, maxHealth{ myHealth }, 
-	attack{ myAttack }, defense{ myDefense }, potionBuffs{ nullptr }, 
-	curAction{ "default" } {
+	attack{ myAttack }, defense{ myDefense }, curAction{ "default" } {
 
 }
 
@@ -79,8 +78,8 @@ shared_ptr<Object> Character::getPotionBuffs() {
 void Character::consumePotion(shared_ptr<Object> myPotion) {
 	//case 1: consume health related potions
 	myPotion->setKnown();
-	if (myPotion->getPotionName().compare("Restore Health") ||
-		myPotion->getPotionName().compare("Poison Health")) {
+	if (myPotion->getPotionName().compare("Restore Health") == 0 ||
+		myPotion->getPotionName().compare("Poison Health") == 0) {
 		this->setHealth(this->getHealth() + myPotion->getHealthEffect());
 		curAction += " PC consumed a: " + myPotion->getPotionName();
 		curAction += ".";

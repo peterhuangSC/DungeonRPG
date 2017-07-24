@@ -1,7 +1,7 @@
 #include <string>
 #include "object.h"
 
-Object::Object(char typeSymbol) : type{ typeSymbol } {
+Object::Object(char typeSymbol) : type{ typeSymbol }, potionBuffs{ nullptr } {
 	//no implementation currently
 }
 
