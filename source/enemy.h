@@ -34,7 +34,7 @@ public:
 
 	virtual bool canMove() override;
 
-	bool getHostility() override;
+	virtual bool getHostility() override;
 };
 
 #endif

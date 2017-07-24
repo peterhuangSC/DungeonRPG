@@ -46,3 +46,9 @@ bool Merchant::receiveDmg(int dmg) {
 void Merchant::resetStatic() {
 	mercHostile = false;
 }
+
+//note: isHostile will only affect one instance of merchant
+// we need to use the static variable here
+bool Merchant::getHostility() {
+	return mercHostile;
+}
