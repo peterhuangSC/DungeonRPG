@@ -14,11 +14,14 @@ OBJECTS = ${GAMEOBJ} ${CHARACTEROBJ} ${PLAYEROBJ} ${ENEMYOBJ} ${ITEMOBJ} ${GENER
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
-        ${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} -lX11
+	 ${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC}
 
 -include ${DEPENDS}
 
 .PHONY: clean
 clean:
-        rm ${EXEC} ${OBJECTS} ${DEPENDS}
-~
+	 rm ${EXEC} ${OBJECTS} ${DEPENDS}
+
+
+
+
