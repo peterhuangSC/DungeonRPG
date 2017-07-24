@@ -6,6 +6,7 @@
 #include "enemy.h"
 
 class Orc : public Enemy {
+
 	double goblinDamage;
 public:
 	//default stats: Health 180, Attack 30, Defense 25, Gold: 1 pile

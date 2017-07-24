@@ -98,6 +98,8 @@ public:
 	std::shared_ptr<Object> getAssocObject();
 	void setAssocObject(std::shared_ptr<Object> ao);
 	void resetAssocObject();
+
+	virtual bool getHostility();
 };
 
 #endif

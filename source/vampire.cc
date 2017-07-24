@@ -6,7 +6,7 @@
 using namespace std;
 
 //additional attributes: const string drowHeroID = "Drow", potionEffectRate = 1.5
-// const int healthGainRate = 5;
+// int healthGainRate = 5;
 
 //default stats: health 50, attack 25, defense 25, note also sets max health to 50 to start
 Vampire::Vampire(int health, int attack, int defense) :

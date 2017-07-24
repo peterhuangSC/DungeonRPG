@@ -160,5 +160,6 @@ if statement, to perform the below commands.
 
 
 void Player::notifyObservers() {
-	cerr << "Notify Observers under construction" << endl;
+	cerr << "This function is out of date - this fn should not be used." << endl;
+	cerr << "Peter Huang and Shane Mazur (C) 2017." << endl;
 }

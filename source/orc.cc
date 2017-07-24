@@ -11,12 +11,9 @@ Orc::Orc(int health, int attack, int defense) :
 	Enemy(health, attack, defense, "Orc", 'O'),
 	goblinDamage{ 1.5 } {
 
-	//this->type = 'O'; //replaces the @ initialized from the character constructor
-
 	this->isMovable = true;
 	this->isHostile = true;
 
-	//this isn't essential as this might be implemented in floor later
 	this->enemyLevel = 1;
 }
 
@@ -27,7 +24,7 @@ Orc::~Orc() {}
 bool Orc::attackPlayer(shared_ptr<Object> player) {
 	bool isPlayerSlain = false;
 
-	//one additional attack on every hero type except for Drow as they are a type of orc too
+	//150% damage attack on Goblin hero types
 	if (player->getHeroType().compare("Goblin") == 0) {
 		int originalAttack = this->attack; //temporarily setting attack to 150%
 		this->attack = floor(this->attack * goblinDamage);
@@ -36,10 +33,7 @@ bool Orc::attackPlayer(shared_ptr<Object> player) {
 	}
 	else {
 		isPlayerSlain = Enemy::attackPlayer(player);
-	}
-	
+	}	
 	return isPlayerSlain;
 }
-
-
 

@@ -8,12 +8,9 @@
 Dragon::Dragon(int health, int attack, int defense) :
 	Enemy(health, attack, defense, "Dragon", 'D') {
 	
-	//this->type = 'D';
-	
 	this->isMovable = false;
-	this->isHostile = false;
+	this->isHostile = true;
 
-	//this isn't essential as this might be implemented in floor later
 	this->enemyLevel = 1;
 }
 

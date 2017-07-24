@@ -33,6 +33,8 @@ public:
 	void notifyObservers();
 
 	virtual bool canMove() override;
+
+	bool getHostility() override;
 };
 
 #endif

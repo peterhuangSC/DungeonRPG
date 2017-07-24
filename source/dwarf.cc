@@ -8,15 +8,10 @@
 Dwarf::Dwarf(int health, int attack, int defense) :
 	Enemy(health, attack, defense, "Dwarf", 'W') {
 
-	//this->type = 'W';
-
 	this->isMovable = true;
 	this->isHostile = true;
 
-	//this isn't essential as this might be implemented in floor later
 	this->enemyLevel = 1;
 }
 
 Dwarf::~Dwarf() {}
-
-

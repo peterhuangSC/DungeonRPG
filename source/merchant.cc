@@ -13,7 +13,6 @@ Merchant::Merchant(int health, int attack, int defense) :
 	this->isMovable = true;
 	this->isHostile = false;
 
-	//this isn't essential as this might be implemented in floor later
 	this->enemyLevel = 1;
 }
 
@@ -47,4 +46,3 @@ bool Merchant::receiveDmg(int dmg) {
 void Merchant::resetStatic() {
 	mercHostile = false;
 }
-

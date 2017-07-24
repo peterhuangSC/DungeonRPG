@@ -31,10 +31,17 @@ shared_ptr<Potion> PotionGenerator::spawnPotion(int type) {
 }
 
 void PotionGenerator::reset(){
+	//there are 6 types of potions
+	for (int i = 1; i <= 6; i++) {
+		spawnPotion(i)->resetStatic();
+	}
+
+	/*
 	spawnPotion(1)->resetStatic();
 	spawnPotion(2)->resetStatic();
 	spawnPotion(3)->resetStatic();
 	spawnPotion(4)->resetStatic();
 	spawnPotion(5)->resetStatic();
 	spawnPotion(6)->resetStatic();
+	*/
 };

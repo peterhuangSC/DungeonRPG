@@ -5,7 +5,7 @@
 #include "enemy.h"
 
 class Merchant : public Enemy {
-	static bool mercHostile; //
+	static bool mercHostile;
 
 public:
 	//default stats: Health 30, Attack 70, Defense 5, <Gold: 1 pile?? check this>
@@ -16,7 +16,6 @@ public:
 
 	bool receiveDmg(int dmg) override;
 
-	//bool attackPlayer(Character* player) override;
 	//severTies() already exists from the superclass
 
 	void resetStatic() override;

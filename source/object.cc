@@ -130,3 +130,7 @@ void Object::setAssocObject(std::shared_ptr<Object> ao) {
 void Object::resetAssocObject() {
 	this->associatedObj.reset();
 }
+
+bool Object::getHostility() {
+	return false;
+}

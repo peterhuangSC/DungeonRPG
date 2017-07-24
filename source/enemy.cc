@@ -77,13 +77,16 @@ bool Enemy::attackPlayer(shared_ptr<Object> player) {
 }
 
 void Enemy::notifyObservers() {
-	cerr << "Notify Observers under construction" << endl;
+	cerr << "This function is out of date - this fn should not be used." << endl;
+	cerr << "Peter Huang and Shane Mazur (C) 2017." << endl;
 }
 
 bool Enemy::canMove() {
-	return true;
+	cerr << "This function is out of date - this fn should not be used." << endl;
+	cerr << "Peter Huang and Shane Mazur (C) 2017." << endl;
+	return true;	
+}
 
-	//might do this implementation later
-	//if (isMovable) return true;
-	//else return false;
+bool Enemy::getHostility() {
+	return this->isHostile;
 }
