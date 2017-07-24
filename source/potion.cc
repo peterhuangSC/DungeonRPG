@@ -53,6 +53,9 @@ vector<int> Potion::potionBuffers() {
 	return myPotBuf;
 }
 
+void Potion::notify(shared_ptr<Object> player) {
+	player->appendAction(" PC sees an unknown potion.");
+}
 
 //---------------------------helper-----------------------------//
 

@@ -13,16 +13,6 @@ Gold::Gold(int gValue, int gQuantity, bool gGuarded) : Item('G'),
 
 Gold::~Gold() {}
 
-/*this method return true if player is successful to pick up the gold
-bool Gold::consumeGold(shared_ptr<Object> spPlayer) {
-	//double check how gold picking up works when theres 2 piles ie human
-	if (!guarded) {
-		spPlayer->addGold(amount * quantity);
-		return true;
-	}
-	return false;
-}*/
-
 char Gold::getItemType() {
 	return this->mapSymbol;
 }
@@ -54,3 +44,11 @@ void Gold::setUnguarded() {
 	this->guarded = false;
 }
 
+void Gold::notify(shared_ptr<Object> player) {
+	if (!isGuarded) {
+		player->appendAction(" PC sees treasure.");
+	}
+	else {
+		player->appendAction(" PC sees a guarded dragon hoard.");
+	}
+}

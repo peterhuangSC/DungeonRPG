@@ -28,6 +28,16 @@ void RestoreHealth::setKnown() {
 	rhVisible = true;
 }
 
+void RestoreHealth::notify(shared_ptr<Object> player) {
+	if (rhVisible) {
+		player->appendAction(" PC sees a " + this->getPotionName());
+		player->appendAction(" potion.");
+	}
+	else {
+		player->appendAction(" PC sees an unknown potion.");
+	}
+}
+
 //------------------------POISON HEALTH------------------------//
 bool PoisonHealth::phVisible = false;
 
@@ -38,6 +48,16 @@ PoisonHealth::~PoisonHealth() {}
 
 void PoisonHealth::setKnown() {
 	phVisible = true;
+}
+
+void PoisonHealth::notify(shared_ptr<Object> player) {
+	if (phVisible) {
+		player->appendAction(" PC sees a " + this->getPotionName());
+		player->appendAction(" potion.");
+	}
+	else {
+		player->appendAction(" PC sees an unknown potion.");
+	}
 }
 
 //------------------------BOOST ATTACK------------------------//
@@ -70,6 +90,16 @@ void BoostAttack::setKnown() {
 	baVisible = true;
 }
 
+void BoostAttack::notify(shared_ptr<Object> player) {
+	if (baVisible) {
+		player->appendAction(" PC sees a " + this->getPotionName());
+		player->appendAction(" potion.");
+	}
+	else {
+		player->appendAction(" PC sees an unknown potion.");
+	}
+}
+
 //------------------------WOUND ATTACK------------------------//
 bool WoundAttack::waVisible = false;
 
@@ -90,6 +120,16 @@ vector<int> WoundAttack::potionBuffers() {
 
 void WoundAttack::setKnown() {
 	waVisible = true;
+}
+
+void WoundAttack::notify(shared_ptr<Object> player) {
+	if (waVisible) {
+		player->appendAction(" PC sees a " + this->getPotionName());
+		player->appendAction(" potion.");
+	}
+	else {
+		player->appendAction(" PC sees an unknown potion.");
+	}
 }
 
 //------------------------BOOST DEFENSE------------------------//
@@ -114,6 +154,16 @@ void BoostDefense::setKnown() {
 	bdVisible = true;
 }
 
+void BoostDefense::notify(shared_ptr<Object> player) {
+	if (bdVisible) {
+		player->appendAction(" PC sees a " + this->getPotionName());
+		player->appendAction(" potion.");
+	}
+	else {
+		player->appendAction(" PC sees an unknown potion.");
+	}
+}
+
 //------------------------WOUND DEFENSE------------------------//
 bool WoundDefense::wdVisible = false;
 
@@ -134,4 +184,14 @@ vector<int> WoundDefense::potionBuffers() {
 
 void WoundDefense::setKnown() {
 	wdVisible = true;
+}
+
+void WoundDefense::notify(shared_ptr<Object> player) {
+	if (wdVisible) {
+		player->appendAction(" PC sees a " + this->getPotionName());
+		player->appendAction(" potion.");
+	}
+	else {
+		player->appendAction(" PC sees an unknown potion.");
+	}
 }

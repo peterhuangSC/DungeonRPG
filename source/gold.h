@@ -1,6 +1,7 @@
 #ifndef __GOLD_H__
 #define __GOLD_H__
 
+#include <memory>
 #include "item.h"
 
 class Gold : public Item {
@@ -11,10 +12,7 @@ protected:
 public:
 	Gold(int gValue = 1, int gQuantity = 1, bool gGuarded = false);
 	~Gold();
-
-	//fix implement@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	//bool consumeGold(std::shared_ptr<Object> spPlayer) override;
-
+	
 	char getItemType() override;
 
 	int getValue() override;
@@ -26,6 +24,8 @@ public:
 	bool isGuarded() override;
 	void setGuarded() override;
 	void setUnguarded() override;
+
+	void notify(std::shared_ptr<Object> player) override;
 };
 
 #endif

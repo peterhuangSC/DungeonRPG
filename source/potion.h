@@ -34,6 +34,8 @@ public:
 
 	virtual std::vector<int> potionBuffers() override;
 
+	virtual void notify(std::shared_ptr<Object> player) override;
+
 	//---------------------------helper-----------------------------//
 	//std::string getAttachedHeroName(std::shared_ptr<Object> myObj);
 };
