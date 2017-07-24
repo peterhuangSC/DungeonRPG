@@ -37,54 +37,56 @@ shared_ptr<Object> Vampire::attackEnemy(shared_ptr<Object> enemy) {
 	if (enemy->getEnemyType().compare("Halfling") == 0) {
 		int halflingDodgeRand = rand() % 2;
 		if (halflingDodgeRand == 0) {
-			curAction = " PC misses attack on Halfling.";
+			curAction += " PC misses attack on Halfling.";
 			return enemy; //enemy is still alive (not slain), you miss your attack
 		}
 	}
 
-	int myDamage = ceil((100 / (100 + enemy->getDefense()) * trueAttack));
+	int myDamage = ceil((100 * trueAttack) / (100 + enemy->getDefense()));
 
 	if (enemy->getEnemyType().compare("Dwarf") == 0) {
 		this->setHealth(this->getHealth() - healthGainRate);
-		this->curAction += " PC loses " + to_string(healthGainRate);
-		this->curAction += " HP from attacking Dwarf.";
+		curAction += " PC loses " + to_string(healthGainRate);
+		curAction += " HP from attacking Dwarf.";
 		if (this->curHealth <= 0) {
 			this->curHealth = 0;
-			this->curAction += " PC dies from attacking Dwarf.";
+			curAction += " PC dies from attacking Dwarf.";
 			return enemy; //#peter: @shane then deal with ending the game b/c PC died
 		}
 	}
 	else {
-		this->curAction += " PC gains " + to_string(healthGainRate);
-		this->curAction += " HP from attack.";
+		curAction += " PC gains " + to_string(healthGainRate);
+		curAction += " HP from attack.";
 		this->setHealth(this->getHealth() + healthGainRate);
 	}
 
 	//true if enemy is alive after receiving the damage you just dealt
 	bool isEnemyAlive = enemy->receiveDmg(myDamage);
-	curAction = " PC deals " + to_string(myDamage);
+	curAction += " PC deals " + to_string(myDamage);
 	curAction += " damage to " + enemy->getEnemyType();
+	curAction += " (" + to_string(enemy->getHealth());
+	curAction += " HP).";
 
 	if (isEnemyAlive) {
 		return enemy;
 	}
 	else {
 		curAction += " " + enemy->getEnemyType();
-		curAction += " has been slain by PC.";
-		if (enemy->getEnemyType().compare("Human")) {
+		curAction += " is slain.";
+		if (enemy->getEnemyType().compare("Human") == 0) {
 			GoldGenerator goldGen;
-			curAction += " Human drops some gold.";
+			curAction += " Human drops gold.";
 			return goldGen.spawnGold('h');
 		}
-		else if (enemy->getEnemyType().compare("Dragon")) {
+		else if (enemy->getEnemyType().compare("Dragon") == 0) {
 			enemy.reset();
 			curAction += " The dragon hoard is now unguarded.";
 			//add unguard implementation later!
 			return enemy;
 		}
-		else if (enemy->getEnemyType().compare("Merchant")) {
+		else if (enemy->getEnemyType().compare("Merchant") == 0) {
 			GoldGenerator goldGen;
-			curAction += " Merchant drops some gold.";
+			curAction += " Merchant drops gold.";
 			return goldGen.spawnGold('m');
 		}
 		else {

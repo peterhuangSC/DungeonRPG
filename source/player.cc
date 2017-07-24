@@ -92,7 +92,7 @@ shared_ptr<Object> Player::attackEnemy(shared_ptr<Object> enemy) {
 	if (enemy->getEnemyType().compare("Halfling") == 0) {
 		int halflingDodgeRand = rand() % 2;
 		if (halflingDodgeRand == 0) {
-			curAction = " PC misses attack on Halfling.";
+			curAction += " PC misses attack on Halfling.";
 			return enemy; //enemy is still alive (not slain), you miss your attack
 		}
 	}
@@ -101,7 +101,7 @@ shared_ptr<Object> Player::attackEnemy(shared_ptr<Object> enemy) {
 	
 	//true if enemy is alive after receiving the damage you just dealt
 	bool isEnemyAlive = enemy->receiveDmg(myDamage);
-	curAction = " PC deals " + to_string(myDamage);
+	curAction += " PC deals " + to_string(myDamage);
 	curAction += " damage to " + enemy->getEnemyType();
 	curAction += " (" + to_string(enemy->getHealth());
 	curAction += " HP).";
