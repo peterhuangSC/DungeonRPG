@@ -82,6 +82,6 @@ public:
 	virtual bool attackPlayer(std::shared_ptr<Object> player);
 
 	virtual void resetStatic();
-}
+};
 
 #endif
