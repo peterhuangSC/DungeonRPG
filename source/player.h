@@ -34,7 +34,8 @@ public:
 	void addGold(int myGold) override;
 	bool addGoldItem(std::shared_ptr<Object> myGold) override;
 
-	virtual bool attackEnemy(std::shared_ptr<Character> enemy);
+//	virtual bool attackEnemy(std::shared_ptr<Character> enemy);
+	virtual std::shared_ptr<Object> attackEnemy(std::shared_ptr<Object> enemy) override;
 	void notifyObservers();
 };
 

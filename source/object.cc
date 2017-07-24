@@ -83,4 +83,10 @@ void Object::setKnown() {}
 
 void Object::endTurnEffect() {}
 
+std::shared_ptr<Object> Object::attackEnemy(std::shared_ptr<Object> enemy) { 
+	return enemy;
+}
+
+bool Object::receiveDmg(int dmg) { return true; } //true if character is alive
+
 void Object::pickPocket() {}

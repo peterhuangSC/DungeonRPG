@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include "player.h"
+#include "GoldGenerator.h"
 
 class Goblin : public Player {
 	int goldStealRate;
@@ -13,7 +14,7 @@ public:
 	~Goblin();
 
 	void pickPocket() override;
-	bool attackEnemy(std::shared_ptr<Character> p) override;
+	std::shared_ptr<Object> attackEnemy(std::shared_ptr<Object> p) override;
 };
 
 #endif

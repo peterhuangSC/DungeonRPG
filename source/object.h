@@ -69,6 +69,13 @@ public:
 
 	virtual void endTurnEffect();
 
+	//returns a shared pointer:
+	//1: the enemy passed in if it is still alive
+	//2: the gold dropped by a human or merchant, if enemy is slain
+	//2b: in other cases enemy slain will return a reset shared pointer (nullptr)
+	virtual std::shared_ptr<Object> attackEnemy(std::shared_ptr<Object> enemy);
+	virtual bool receiveDmg(int dmg);
+
 	virtual void pickPocket();
 };
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include "player.h"
+#include "GoldGenerator.h"
 
 using namespace std;
 
@@ -77,10 +78,13 @@ bool Player::addGoldItem(shared_ptr<Object> myGold) {
 	}
 }
 
-// this method performs the attack action
-// return val: true if enemy is slain by this attack, false if enemy alive
-bool Player::attackEnemy(shared_ptr<Character> enemy) {
-	if (!enemy) return false;
+/* this method performs the attack action
+   returns a shared pointer:
+   1: the enemy passed in if it is still alive
+   2: the gold dropped by a human or merchant, if enemy is slain
+   2b: in other cases enemy slain will return a reset shared pointer (nullptr) */
+shared_ptr<Object> Player::attackEnemy(shared_ptr<Object> enemy) {
+	if (!enemy) return enemy;
 	
 	//this below is your TRUE ATTACK
 	int trueAttack = this->getAttack();
@@ -88,8 +92,8 @@ bool Player::attackEnemy(shared_ptr<Character> enemy) {
 	if (enemy->getEnemyType().compare("Halfling") == 0) {
 		int halflingDodgeRand = rand() % 2;
 		if (halflingDodgeRand == 0) {
-			curAction = "misses attack on Halfling";
-			return false; //enemy is still alive (not slain), you miss your attack
+			curAction = " PC misses attack on Halfling.";
+			return enemy; //enemy is still alive (not slain), you miss your attack
 		}
 	}
 	
@@ -97,26 +101,44 @@ bool Player::attackEnemy(shared_ptr<Character> enemy) {
 	
 	//true if enemy is alive after receiving the damage you just dealt
 	bool isEnemyAlive = enemy->receiveDmg(myDamage);
-	curAction = "deals " + myDamage;
+	curAction = " PC deals " + to_string(myDamage);
 	curAction += " damage to " + enemy->getEnemyType();
 
 	if (isEnemyAlive) {
-		return false;
+		return enemy;
 	}
-	else if (enemy->getEnemyType().compare("Human")) {
-	}
-	else if (enemy->getEnemyType().compare("Dragon")) {
-	}
-	else if (enemy->getEnemyType().compare("Merchant")) {
-	} 
 	else {
-		//enemy has been slain
-		int randGoldAmount = rand() % 2;
-		if (randGoldAmount == 1) this->addGold(2);
-		else this->addGold(1);
-		return true;
+		curAction += " " + enemy->getEnemyType();
+		curAction += " has been slain by PC.";
+		if (enemy->getEnemyType().compare("Human")) {
+			GoldGenerator goldGen;
+			curAction += " Human drops some gold.";
+			return goldGen.spawnGold('h');
+		}
+		else if (enemy->getEnemyType().compare("Dragon")) {
+			enemy.reset();
+			curAction += " The dragon hoard is now unguarded.";
+			//add unguard implementation later!
+			return enemy;
+		}
+		else if (enemy->getEnemyType().compare("Merchant")) {
+			GoldGenerator goldGen;
+			curAction += " Merchant drops some gold.";
+			return goldGen.spawnGold('m');
+		}
+		else {
+			//enemy has been slain
+			int randGoldAmount = (rand() % 2) + 1;
+			this->addGold(randGoldAmount);
+			curAction += " PC receives " + to_string(randGoldAmount);
+			curAction += " gold from ";
+			curAction += enemy->getEnemyType() + ".";
+			//pg3 specifications, 2.2, GOLD IS IMMEDIATELY ADDED TO PLAYER'S TOTAL
+			enemy.reset();
+			return enemy;
+		}
 	}
-	return false;
+	return enemy;
 }
 
 /*

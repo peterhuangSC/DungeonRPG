@@ -24,7 +24,7 @@ public:
 	~Character();
 
 	//virtual bool attack(Character* c) = 0;
-	virtual bool receiveDmg(int dmg);
+	virtual bool receiveDmg(int dmg) override;
 
 	//accessors and mutators
 	int getHealth() override;

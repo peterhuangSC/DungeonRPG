@@ -14,7 +14,7 @@ Troll::~Troll() {}
 
 void Troll::endTurnEffect() {
 	if (curHealth < maxHealth) {		
-		this->curAction += " PC regenerated " 
+		this->curAction += " Special Ability: PC regenerated " 
 			+ to_string(min(healthGainRate, maxHealth - curHealth));
 		this->curAction += " health points.";
 		// now change curHealth, since the above uses the original values

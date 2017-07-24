@@ -3,7 +3,9 @@
 
 #include <string>
 #include <memory>
+#include "GoldGenerator.h"
 #include "player.h"
+
 
 class Vampire : public Player {
 	int healthGainRate;
@@ -14,7 +16,7 @@ public:
 	~Vampire();
 
 	void setHealth(int newHealth) override;
-	bool attackEnemy(std::shared_ptr<Character> enemy) override;	
+	std::shared_ptr<Object> attackEnemy(std::shared_ptr<Object> enemy) override;	
 };
 
 #endif
