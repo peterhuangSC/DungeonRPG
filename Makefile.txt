@@ -7,7 +7,7 @@ CHARACTEROBJ = character.o player.o enemy.o
 PLAYEROBJ = shade.o drow.o vampire.o troll.o goblin.o
 ENEMYOBJ = human.o dwarf.o halfling.o elf.o orc.o merchant.o dragon.o
 ITEMOBJ = item.o gold.o potion.o ladder.o specificPotions.o
-GENEROBJ = PlayerGenerator.o EnemyGenerator.o
+GENEROBJ = PlayerGenerator.o EnemyGenerator.o GoldGenerator.o LadderGenerator.o PotionGenerator.o
 
 OBJECTS = ${GAMEOBJ} ${CHARACTEROBJ} ${PLAYEROBJ} ${ENEMYOBJ} ${ITEMOBJ} ${GENEROBJ} 
 
