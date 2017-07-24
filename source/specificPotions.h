@@ -15,6 +15,7 @@ public:
 	void setKnown() override;
 
 	void notify(std::shared_ptr<Object> player) override;
+	void resetStatic() override;
 };
 
 class PoisonHealth : public Potion {
@@ -26,6 +27,7 @@ public:
 	void setKnown() override;
 
 	void notify(std::shared_ptr<Object> player) override;
+	void resetStatic() override;
 };
 
 class BoostAttack : public Potion {
@@ -39,6 +41,7 @@ public:
 	void setKnown() override;
 
 	void notify(std::shared_ptr<Object> player) override;
+	void resetStatic() override;
 };
 
 class WoundAttack : public Potion {
@@ -52,6 +55,7 @@ public:
 	void setKnown() override;
 
 	void notify(std::shared_ptr<Object> player) override;
+	void resetStatic() override;
 };
 
 class BoostDefense : public Potion {
@@ -65,6 +69,7 @@ public:
 	void setKnown() override;
 
 	void notify(std::shared_ptr<Object> player) override;
+	void resetStatic() override;
 };
 
 class WoundDefense : public Potion {
@@ -78,6 +83,7 @@ public:
 	void setKnown() override;
 
 	void notify(std::shared_ptr<Object> player) override;
+	void resetStatic() override;
 };
 
 #endif

@@ -13,6 +13,7 @@
 class PlayerGenerator {
 public:
 	std::shared_ptr<Player> spawnPlayer(char type);
+	void reset();
 };
 
 #endif

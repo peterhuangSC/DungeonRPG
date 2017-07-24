@@ -8,3 +8,4 @@ shared_ptr<Ladder> LadderGenerator::spawnLadder(int chamber) {
 	//now this is the standard ladder
 }
 
+void LadderGenerator::reset() {}

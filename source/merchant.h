@@ -18,6 +18,8 @@ public:
 
 	//bool attackPlayer(Character* player) override;
 	//severTies() already exists from the superclass
+
+	void resetStatic() override;
 };
 
 #endif

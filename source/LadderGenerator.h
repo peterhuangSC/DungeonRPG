@@ -8,6 +8,7 @@ class LadderGenerator {
 public:
 	//spawns in the room YOU specify
 	std::shared_ptr<Ladder> spawnLadder(int chamber);
+	void reset();
 };
 
 #endif
