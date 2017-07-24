@@ -19,6 +19,7 @@ public:
 	//severTies() already exists from the superclass
 
 	void resetStatic() override;
+	bool getHostility() override;
 };
 
 #endif
