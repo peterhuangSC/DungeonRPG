@@ -2,6 +2,7 @@
 #define __TROLL_H__
 
 #include <string>
+#include <algorithm>
 #include "player.h"
 
 class Troll : public Player {
@@ -11,6 +12,8 @@ public:
 	//default stats: health 120, attack 25, defense 15
 	Troll(int health = 120, int attack = 25, int defense = 15);
 	~Troll();
+
+	void endTurnEffect() override;
 };
 
 #endif

@@ -81,4 +81,6 @@ std::vector<int> Object::potionBuffers() {
 
 void Object::setKnown() {}
 
+void Object::endTurnEffect() {}
+
 void Object::pickPocket() {}

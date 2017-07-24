@@ -67,6 +67,8 @@ public:
 
 	virtual void setKnown();
 
+	virtual void endTurnEffect();
+
 	virtual void pickPocket();
 };
 

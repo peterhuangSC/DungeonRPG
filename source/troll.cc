@@ -12,3 +12,6 @@ Troll::Troll(int health, int attack, int defense) :
 
 Troll::~Troll() {}
 
+void Troll::endTurnEffect() {
+	this->curHealth = min(this->curHealth + healthGainRate, this->maxHealth);
+}
