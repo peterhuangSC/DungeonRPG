@@ -135,6 +135,7 @@ void WoundAttack::setKnown() {
 }
 
 void WoundAttack::notify(shared_ptr<Object> player) {
+
 	if (waVisible) {
 		player->appendAction(" PC sees a " + this->getPotionName());
 		player->appendAction(" potion.");

@@ -9,12 +9,13 @@ using namespace std;
 
 //default stats: health 150, attack 25, defense 15
 Drow::Drow(int health, int attack, int defense) :
-	Player(health, attack, defense, "drow"),
+	Player(health, attack, defense, "Drow"),
 	potionEffectRate{ 1.5 } {}
 
 Drow::~Drow() {}
 
 void Drow::consumePotion(shared_ptr<Object> myPotion) {
+	myPotion->setKnown();
 	//case 1: consume health related potions
 	if (myPotion->getPotionName().compare("Restore Health") == 0 ||
 		myPotion->getPotionName().compare("Poison Health") == 0) {

@@ -434,7 +434,7 @@ void Map::endTurn(){
         cout << *this;
         playing = false;
         int score = player->getGold();
-        if(player->getHeroType() == "shade") score *= 1.5;
+        if(player->getHeroType() == "Shade") score *= 1.5;
         cout << "\n\n\n\n         GAME OVER, YOU HAVE DIED!\n" << endl; 
         cout <<         "             YOUR SCORE WAS: " << score << "\n\n\n" << endl;
         return;
@@ -444,7 +444,7 @@ void Map::endTurn(){
         cout << *this;
         playing = false;
         int score = player->getGold();
-        if(player->getHeroType() == "shade") score *= 1.5;
+        if(player->getHeroType() == "Shade") score *= 1.5;
         cout << "\n\n\n\n         GAME OVER, YOU HAVE DIED!\n" << endl; 
         cout <<         "             YOUR SCORE WAS: " << score << "\n\n\n" << endl;
         return;
