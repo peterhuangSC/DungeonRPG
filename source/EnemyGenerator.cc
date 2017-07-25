@@ -2,6 +2,8 @@
 
 using namespace std;
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 shared_ptr<Enemy> EnemyGenerator::spawnEnemy() {
 	shared_ptr<Enemy> currentEnemy;
 	int randGen = rand() % 18;

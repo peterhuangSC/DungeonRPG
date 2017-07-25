@@ -2,6 +2,8 @@
 
 using namespace std;
 
+/* Author, Coded & Developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 shared_ptr<Gold> GoldGenerator::spawnGold() {
 	shared_ptr<Gold> currentGold;
 	int randGen = rand() % 8;

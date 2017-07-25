@@ -2,6 +2,7 @@
 #include <cmath>
 #include "human.h"
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
 //additional attributes: const string humanMobID = "Human", const int humanGold = 2
 
 //default stats: Health 140, Attack 20, Defense 20, Gold: 2 piles

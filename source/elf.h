@@ -5,6 +5,8 @@
 #include <memory>
 #include "enemy.h"
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 class Elf : public Enemy {
 
 public:

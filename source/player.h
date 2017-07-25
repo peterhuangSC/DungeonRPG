@@ -9,6 +9,8 @@
 //#include "enemy.h"
 
 class Enemy;
+/* This project was developed by:
+   Peter Huang [zh3huang] and Shane Mazur [smazur]*/
 
 class Player : public Character {
 

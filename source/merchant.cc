@@ -2,6 +2,7 @@
 #include <cmath>
 #include "merchant.h"
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
 //additional attributes: const string merchantMobID = "Merchant", const int merchantGold = 1
 
 bool Merchant::mercHostile = false;

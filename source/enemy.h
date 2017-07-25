@@ -6,6 +6,8 @@
 #include "character.h"
 //#include "player.h"
 
+/* Author, Coded & Developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 class Player;
 
 class Enemy : public Character {

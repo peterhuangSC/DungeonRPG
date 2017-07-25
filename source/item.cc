@@ -5,6 +5,8 @@
 
 using namespace std;
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 Item::Item(char itemType) : 
 	Object(itemType), mapSymbol{ itemType } {}
 

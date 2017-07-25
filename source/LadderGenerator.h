@@ -4,6 +4,8 @@
 #include <memory>
 #include "ladder.h"
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 class LadderGenerator {
 public:
 	//spawns in the room YOU specify

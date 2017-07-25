@@ -5,8 +5,8 @@
 using namespace std;
 
 /*
+This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) 
 ATTRIBUTES: (protected)
-
 <in Potion>
 shared pointer player
 string potionID, int healthEffect, int attackEffect, int defenseEffect

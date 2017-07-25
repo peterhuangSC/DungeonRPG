@@ -7,6 +7,8 @@
 
 class Player;
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 class Ladder : public Item {
 protected:
 	//char mapSymbol;

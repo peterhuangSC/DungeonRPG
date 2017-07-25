@@ -12,6 +12,8 @@
 #include "dragon.h"
 #include "halfling.h"
 
+/* Author, Coded & Developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 class EnemyGenerator {
 public:
 	std::shared_ptr<Enemy> spawnEnemy();

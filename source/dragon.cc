@@ -2,6 +2,7 @@
 #include <cmath>
 #include "dragon.h"
 
+// This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) 
 //additional attributes: const string dragonMobID = "Dragon", const int dragonGold = 1
 
 //default stats: Health 150, Attack 20, Defense 20, Gold: 1 pile

@@ -4,6 +4,7 @@
 
 using namespace std;
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
 //additional attributes: const string elfMobID = "Elf", const int elfGold = 1
 
 //default stats: Health 140, Attack 30, Defense 10, Gold: 1 pile

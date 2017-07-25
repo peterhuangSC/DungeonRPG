@@ -7,6 +7,8 @@
 #include "potion.h"
 #include "specificPotions.h"
 
+/* Author, Coded & Developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 class PotionGenerator {
 public:
 	std::shared_ptr<Potion> spawnPotion();

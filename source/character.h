@@ -7,6 +7,9 @@
 #include "object.h"
 #include "potion.h"
 
+/* This project was developed by:
+   Peter Huang [zh3huang] and Shane Mazur [smazur]*/
+
 class Character : public Object {
 
 protected:

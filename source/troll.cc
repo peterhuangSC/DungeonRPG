@@ -3,6 +3,7 @@
 
 using namespace std;
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
 //additional attributes: const string trollHeroID = "Drow", healthGainRate = 5
 
 //default stats: health 120, attack 25, defense 15

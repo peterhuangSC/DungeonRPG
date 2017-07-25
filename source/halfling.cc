@@ -2,6 +2,7 @@
 #include <cmath>
 #include "halfling.h"
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
 //additional attributes: const string halflingMobID = "Halfling", const int halflingGold = 1
 
 //default stats: Health 100, Attack 15, Defense 20, Gold: 1 pile

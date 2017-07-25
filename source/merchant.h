@@ -1,6 +1,8 @@
 #ifndef __MERCHANT_H__
 #define __MERCHANT_H__
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 #include <string>
 #include "enemy.h"
 

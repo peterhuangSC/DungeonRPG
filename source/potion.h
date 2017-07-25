@@ -6,6 +6,8 @@
 #include <vector>
 #include "item.h"
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 class Potion : public Item {
 protected:
 	std::string potionID;

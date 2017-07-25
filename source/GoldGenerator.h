@@ -6,6 +6,8 @@
 #include "gold.h"
 #include "EnemyGenerator.h"
 
+/* Author, Coded & Developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 class GoldGenerator {
 public:
 	std::shared_ptr<Gold> spawnGold();

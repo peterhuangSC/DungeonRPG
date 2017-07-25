@@ -5,6 +5,7 @@
 
 using namespace std;
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
 //additional attributes: const string drowHeroID = "Drow", potionEffectRate = 1.5
 // int healthGainRate = 5;
 

@@ -4,6 +4,8 @@
 #include <memory>
 #include "player.h"
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 class Drow : public Player {
 	double potionEffectRate;
 public:

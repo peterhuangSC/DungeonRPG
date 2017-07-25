@@ -6,6 +6,8 @@
 #include <memory>
 #include "potion.h"
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 class RestoreHealth : public Potion {
 	static bool rhVisible;
 public:

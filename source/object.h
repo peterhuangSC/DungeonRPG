@@ -5,6 +5,8 @@
 #include <memory>
 #include <vector>
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 class Object {
 	//no private fields needed so far
 protected:

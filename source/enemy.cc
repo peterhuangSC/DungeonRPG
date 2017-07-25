@@ -5,6 +5,7 @@
 
 using namespace std;
 
+/* Author, Coded & Developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
 //attributes: curHealth, maxHealth, attack, defense
 //            enemyLevel, goldDrop, isHostile, isMovable
 

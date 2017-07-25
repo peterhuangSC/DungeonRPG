@@ -1,6 +1,8 @@
 #ifndef __PLAYERGENERATOR_H__
 #define __PLAYERGENERATOR_H__
 
+/* Author, Coded & Developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 #include <string>
 #include <memory>
 #include "player.h"

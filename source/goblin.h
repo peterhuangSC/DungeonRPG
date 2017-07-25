@@ -6,6 +6,8 @@
 #include "player.h"
 #include "GoldGenerator.h"
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 class Goblin : public Player {
 	int goldStealRate;
 public:

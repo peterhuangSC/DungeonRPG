@@ -1,6 +1,9 @@
 #include <string>
 #include "object.h"
 
+/* This project was coded & developed by:
+Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 Object::Object(char typeSymbol) : type{ typeSymbol }, 
 	potionBuffs{ nullptr },	hadTurn{ false } {
 	//no implementation currently

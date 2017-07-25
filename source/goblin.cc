@@ -3,6 +3,7 @@
 
 using namespace std;
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
 //additional attributes: const string trollHeroID = "Drow"
 //                       const int goldStealRate = 5
 

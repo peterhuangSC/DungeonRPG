@@ -4,6 +4,8 @@
 #include <string>
 #include "enemy.h"
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 class Dragon : public Enemy {
 
 public:

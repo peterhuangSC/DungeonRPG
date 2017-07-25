@@ -3,6 +3,7 @@
 
 using namespace std;
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
 //additional attributes: double potionEffectRate = 1.5
 //note: when attaching potions, check to make sure effects are 1.5x
 

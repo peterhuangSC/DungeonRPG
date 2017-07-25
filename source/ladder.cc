@@ -6,6 +6,7 @@ using namespace std;
 
 //char mapSymbol;
 //int currentChamber;
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
 
 Ladder::Ladder() : Item('\\'), currentChamber{ 1 } {}
 

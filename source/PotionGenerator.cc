@@ -2,6 +2,8 @@
 
 using namespace std;
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 shared_ptr<Potion> PotionGenerator::spawnPotion() {
 	int randGen = rand() % 6;
 	if (randGen == 0) randGen += 6;

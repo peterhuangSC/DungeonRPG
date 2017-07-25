@@ -3,8 +3,11 @@
 
 using namespace std;
 
-/* Protected attributes
-	int amount, int quantity, bool guarded;
+
+/* 
+This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur)
+Protected attributes
+  int amount, int quantity, bool guarded;
 */
 
 

@@ -4,6 +4,7 @@
 
 using namespace std;
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
 //attributes: curHealth, maxHealth, attack, defense, shared_ptr<potion> potionBuffs
 
 //methods below-------------------------------------

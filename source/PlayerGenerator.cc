@@ -2,6 +2,8 @@
 
 using namespace std;
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
+
 shared_ptr<Player> PlayerGenerator::spawnPlayer(char type) {
 	switch (type) {
 	case 's' : //shade

@@ -6,6 +6,7 @@
 #include "GoldGenerator.h"
 #include "player.h"
 
+/* This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur) */
 
 class Vampire : public Player {
 	int healthGainRate;

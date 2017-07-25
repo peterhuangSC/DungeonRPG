@@ -4,6 +4,7 @@
 using namespace std;
 
 /*
+This project was coded & developed by Peter Huang (zh3huang) and Shane Mazur (smazur)
 ATTRIBUTES: (protected)
   string potionID, int healthEffect, int attackEffect, int defenseEffect
   mapSymbol (item), type (object)
