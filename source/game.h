@@ -65,6 +65,7 @@ class Floor {
 
     int get(char var);
 
+
     char Cellstr(int y,int x) const;
     void addCell(int y,int x,char c);
     void init(std::shared_ptr<Object> player, std::ifstream &layout);
@@ -72,10 +73,14 @@ class Floor {
     void attachObs();
     void endTurn();
 
+    //Supports game actions
     int move(std::string dir, int y, int x);
     void potion(std::string dir, int y, int x);
     void attack(std::string dir, int y, int x);
     Cell &randMove(Cell &cell);
+
+    //clears this level at the end of the game
+    void clearLevel();
 };
 /////////////////////////////////////////////////////////////////
 

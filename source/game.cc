@@ -355,7 +355,7 @@ void Floor::attack(string dir, int y, int x){
 }
 
 
-//Takes in current cell, returns random free adjacent cell
+    //Takes in current cell, returns random free adjacent cell
 Cell &Floor::randMove(Cell &cell){
     int tries = 100;
     int r;
@@ -365,6 +365,21 @@ Cell &Floor::randMove(Cell &cell){
     }
     return cell;
 };
+
+
+    //clears this level at the end of the game
+void Floor::clearLevel(){
+    int dimy = ground.size();
+    int dimx = ground[0].size();
+    for(int y = 0; y < dimy; ++y){
+        for(int x = 0; x < dimx; ++x){
+            if(ground[y][x].onCell){
+                ground[y][x].onCell->resetAssocObject();
+                ground[y][x].onCell.reset();
+            }
+        }
+    }
+}
 
 /////////////////////////////////////////////////////////////////
 
@@ -528,6 +543,9 @@ void Map::endGame(){
     GG.reset();
     PG.reset();
     EG.reset();
+    for(int i = 0; i < 5; ++i){
+        Maps[i].clearLevel();
+    }
 };
 
 //Outputs current floor of Map
