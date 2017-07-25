@@ -55,7 +55,7 @@ int main(int argc, char* argv[]){
         cout << "*****  Note: Pressing enter repeats your last turn        *****" << endl;
         cout << "*****                                                     *****" << endl;
         cout << "***** Choose a Race: s(shade), d(drow), v(vampire),       *****" << endl;
-        cout << "*****                   g(gobin), t(troll)                *****" << endl;
+        cout << "*****                   g(goblin), t(troll)               *****" << endl;
         cout << "***************************************************************" << endl;
         cout << "***************************************************************" << endl;
         cout << "Race: ";
