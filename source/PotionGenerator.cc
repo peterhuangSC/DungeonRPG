@@ -19,13 +19,15 @@ shared_ptr<Potion> PotionGenerator::spawnPotion() {
 }
 
 shared_ptr<Potion> PotionGenerator::spawnPotion(int type) {
+	//types are specified from the provided document
+	//0 - RH, 1 - BA, 2 - BD, 3 - PH, 4 - WA, 5 - WD
 	switch (type) {
-	case 1: return make_shared<RestoreHealth>();
-	case 2: return make_shared<PoisonHealth>();
-	case 3: return make_shared<BoostAttack>(nullptr);
+	case 0: return make_shared<RestoreHealth>();	
+	case 1: return make_shared<BoostAttack>(nullptr);
+	case 2: return make_shared<BoostDefense>(nullptr);	
+	case 3: return make_shared<PoisonHealth>();	
 	case 4: return make_shared<WoundAttack>(nullptr);
-	case 5: return make_shared<BoostDefense>(nullptr);
-	case 6: return make_shared<WoundDefense>(nullptr);
+	case 5: return make_shared<WoundDefense>(nullptr);
 	default: return make_shared<RestoreHealth>();
 	}
 }

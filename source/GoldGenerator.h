@@ -10,6 +10,7 @@ class GoldGenerator {
 public:
 	std::shared_ptr<Gold> spawnGold();
 	std::shared_ptr<Gold> spawnGold(char specificType);
+	std::shared_ptr<Gold> spawnGold(int type);
 	std::shared_ptr<Gold> spawnGold(int amount, int quantity);
 	void reset();
 };
