@@ -433,16 +433,20 @@ void Map::endTurn(){
     if(player->getHealth() <= 0){
         cout << *this;
         playing = false;
+        int score = player->getGold()
+        if(player.getHeroType() == "shade") score *= 1.5;
         cout << "\n\n\n\n         GAME OVER, YOU HAVE DIED!\n" << endl; 
-        cout <<         "             YOUR SCORE WAS: " << player->getGold() << "\n\n\n" << endl;
+        cout <<         "             YOUR SCORE WAS: " << score << "\n\n\n" << endl;
         return;
     }
     if(!frozen) Maps[level].endTurn();
     if(player->getHealth() <= 0){
         cout << *this;
         playing = false;
+        int score = player->getGold()
+        if(player.getHeroType() == "shade") score *= 1.5;
         cout << "\n\n\n\n         GAME OVER, YOU HAVE DIED!\n" << endl; 
-        cout <<         "             YOUR SCORE WAS: " << player->getGold() << "\n\n\n" << endl;
+        cout <<         "             YOUR SCORE WAS: " << score << "\n\n\n" << endl;
         return;
     }
     player->endTurnEffect();
