@@ -155,7 +155,7 @@ void Floor::init(shared_ptr<Object> player){
 
     //Place a ladder
      r = 1 + (rand() % 5);
-    if(r == noLadder) r = ++r % 5;
+    if(r == noLadder) r = 1 + (++r % 5);
     rooms[r].removeFree()->setonCell(LG.spawnLadder(r));
 
     //Place the potions
