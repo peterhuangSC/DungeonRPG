@@ -77,13 +77,13 @@ bool Enemy::attackPlayer(shared_ptr<Object> player) {
 }
 
 void Enemy::notifyObservers() {
-	cerr << "This function is out of date - this fn should not be used." << endl;
-	cerr << "Peter Huang and Shane Mazur (C) 2017." << endl;
+	//cerr << "This function is out of date - this fn should not be used." << endl;
+	//cerr << "Peter Huang and Shane Mazur (C) 2017." << endl;
 }
 
 bool Enemy::canMove() {
-	cerr << "This function is out of date - this fn should not be used." << endl;
-	cerr << "Peter Huang and Shane Mazur (C) 2017." << endl;
+	//cerr << "This function is out of date - this fn should not be used." << endl;
+	//cerr << "Peter Huang and Shane Mazur (C) 2017." << endl;
 	return true;	
 }
 
