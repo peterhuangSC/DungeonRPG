@@ -19,7 +19,6 @@ int main(int argc, char* argv[]){
     //Begin a game
     playing = true;
     while(playing){
-    cout << "At any time you may quit by typing: q" << endl;
 /////////////////////////////////////////////////////////////////
 
         //Command Initiliaztions
@@ -29,8 +28,37 @@ int main(int argc, char* argv[]){
         string direction;
         char quit;
 
-        //Player must choose race
-        cout << "Choose a Race, one of:  s, d, v, g, t" << endl;
+        //Intro
+        string spacing(28,'\n');
+        cout << spacing;
+        cout << "***************************************************************" << endl;
+        cout << "***************************************************************" << endl;
+        cout << "*****                                                     *****" << endl;
+        cout << "*****           WELCOME TO CHAMBER CRAWLER 3000           *****" << endl;
+        cout << "*****                                                     *****" << endl;
+        cout << "*****     By: Shane Mazur, Peter Huang & Jason Cheung     *****" << endl;
+        cout << "*****                                                     *****" << endl;
+        cout << "***************************************************************" << endl;
+        cout << "***************************************************************" << endl;
+        cout << "***************************************************************" << endl;
+        cout << "***** Game Commands (Type and press enter)                *****" << endl;
+        cout << "*****  - q: Quits the game at any time                    *****" << endl;
+        cout << "*****  - r: Restarts the game                             *****" << endl;
+        cout << "*****  - f: Freezes the enemies                           *****" << endl;
+        cout << "*****                                                     *****" << endl;
+        cout << "***** Player Commands (Type and press enter)              *****" << endl;
+        cout << "*****  - <direction>  : Moves in that direction           *****" << endl;
+        cout << "*****  - u <direction>: Uses a potion(P) in direction     *****" << endl;
+        cout << "*****  - a <direction>: Attack in a direction             *****" << endl;
+        cout << "*****                                                     *****" << endl;
+        cout << "*****  Directions: no, ea, so, we, ne, se, sw, nw         *****" << endl;
+        cout << "*****  Note: Pressing enter repeats your last turn        *****" << endl;
+        cout << "*****                                                     *****" << endl;
+        cout << "***** Choose a Race: s(shade), d(drow), v(vampire),       *****" << endl;
+        cout << "*****                   g(gobin), t(troll)                *****" << endl;
+        cout << "***************************************************************" << endl;
+        cout << "***************************************************************" << endl;
+        cout << "Race: ";
         
         if(!getline(cin,race)) return 0;
 
@@ -39,15 +67,18 @@ int main(int argc, char* argv[]){
             cout << "Quitting Game..." << endl;
             return 0;
         }
-    //Create a map//
-        //Sets the race of the character
-
+    //Create a map with the chosen character//
         //Use the default file if none specified, random gen
-        //if(argc == 1) 
-        Map map(race);
+        bool random = true;
+        string file;
         //Otherwise use the one specified
-        else Map map(race, false, argv[2]);
-        cout << map;
+        if(argc == 2) {
+            random = false;
+            file = argv[1];
+        }
+        ifstream layout(file);
+        Map Game(race, random, layout);
+        cout << Game;
 
 /////////////////////////////////////////////////////////////////
 
@@ -58,7 +89,7 @@ int main(int argc, char* argv[]){
 
 			//Quit the game
 			if (command == "q") {
-                map.endGame();
+                Game.endGame();
 				cout << "Quitting Game..." << endl;
 				return 0;
 			}
@@ -69,41 +100,41 @@ int main(int argc, char* argv[]){
 			}
 			//Freeze enemies
 			else if (command == "f") {
-				map.freeze();
+				Game.freeze();
 			}
 			//Let's make a move
 			else if (command == "no" || command == "ne" || command == "ea" || command == "se"
 				  || command == "so" || command == "sw" || command == "we" || command == "nw")
-				{map.move(command);}
+				{Game.move(command);}
             //Let's use a potion
             else if(command == "u"){
                 line_in >> direction;
                     if(direction == "no" || direction == "ne" || direction == "ea" || direction == "se"
                     || direction == "so" || direction == "sw" || direction == "we" || direction == "nw")
-                    {map.potion(direction);}
-                else cout << "Invalid Direction" << endl;
+                    {Game.potion(direction);}
+                    else Game.setPlayerAction("Invalid Direction");
             }
             //Let's smash some skulls
             else if(command == "a"){
                 line_in >> direction;
                 if(direction == "no" || direction == "ne" || direction == "ea" || direction == "se"
                 || direction == "so" || direction == "sw" || direction == "we" || direction == "nw")
-                {map.attack(direction);}
-                else cout << "Invalid Direction" << endl;
+                {Game.attack(direction);}
+                else Game.setPlayerAction("Invalid Direction");
             }
             //Not a valid command
-            else cout << "Invalid Command" << endl;
-			if(playing) cout << map; 
+            else Game.setPlayerAction("Invalid Command");
+			if(playing) cout << Game; 
         }
 
     //Endgame Process//
         //EOF ends the game
         if(cin.eof()) playing = false;
         //Restart the game
-        else if(command == "r") map.endGame(); //Do nothing, game will restart
+        else if(command == "r") Game.endGame(); //Do nothing, game will restart
         //Otherwise, check if they want to continue
         else{
-            map.endGame();
+            Game.endGame();
             cout << "Quit the game?(y/n)" << endl;
             cin >> quit;
             getline(cin,command);//Throw away rest of line
@@ -119,4 +150,6 @@ int main(int argc, char* argv[]){
         }
     }
 }
+
+
 

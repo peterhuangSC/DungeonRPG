@@ -112,6 +112,40 @@ int Floor::get(char var){
     }
 };
 
+
+void Floor::init(shared_ptr<Object> player, ifstream &layout){
+    int dimy = ground.size();
+    int dimx = ground[0].size();
+    string line;
+    //Place all object types
+    for(int y = 0; y < dimy; ++y){
+        getline(layout, line);
+        for(int x = 0; x < dimx; ++x){
+            char c = line[x];
+            int ic = c - '0';
+            if(c == '@') ground[y][x].setonCell(player);
+            if(c == '\\') ground[y][x].setonCell(LG.spawnLadder(ground[y][x].getRoom()));
+            else if('0' <= c && c <= '5') ground[y][x].setonCell(PG.spawnPotion(ic));
+            else if('6' <= c && c <= '9') ground[y][x].setonCell(GG.spawnGold(ic));
+            else if('A' <= c && c <= 'Z') ground[y][x].setonCell(EG.spawnEnemy(c));
+        }
+    }
+    //Replace dragons with the one linked to its dragon hoard
+    for(int y = 0; y < dimy; ++y){
+        for(int x = 0; x < dimx; ++x){
+            if(ground[y][x].getType() == 'D'){
+                int size = ground[y][x].Observers.size();
+                for(int k = 0; k < size; ++k){
+                    if(ground[y][x].Observers[k]->onCell && ground[y][x].Observers[k]->onCell->isGuarded()){
+                        ground[y][x].setonCell(ground[y][x].Observers[k]->onCell->getAssocObject());
+                    }
+                }
+            }
+        }
+    }
+};
+
+
 void Floor::init(shared_ptr<Object> player){
 
     //Place the Player
@@ -172,7 +206,7 @@ void Floor::attachObs(){
             }
         }
     }
-}
+};
 
     //Performs actions at end of enemy turn
 void Floor::endTurn(){
@@ -248,7 +282,6 @@ int Floor::move(string dir, int y, int x){
         else if(dir == "sw") {curr->onCell->setAction("PC moves South-West.");}
         else if(dir == "we") {curr->onCell->setAction("PC moves West.");}
         else if(dir == "nw") {curr->onCell->setAction("PC moves North-West.");}
-
 
         //If gold on Cell, 
         if(type == 'G') curr->onCell->addGoldItem(cell->onCell);
@@ -343,8 +376,8 @@ void Info::levelUp(){++level;};
 ostream &operator<<(ostream &out, const Info info){
     int size = 22 + info.player->getHeroType().length() + to_string(info.player->getGold()).length();
     string line(info.dimx - size,' ');
-    cout << "Race: " << info.player->getHeroType() << "  Gold: " << info.player->getGold();
-    cout << line << "Floor: " << info.level + 1 << endl;
+    out << "Race: " << info.player->getHeroType() << "  Gold: " << info.player->getGold();
+    out << line << "Floor: " << info.level + 1 << endl;
     out << "HP : " << info.player->getHealth() << endl;
     out << "Atk: " << info.player->getAttack() << endl;
     out << "Def: " << info.player->getDefense() << endl;
@@ -376,6 +409,7 @@ void Map::get(){
     //The char in this cell on the current floor
 char Map::Cellstr(int y, int x) const{
     return Maps[level].Cellstr(y,x);
+
 };
 
     //Initialize the current Level
@@ -386,9 +420,11 @@ void Map::init_Level(){
         cout <<         "             YOUR SCORE WAS: " << player->getGold() << "\n\n\n" << endl;
     }
     else {
-        Maps[level].init(player);
+        if(random) Maps[level].init(player);
+        else Maps[level].init(player, layout);
+
         player->setAction("Player Enters Level " + to_string(level+1));;
-        this->get();     
+        this->get();
     }
 };
 
@@ -413,11 +449,12 @@ void Map::endTurn(){
 }
 
     //Create all floors of map
-Map::Map(string filename, string race): 
-dimx{dim_x}, dimy{dim_y}, level{0}, frozen{false}, 
+Map::Map(string race, bool random, ifstream &layout): 
+dimx{dim_x}, dimy{dim_y}, level{0}, frozen{false},
+random{random}, layout{layout}, 
 player{CG.spawnPlayer(race[0])}, info(dim_x, player) {
     Maps.assign(5,Floor(dimx,dimy));
-    ifstream file (filename);
+    ifstream file ("default.txt");
     string line;
     for(int i = 0; i < 5; ++i){ 
         for(int y = 0; y < dimy; ++y){
@@ -432,6 +469,11 @@ player{CG.spawnPlayer(race[0])}, info(dim_x, player) {
         Maps[i].attachObs();
     }
     this->init_Level();
+};
+
+    //Invalid message to player
+void Map::setPlayerAction(string action){
+    player->setAction(action);
 };
 
     //Freeze
@@ -487,7 +529,10 @@ void Map::endGame(){
 //Outputs current floor of Map
 ostream &operator<<(ostream &out, const Map floor){
     string spacing(28, '\n');
-    cout << spacing;
+    out << spacing;
+    out << "|-----------------------------------------------------------------------------|" << endl;
+    out << "|----------------------------CHAMBER CRAWLER 3000-----------------------------|" << endl;
+    out << "|----------------By: Shane Mazur, Peter Huang & Jason Cheung -----------------|" << endl;
     for(int y = 0; y < dim_y; ++y){
         for(int x = 0; x < dim_x; ++x){
             out << floor.Cellstr(y,x);
@@ -495,6 +540,7 @@ ostream &operator<<(ostream &out, const Map floor){
         out << endl;
     }
     out << floor.info;
+    out << "Command: ";
     return out;
 };
 

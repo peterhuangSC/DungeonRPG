@@ -67,6 +67,7 @@ class Floor {
 
     char Cellstr(int y,int x) const;
     void addCell(int y,int x,char c);
+    void init(std::shared_ptr<Object> player, std::ifstream &layout);
     void init(std::shared_ptr<Object> player);
     void attachObs();
     void endTurn();
@@ -100,6 +101,10 @@ class Map{
     std::vector<Floor> Maps;
     bool frozen;
 
+    //Layout file
+    bool random;
+    std::ifstream &layout;
+
     //The Player
     std::shared_ptr<Object> player;
     int x,y;
@@ -121,7 +126,10 @@ class Map{
 
 public:
     //Create all floors of map
-    Map(std::string filename, std::string race);
+    Map(std::string race, bool random, std::ifstream &layout);
+
+    //Invalid message to player
+    void setPlayerAction(std::string action);
 
     //Freeze the enemies
     void freeze();
@@ -144,4 +152,3 @@ public:
 std::ostream &operator<<(std::ostream &out, const Map floor);
 /////////////////////////////////////////////////////////////////
 #endif
-
