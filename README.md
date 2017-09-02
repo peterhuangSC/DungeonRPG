@@ -7,12 +7,17 @@ in the game or slain. You have 5 hero choices, and you fight against a variety o
 Enemies (Chamber crawlers) drop coins which contribute to your total score, and unknown potions are scattered 
 across the map - which may assist your adventures.
 
+
 Authors: Peter Huang, Shane Mazur 
+
 Latest Update: July 25 2017
+
 Version: 1.1
+
 Copyright 2017 Peter Huang and Shane Mazur
 
-Notice: You may view the code and compile/run it to play with it, but you may NOT copy this code for any school
-assignment related purposes. This includes any final projects at your institution (e.g. CS246 at UW). The university
+
+Notice: You may view the code and compile/run it to play the game, but you may NOT copy this code for any school
+assignment and related purposes. This includes any final projects at your institution (e.g. CS246 at UW). The university
 has a program to check for code similarity (not just naming convention), such as code blocks, structures, and runtime.
 Eg. you can check out MOSS (what Stanford uses) for your reference.
