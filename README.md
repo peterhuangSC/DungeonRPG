@@ -22,4 +22,4 @@ assignment and related purposes. This includes any final projects at your instit
 has a program to check for code similarity (not just naming convention), such as code blocks, structures, and runtime.
 Eg. you can check out MOSS (what Stanford uses) for your reference.
 
-test edit 2
+test edit
