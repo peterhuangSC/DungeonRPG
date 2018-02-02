@@ -21,5 +21,3 @@ Notice: You may view the code and compile/run it to play the game, but you may N
 assignment and related purposes. This includes any final projects at your institution (e.g. CS246 at UW). The university
 has a program to check for code similarity (not just naming convention), such as code blocks, structures, and runtime.
 Eg. you can check out MOSS (what Stanford uses) for your reference.
-
-test edit
